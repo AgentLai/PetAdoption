@@ -1,6 +1,6 @@
 
 CREATE TABLE Member (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    MemberID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     Age INT,
@@ -11,18 +11,20 @@ CREATE TABLE Member (
 
 CREATE TABLE Admin (
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
+    MemberID INT NOT NULl,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL
+    Password VARCHAR(255) NOT NULL,
+    FOREIGN KEY(MemberID)
 );
 
 CREATE TABLE Settings (
     SettingID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
+    MemberID INT,
     NameOfSetting VARCHAR(100) NOT NULL,
     OptionPicked VARCHAR(100) NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Member(UserID)
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
 
 CREATE TABLE Pets (
@@ -41,12 +43,12 @@ CREATE TABLE Pets (
 
 CREATE TABLE Transaction (
     TransactionID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
+    MemberID INT,
     PetID INT,
     Date DATE,
     Time TIME,
     Amount DECIMAL(10, 2),
-    FOREIGN KEY (UserID) REFERENCES Member(UserID),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
@@ -62,22 +64,22 @@ CREATE TABLE ChatHistory (
 
 CREATE TABLE AdoptionApplication (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
+    MemberID INT,
     PetID INT,
     ApplicationDate DATE,
     Status ENUM('Accepted', 'Denied', 'Ongoing', 'Submitted', 'Cancelled') NOT NULL,
     Comments TEXT,
-    FOREIGN KEY (UserID) REFERENCES Member(UserID),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
 CREATE TABLE Reviews (
     ReviewID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
+    MemberID INT,
     PetID INT,
     Rating INT CHECK (Rating BETWEEN 1 AND 5),
     Comments TEXT,
     ReviewDate DATE,
-    FOREIGN KEY (UserID) REFERENCES Member(UserID),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
