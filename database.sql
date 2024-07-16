@@ -1,22 +1,23 @@
-
 CREATE TABLE Member (
     MemberID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
-    Age INT,
     DOB DATE,
     Email VARCHAR(100) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL
+    Password VARCHAR(255) NOT NULL,
+    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    CHECK (Password REGEXP '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$')
 );
 
 CREATE TABLE Admin (
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
-    MemberID INT NOT NULl,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
+    MemberID INT NOT NULL,
+    Username VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    FOREIGN KEY(MemberID)
+    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    CHECK (Password REGEXP '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$'),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
 
 CREATE TABLE Settings (
@@ -83,3 +84,6 @@ CREATE TABLE Reviews (
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
+
+INSERT INTO Member(Username, FistName, LastName, DOB, Email, Password) VALUES ('AgentLai', 'Douglas', 'Lai', '12-Feb-2000', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000');
+INSERT INTO Admin(MemberID, Username, Password) VALUES (1,'PetAdmin', '@dmin2024_PetHaven');
