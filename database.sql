@@ -5,9 +5,7 @@ CREATE TABLE Member (
     LastName VARCHAR(50) NOT NULL,
     DOB DATE,
     Email VARCHAR(100) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
-    CHECK (Password REGEXP '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$')
+    Password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Admin (
@@ -15,8 +13,6 @@ CREATE TABLE Admin (
     MemberID INT NOT NULL,
     Username VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
-    CHECK (Password REGEXP '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$'),
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
 
@@ -31,7 +27,7 @@ CREATE TABLE Settings (
 CREATE TABLE Pets (
     PetID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(50) NOT NULL,
-    Pictures TEXT,  
+    Pictures TEXT,
     Age INT,
     PetSpecies VARCHAR(50),
     Breed VARCHAR(50),
@@ -59,8 +55,8 @@ CREATE TABLE ChatHistory (
     ReceiverUserID INT,
     Message TEXT NOT NULL,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (SenderUserID) REFERENCES Member(UserID),
-    FOREIGN KEY (ReceiverUserID) REFERENCES Member(UserID)
+    FOREIGN KEY (SenderUserID) REFERENCES Member(MemberID),
+    FOREIGN KEY (ReceiverUserID) REFERENCES Member(MemberID)
 );
 
 CREATE TABLE AdoptionApplication (
@@ -85,5 +81,8 @@ CREATE TABLE Reviews (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
-INSERT INTO Member(Username, FistName, LastName, DOB, Email, Password) VALUES ('AgentLai', 'Douglas', 'Lai', '12-Feb-2000', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000');
-INSERT INTO Admin(MemberID, Username, Password) VALUES (1,'PetAdmin', '@dmin2024_PetHaven');
+INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password) 
+VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000');
+
+INSERT INTO Admin (MemberID, Username, Password) 
+VALUES (1, 'PetAdmin', '@dmin2024_PetHaven');
