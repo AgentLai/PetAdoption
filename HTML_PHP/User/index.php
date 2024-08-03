@@ -11,45 +11,97 @@ and open the template in the editor.
         <link rel="stylesheet" href="style.css">
     </head>
   <body> 
-      <nav class="navbar">    
+    <!-- NAVIGATION BAR/HEADER -->  
+    <div class="nav-container">  
+      <nav>  
           <ul>
               <li><a href="index.php">Home</a></li>
               <li><a href="AboutUs.php">About Us</a></li>
-              <div class="dropdown">
-                <button class="dropbtn">Pets<i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="Cats.php">Cats</a>
-                    <a href="Dogs.php">Dogs</a>
-                  <a href="#">Birds</a>
-    </div>
-  </div>
               <li><a href="Login.html">Login(Placeholder)</a></li>
           </ul>
       </nav> 
-      
-      
+  </div> 
+    <!-- TOP PAGE -->  
       <main>
-          <div class="toppage"></div>
+          <div class="top-section"></div>
           
-          <div class="Title1">
+          <div class="top-title">
                <h1>PET HAVEN</h1>
                <p>The Number One Pet Adoption Website</p>
           </div>
+          
           <p>Placeholder</p>
            <p>Please Adopt</p>
             <p>I'll find you if you don't</p>
              <p>Respectfully <3</p>
+             
+    <!-- PET SLIDER -->  
+    <div class="pet-background">
+    <section class="pet-section">
+        <div class="pet-slider">
+            <div class="pet-slide">
+                <input type="radio" name="radio-btn" id="radio1">
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+                <input type="radio" name="radio-btn" id="radio4">
+                <input type="radio" name="radio-btn" id="radio5">
+                <input type="radio" name="radio-btn" id="radio6">
+                
+                <div class="st first">    
+                   <img src="Images/burger(cat).jpg" alt="">
+                </div>
+                
+                <div class="st"> 
+                    <img src="Images/phoenix.jpg" alt="">
+                </div>
+                
+                <div class="st"> 
+                    <img src="Images/bob.jpg" alt="">
+                </div>
+                
+                <div class="st"> 
+                    <img src="Images/Rocky(dog).jpg" alt=""> 
+                </div>
+                
+                <div class="st"> 
+                    <img src="Images/carl.jpg." alt="">
+                </div>
+                
+                <div class="st"> 
+                    <img src="Images/Mars(cat).jpg" alt=""> 
+                </div>
+                
+                <div class="nav-auto">
+                    <div class="a-b1"></div>
+                    <div class="a-b2"></div>
+                    <div class="a-b3"></div>
+                    <div class="a-b4"></div>
+                    <div class="a-b5"></div>
+                    <div class="a-b6"></div>
+                </div>
+              </div>    
             
-           
+                <div class="nav-m">
+                    <label for="radio1" class="m-btn"></label>
+                    <label for="radio2" class="m-btn"></label> 
+                    <label for="radio3" class="m-btn"></label>
+                    <label for="radio4" class="m-btn"></label>
+                    <label for="radio5" class="m-btn"></label>
+                    <label for="radio6" class="m-btn"></label>  
+                </div>
+                  
+       </div>
+    </section>   
+    </div>      
       </main>      
-      <footer></footer>  
+     
        <?php
           
         ?>
       
       <footer>
           Contact us
+          
       </footer> 
   </body>
 </html>
