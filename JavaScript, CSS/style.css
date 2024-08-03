@@ -106,28 +106,60 @@ body{
 
 /* Navigation for index
 */
-.navbar ul{
-    list-style-type: none;
-    background-color: whitesmoke;
-    padding: 0px;
+.nav-container{
+    background: #ffbdc9;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
+    background: #fff;
+    border-radius: 50px;
+    padding: 5px;
+    box-shadow: 0 25px 20px -20px rgba(0,0,0,0.4);
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 13px 35px;
     margin: 0px;
-    overflow: hidden;
+    font-size: 18px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 0.5s;
 }
 
-.navbar a{
+nav ul li::after{
+    content: '';
+    background: #f44566;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+    transition: top 0.5s, opacity 0.5s;
+}
+
+nav ul li::hover{
     color: black;
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-    text-align: center;
 }
+    
+nav ul li::hover::after{
+    top: 50%;
+    opacity: 1;
+    }   
 
-.navbar a:hover{
-    background-color: lightgrey;
-}
-.navbar li{
-    float: left;
-}
+/*Dropdown*/
 
 .dropdown{
     float: left;
@@ -179,21 +211,19 @@ body{
   display: block;
 }
 
-
-/****Index*******/
-div.toppage { 
+div.top-section { 
  
     background-image: url('Images/Husky.jpg');
     background-position: center;
    background-size: 2000px;
    height: 475px;
    background-repeat: no-repeat;
-   filter: blur(3px);
+   filter: blur(2px);
    
     
 }
 
-div.Title1 {
+div.top-title {
     
     color: white;
     text-align: center;
@@ -207,12 +237,146 @@ div.Title1 {
     text-shadow: 0px 4px 7px gray;
 }
 
-div.Title1 h1{
+div.top-title h1{
     font-size: 65px;
     margin-bottom: 5px;
 }
 
-div.Title1 p{
+div.top-title p{
     font-size: 35px;
 }
 
+/*Pet Background*/
+.pet-background{
+    background-color: whitesmoke;
+}
+
+/*Pet Slider*/
+
+
+.pet-section{
+   margin: 0;
+   padding: 0;
+   height: 125vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .pet-slider{
+     width: 800px;
+     height: 500px;
+     border-radius: 10px;
+     overflow: hidden;
+ }
+ 
+ .pet-slide{
+     width: 635%;
+     height: 500px;
+     display: flex;
+ }
+ 
+ .pet-slide input{
+     display: none;
+ }
+ 
+ .st{
+     width: 20%;
+     transition: 2s;
+ }
+ 
+ .st img{
+     width: 800px;
+     height: 500px;
+ }
+ 
+ .nav-m{
+     position: absolute;
+     width: 800px;
+     margin-top: -40px;
+     justify-content: center;
+     display: flex;
+ }
+
+ .m-btn{
+     border: 2px solid #fff;
+     padding: 5px;
+     border-radius: 10px;
+     cursor: pointer;
+     transition: 1s;
+ }
+ 
+ .m-btn:not(:last-child){
+     margin-right: 30px;
+ }
+ 
+ .m-btn:hover{
+     background-color: whitesmoke;
+ }
+ 
+ #radio1:checked ~.first{
+    margin-left: 0;
+ } 
+  #radio2:checked ~.first{
+    margin-left: -20%;
+ } 
+  #radio3:checked ~.first{
+    margin-left: -40%;
+ } 
+  #radio4:checked ~.first{
+    margin-left: -60%;
+ } 
+  #radio5:checked ~.first{
+    margin-left: -80%;
+ } 
+  #radio6:checked ~.first{
+    margin-left: -100%;
+ } 
+.pet-section div img{
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.nav-auto{
+   position: absolute; 
+   width: 800px;
+   margin-top: 460px;
+   display: flex;
+   justify-content: center;
+}
+
+.nav-auto div{
+    border: 2px solid #fff;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.nav-auto div:not(:last-child){
+    margin-right: 30px;
+    justify-content: center;
+}
+
+#radio1:checked ~.nav-auto .a-b1{
+    background-color: white;
+}
+
+#radio2:checked ~.nav-auto .a-b2{
+    background-color: white;
+}
+
+#radio3:checked ~.nav-auto .a-b3{
+    background-color: white;
+}
+
+#radio4:checked ~.nav-auto .a-b4{
+    background-color: white;
+}
+
+#radio5:checked ~.nav-auto .a-b5{
+    background-color: white;
+}
+
+#radio6:checked ~.nav-auto .a-b6{
+    background-color: white;
+}
