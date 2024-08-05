@@ -12,15 +12,24 @@ and open the template in the editor.
     </head>
   <body> 
     <!-- NAVIGATION BAR/HEADER -->  
-    <div class="nav-container">  
-      <nav>  
-          <ul>
-              <li><a href="index.php">Home</a></li>
-              <li><a href="AboutUs.php">About Us</a></li>
-              <li><a href="Login.html">Login(Placeholder)</a></li>
-          </ul>
-      </nav> 
-  </div> 
+    <header> 
+        <div class="nav-container">  
+            <a href ="" class = "logo">Pet Haven</a>  
+            <div class ="navbar">
+                <a href="index.php">Home</a>
+                <a href="AboutUs.php">About Us</a>
+                <a href="Login.html">Login(Placeholder)</a>
+            </div>
+            <div class = "nav-icons">
+                <a href="Login.php"><i class='bx bx-user'></i></a>
+                <div class="menu-icons">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </div>
+    </header> 
     <!-- TOP PAGE -->  
       <main>
           <div class="top-section"></div>
