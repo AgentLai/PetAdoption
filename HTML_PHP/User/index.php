@@ -9,15 +9,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Pet Haven</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     </head>
   <body> 
-    <!-- NAVIGATION BAR/HEADER -->  
+   <!-- NAVIGATION BAR/HEADER -->  
     <header> 
         <div class="nav-container">  
             <a href ="" class = "logo">Pet Haven</a>  
             <div class ="navbar">
                 <a href="index.php">Home</a>
                 <a href="AboutUs.php">About Us</a>
+                <a href="Dogs.php">Dogs</a>
+                <a href="Cats.php">Cats</a>
                 <a href="Login.html">Login(Placeholder)</a>
             </div>
             <div class = "nav-icons">
@@ -38,79 +41,87 @@ and open the template in the editor.
                <h1>PET HAVEN</h1>
                <p>The Number One Pet Adoption Website</p>
           </div>
-          
-          <p>Placeholder</p>
-           <p>Please Adopt</p>
-            <p>I'll find you if you don't</p>
-             <p>Respectfully <3</p>
+    <!-- Main Part -->
+<div class="main-container">  
+    <div class="ui-body">
+         <div class="ui-card">
+              <img class="ui-image"src="Images/index_image(cat).jpg">
+              <div class="description">
+                  <h3>About Us</h3>
+                  <p>Welcome to Pet Haven, a platform born out of a shared passion for the welfare and care of animals.</p>
+                  <a href="AboutUs.php">Read More</a>
+              </div>
+         </div>
+    </div>       
+    
+     <div class="ui-body">
+         <div class="ui-card">
+             <img class="ui-image"src="Images/index_image(dog).jpg">
+              <div class="description">
+                  <h3>Donate Here</h3>
+                  <p>Want to contribute into helping us rescue more animals? Click here to find out more about it</p>
+                  <a href="AboutUs.php">Read More</a>
+              </div>
+         </div>
+    </div>         
+    
+     <div class="ui-body">
+         <div class="ui-card">
+             <img class="ui-image" src="Images/rabbit1.jpg">
+              <div class="description">
+                  <h3>Contact Us</h3>
+                  <p>Contact us about anything by clicking here pookie <33</p>
+                  <a href="AboutUs.php">Read More</a>
+              </div>
+         </div>
+    </div>         
+</div>             
              
-    <!-- PET SLIDER -->  
-    <div class="pet-background">
-    <section class="pet-section">
-        <div class="pet-slider">
-            <div class="pet-slide">
-                <input type="radio" name="radio-btn" id="radio1">
-                <input type="radio" name="radio-btn" id="radio2">
-                <input type="radio" name="radio-btn" id="radio3">
-                <input type="radio" name="radio-btn" id="radio4">
-                <input type="radio" name="radio-btn" id="radio5">
-                <input type="radio" name="radio-btn" id="radio6">
-                
-                <div class="st first">    
-                   <img src="Images/burger(cat).jpg" alt="">
-                </div>
-                
-                <div class="st"> 
-                    <img src="Images/phoenix.jpg" alt="">
-                </div>
-                
-                <div class="st"> 
-                    <img src="Images/bob.jpg" alt="">
-                </div>
-                
-                <div class="st"> 
-                    <img src="Images/Rocky(dog).jpg" alt=""> 
-                </div>
-                
-                <div class="st"> 
-                    <img src="Images/carl.jpg." alt="">
-                </div>
-                
-                <div class="st"> 
-                    <img src="Images/Mars(cat).jpg" alt=""> 
-                </div>
-                
-                <div class="nav-auto">
-                    <div class="a-b1"></div>
-                    <div class="a-b2"></div>
-                    <div class="a-b3"></div>
-                    <div class="a-b4"></div>
-                    <div class="a-b5"></div>
-                    <div class="a-b6"></div>
-                </div>
-              </div>    
-            
-                <div class="nav-m">
-                    <label for="radio1" class="m-btn"></label>
-                    <label for="radio2" class="m-btn"></label> 
-                    <label for="radio3" class="m-btn"></label>
-                    <label for="radio4" class="m-btn"></label>
-                    <label for="radio5" class="m-btn"></label>
-                    <label for="radio6" class="m-btn"></label>  
-                </div>
-                  
-       </div>
-    </section>   
-    </div>      
+   
       </main>      
      
        <?php
           
         ?>
-      
-      <footer>
-          Contact us
-          
-      </footer> 
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>Pet Haven</h4>
+                    <ul>
+                        <li><a href="AboutUs.php">about us</a></li>
+                        <li><a href="#">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+                 <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-col">
+                    <h4>adopt now</h4>
+                    <ul>
+                        <li><a href="#">dogs</a></li>
+                        <li><a href="#">cats</a></li>
+                        <li><a href="#">birds</a></li>  
+                    </ul>
+                </div>
+                 <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </footer> 
   </body>
 </html>
