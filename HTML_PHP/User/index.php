@@ -48,14 +48,14 @@
             <div class="btn">
                 <i class = "fas fa-times close-btn"></i>
             </div>
-            <a href="index.html">Home</a>
-            <a href="index.html#requirements">About Us</a>
-            <a href="index.html#pets">Pets</a>
+            <a href="index.php">Home</a>
+            <a href="index.php#requirements">About Us</a>
+            <a href="index.php#pets">Pets</a>
             <a href="">Contact Us</a>
-            <a href="index.html#stories">Stories</a>
+            <a href="index.php#stories">Stories</a>
         </div>
 
-        <button class = "btn-2" onclick="window.location.href='register.html'">
+        <button class = "btn-2" onclick="window.location.href='register.php'">
         <p>Sign Up Now</p>
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         </button>
