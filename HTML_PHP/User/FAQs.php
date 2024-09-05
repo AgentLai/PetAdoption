@@ -69,9 +69,57 @@
           
           <div class="faq">
               <div class="question">
-                <h3>How Can I Adopt</h3>
+                <h3>How can I adopt a pet?</h3>
                   
-                 <svg width="15" height="10" viewBox="0 0 42 25">
+                 <svg width="20" height="15" viewBox="0 0 42 25">
+                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
+                 </svg>
+                  
+              </div>
+              <div class="answer">
+                  <p>
+                      To adopt a pet, browse our available pets online, choose one that fits your family and lifestyle, and fill out the adoption application.
+                      After submission, our team will review your application and contact you to discuss the next steps, which may include a meet-and-greet with the pet.
+                  </p>
+              </div>
+          </div>
+            <div class="faq">
+              <div class="question">
+                <h3>What are the adoption fees?</h3>
+                  
+                 <svg width="20" height="15" viewBox="0 0 42 25">
+                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
+                 </svg>
+                  
+              </div>
+              <div class="answer">
+                  <p>
+                     Adoption fees vary based on the type and age of the pet.
+                     Generally, adoption fees cover vaccinations, spaying/neutering, and other veterinary care. Specific fees are listed on each pet’s profile page.
+                  </p>
+              </div>
+          </div>
+            <div class="faq">
+              <div class="question">
+                <h3>Can I return a pet after adoption?</h3>
+                  
+                 <svg width="20" height="15" viewBox="0 0 42 25">
+                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
+                 </svg>
+                  
+              </div>
+              <div class="answer">
+                  <p>
+                     We understand that sometimes adoptions don’t work out. If you need to return a pet, please contact us immediately.
+                     We’ll work with you to find the best solution, whether it’s returning the pet to us or finding a more suitable home.
+                  </p>
+              </div>
+          </div>
+          <div class="faq">
+              <div class="question">
+                <h3>What should I consider before adopting a pet?</h3>
+                  
+                 <svg width="20" height="15" viewBox="0 0 42 25">
                    <path d="M3 3L21 21L39 3" 
                     stroke="white" 
                     stroke-width="7" 
@@ -82,52 +130,8 @@
               </div>
               <div class="answer">
                   <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                  </p>
-              </div>
-          </div>
-            <div class="faq">
-              <div class="question">
-                <h3>How Can I Adopt</h3>
-                  
-                 <svg width="15" height="10" viewBox="0 0 42 25">
-                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
-                 </svg>
-                  
-              </div>
-              <div class="answer">
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                  </p>
-              </div>
-          </div>
-            <div class="faq">
-              <div class="question">
-                <h3>How Can I Adopt</h3>
-                  
-                 <svg width="15" height="10" viewBox="0 0 42 25">
-                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
-                 </svg>
-                  
-              </div>
-              <div class="answer">
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                  </p>
-              </div>
-          </div>
-            <div class="faq">
-              <div class="question">
-                <h3>How Can I Adopt</h3>
-                  
-                 <svg width="15" height="10" viewBox="0 0 42 25">
-                   <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecaps="round"/>
-                 </svg>
-                  
-              </div>
-              <div class="answer">
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                      Consider your lifestyle, the time you can dedicate to a pet, your living environment, and your budget. 
+                      Pets require time, attention, and financial resources for food, healthcare, and other needs.
                   </p>
               </div>
           </div>
@@ -139,7 +143,8 @@
                    <p>Looking to contact PetHaven? There's a few ways to do it—check out all your options below.</p>
                </div>
           </div>
-      </div>      
+      </div> 
+     
       
       
       
