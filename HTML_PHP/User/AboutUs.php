@@ -73,12 +73,12 @@
      <div class="MoreAbout">
         <div class="MoreAbout-wrapper">
             <h2>Learn More About Us!</h2>
-          <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
+         <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
         <b>Pet<span style="color: #87c7af">Haven</span></b> is a sanctuary where the hopes of animals seeking their forever homes intertwine with the dreams of compassionate individuals eager to provide them with the love and care they deserve. 
         At <b>Pet<span style="color: #87c7af">Haven</span></b>, we believe that every pet is a cherished life waiting for a chance to flourish in a nurturing environment. 
         <br><br>
-        Our platform serves as a bridge that connects these loving souls to those who are ready to open not just their homes but their hearts, 
-        offering a safe and warm refuge where they can truly belong.</p>
+        Our platform serves as a bridge that connects these loving souls to those who are ready to open not just their homes but their hearts. 
+        We feel that every pet deserves a safe and warm refuge, where they can thrive and truly belong.</p>
         <br><br>
           <h2> Why Pet<span style="color: #87c7af">Haven</span>? </h2>
         <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">   
@@ -89,8 +89,10 @@
          <br><br>
           <h2> Our Mission </h2>
         <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">   
-            At <b>Pet<span style="color: #87c7af">Haven</span></b>, we believe in making a difference by providing a seamless, user-friendly web application to address the stray animal crisis. 
-        Our mission is to reduce the number of abandoned and suffering stray animals by facilitating their adoption.
+         At <b>Pet<span style="color: #87c7af">Haven</span></b>, we are dedicated to creating a significant impact on the lives of stray animals and the communities they inhabit.
+         Our passion drives us to develop a seamless, user-friendly web application that addresses the critical issue of stray animals, ensuring that every animal in need finds a loving home.
+         By leveraging cutting-edge technology and compassionate outreach, we aim to drastically reduce the number of abandoned and suffering stray animals.
+         Our mission extends beyond mere adoption; we strive to educate the public on responsible pet ownership, advocate for humane treatment, and build a supportive network that fosters a kinder, more empathetic society. 
         </p>
       </div>
     </div>
