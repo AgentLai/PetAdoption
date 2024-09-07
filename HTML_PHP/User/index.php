@@ -7,9 +7,10 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="index.js" defer></script>
+    <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
     <!-- For Icons -->
     <link
       rel="stylesheet"
@@ -49,9 +50,9 @@
                 <i class = "fas fa-times close-btn"></i>
             </div>
             <a href="index.php">Home</a>
-            <a href="index.php#requirements">About Us</a>
-            <a href="index.php#pets">Pets</a>
-            <a href="">Contact Us</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Pets.php">Pets</a>
+            <a href="FAQs.php">FAQ's</a>
             <a href="index.php#stories">Stories</a>
         </div>
 
@@ -73,14 +74,14 @@
           Available for Adoption.
         </p>
         <div class="hero-headlines-buttons">
-          <button class="btn-3">Our Pets</button>
+            <button class="btn-3"><a href="index.php#pets">Our Pets</a></button>
           <button class="btn-3 btn-transparent">Contact Us!</button>
         </div>
       </div>
       <div class="hero-images">
-        <img src="img/hero-img-1.png" alt="img">
-        <img src="img/hero-img-2.png" alt="img">
-        <img src="img/hero-img-3.png" alt="img">
+          <img src="Images/hero-img-1.png" alt="img">
+        <img src="Images/hero-img-2.png" alt="img">
+        <img src="Images/hero-img-3.png" alt="img">
       </div>
     </section>
     <!--About Section-->
@@ -131,7 +132,7 @@
             </div>   
         </div>
       </div>
-      <img src="img/requirements-img.png" alt="img">
+      <img src="Images/requirements-img.png" alt="img">
     </section>
 
     <!--Pets Section-->
@@ -143,20 +144,20 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-          <img src="img/pet-item-1.png" alt="img"/>
-          <h3>Woofsalot</h3>
+            <img src="Images/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+          <h3>Henry</h3>
         </div>
         <div class="pet-item">
-          <img src="img/pet-item-2.png" alt="img"/>
-          <h3>Dexter</h3>
+            <img src="Images/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+          <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-          <img src="img/pet-item-3.png" alt="img"/>
-          <h3>Leo</h3>
+            <img src="Images/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+          <h3>Dan</h3>
         </div>
       </div>
       <button class="btn-3 btn-pets">
-        <p>Find More</p>
+          <a href="Pets.php">Find More</a>
         <i class="fa-solid fa-arrow-right-long"></i>
       </button>
     </section>
@@ -189,9 +190,9 @@
             <h6>Community Loved</h6>
           </div>
         </div>
-        <button class="btn-3">Get Started!</button>
+        <button class="btn-3"><a href="AboutUs.php">Learn More</a></button>
       </div>
-      <img src="img/about-img.png" alt="img">
+      <img src="Images/about-img.png" alt="img">
     </div>
     <!--Testimonials Sections-->
     <div class="testimonials" id="stories">
@@ -203,7 +204,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="img/testimony-image-1.png" alt="img"/>
+              <img src="Images/testimony-image-1.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lylia Johnson</h4>
                 <p>Garfield's Owner</p>
@@ -223,7 +224,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="img/testimony-image-2.png" alt="img"/>
+              <img src="Images/testimony-image-2.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Jason Lesley</h4>
                 <p>Benedict's Owner</p>
@@ -242,7 +243,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="img/testimony-image-3.png" alt="img"/>
+              <img src="Images/testimony-image-3.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lutpii Lo</h4>
                 <p>Terizla's Owner</p>
@@ -269,19 +270,19 @@
       <h2>Quick Links</h2>
       <div class="link-container">
         <div class="links">
-          <a href="index.html#about">About</a>
-          <a href="index.html#pets">Pets</a>
+          <a href="index.php#about">About</a>
+          <a href="index.php#pets">Pets</a>
         </div>
         <div class="links">
-          <a href="index.html#requirements">Requirements</a>
-          <a href="index.html#stories">Stories</a>
-          <a href="index.html#footer">Contact Us</a>
+          <a href="index.php#requirements">Requirements</a>
+          <a href="index.php#stories">Stories</a>
+          <a href="index.php#footer">Contact Us</a>
         </div>
       </div>
     </div>
     <div class="footer-brand">
       <h1>Pet<b class="accent">Haven</b></h1>
-      <p>Find Your Purrfect Furry friend Today!</p>
+      <p>Find Your Purrfect furry friend Today!</p>
       <div class="socials">
         <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="/"><i class="fa-brands fa-tiktok"></i></a>
@@ -296,11 +297,11 @@
       </div>
       <div class="contact-info-item">
         <i class="fa-solid fa-phone"></i>
-        <p>+60 17-816 3645(Douglas's phone) Call him xoxo</p>
+        <p>+60 17-816 3645(Douglas)</p>
       </div>
     </div>
   </div>
-    <p class="copyright">All Rights Reserved to<b>Pet Haven</b></p>
+    <p class="copyright">All Rights Reserved to <b>Pet Haven</b></p>
  </footer>
 <!-- Footer Section End -->
 

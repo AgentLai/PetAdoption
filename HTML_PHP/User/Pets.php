@@ -37,7 +37,7 @@
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
-    <title>Pet Haven |  About Us</title>
+    <title>Pet Haven</title>
   </head>
   <body>
     <nav>
@@ -64,40 +64,15 @@
             <i class="fas fa-bars menu-btn"></i>
         </div>
     </nav>
-
-<div class="box-area">      
-      <div class="MoreAbout-Banner">  
-         <h1>ABOUT US</h1>
-      </div>
       
-     <div class="MoreAbout">
-        <div class="MoreAbout-wrapper">
-            <h2>Learn More About Us!</h2>
-         <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
-        <b>Pet<span style="color: #87c7af">Haven</span></b> is a sanctuary where the hopes of animals seeking their forever homes intertwine with the dreams of compassionate individuals eager to provide them with the love and care they deserve. 
-        At <b>Pet<span style="color: #87c7af">Haven</span></b>, we believe that every pet is a cherished life waiting for a chance to flourish in a nurturing environment. 
-        <br><br>
-        Our platform serves as a bridge that connects these loving souls to those who are ready to open not just their homes but their hearts. 
-        We feel that every pet deserves a safe and warm refuge, where they can thrive and truly belong.</p>
-        <br><br>
-          <h2> Why Pet<span style="color: #87c7af">Haven</span>? </h2>
-        <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">   
-       Every year, approximately 7.6 million pets become strays, with about 3.4 million of them being cats in Malaysia alone. 
-       Globally, the World Health Organization (WHO) estimates that there are over 200 million stray dogs.
-       These staggering numbers highlight the urgent need for a solution.
-        </p>
-         <br><br>
-          <h2> Our Mission </h2>
-        <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">   
-         At <b>Pet<span style="color: #87c7af">Haven</span></b>, we are dedicated to creating a significant impact on the lives of stray animals and the communities they inhabit.
-         Our passion drives us to develop a seamless, user-friendly web application that addresses the critical issue of stray animals, ensuring that every animal in need finds a loving home.
-         By leveraging cutting-edge technology and compassionate outreach, we aim to drastically reduce the number of abandoned and suffering stray animals.
-         Our mission extends beyond mere adoption; we strive to educate the public on responsible pet ownership, advocate for humane treatment, and build a supportive network that fosters a kinder, more empathetic society. 
-        </p>
-      </div>
-    </div>
-</div>    
-    <!-- Footer Section -->
+      
+      
+      
+      
+      
+      
+      
+   <!-- Footer Section -->
  <footer id="footer">
   <div class="footer-container">
     <div class="footer-links">
@@ -141,3 +116,11 @@
 
   </body>
 </html>  
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
