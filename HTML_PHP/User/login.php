@@ -1,4 +1,4 @@
-<?php
+<form?php
     session_start();
 ?>
 
@@ -43,8 +43,23 @@
     <title>Login</title>
 </head>
 <body>
+    <nav>
+        <a href="index.html" class ="brand">
+            <h1>Pet<b class="accent">Haven</b></h1>
+        </a>
+        <div class="menu">
+            <div class="btn">
+                <i class = "fas fa-times close-btn"></i>
+            </div>
+            <a href="index.php">Home</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Pets.php">Pets</a>
+            <a href="FAQs.php">FAQ's</a>
+            <a href="index.php#stories">Stories</a>
+        </div>
+    </nav>
     <div class="login-container">
-        <div class="box">
+        <div class="box form-box">
             <?php
                 include("php/config.php");
                 if(isset($_POST['submit'])){
@@ -71,41 +86,26 @@
                 }else{
                 
             ?>
-            <div class="box-login" >
-                <div class="top-header">
-                    <h3>Hello Again!</h3>
-                    <small>We are happy to have you back!</small>
-                </div>
-                <div class="input-group">
-                    <div class="input-field">
-                        <input type="text" class="input-box" id="Email" required>
-                        <label for="Email">Email Address</label>
+            <header>Login</header>
+                <form action="" method="post"></form>
+                    <div class="field input">
+                        <label for="Username">Username</label>
+                        <input type="text" name="Username" id="Username" required>  
                     </div>
-                    <div class="input-field">
-                        <input type="password" class="input-box" id="Password" required>
-                        <label for="Password">Password</label>
-                        <div class="eye-area">
-                            <div class="eye-box" onclick="myLogin">
-                                <i class="fa-regular fa-eye"></i>
-                                <i class="fa-regular fa-eye-slash"></i>
-                            </div>
-                        </div>
+                    <div class="field input">
+                        <label for="Password">Password</label> 
+                        <input type="password" name="Password" id="Password" required>
                     </div>
-                    <div class="remember">
-                        <input type="checkbox" id="formCheck" class="check">
-                        <label for="formCheck"> Remember Me</label>
+                    <div class="field">
+                        <input type="submit" class="btn" name="submit" value="Sign In">
                     </div>
-                    <div class="input-field">
-                        <input type="submit" class="input-submit" value="Sign In">
+                    <div class="login-link">
+                        Don't have an account? <a href="register.php">Sign Up Now!</a>
                     </div>
-                    <div class="forgot">
-                        <a href="register.php">Forgot Password?</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
         <?php } ?>
-    </div>
-    
+    </div>    
 </body>
 </html>

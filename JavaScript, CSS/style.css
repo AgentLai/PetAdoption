@@ -992,7 +992,7 @@ footer{
 }
 
 /******************Login & Register**************/
-.container{
+.login-container{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1015,7 +1015,7 @@ footer{
     margin: 0px 10px;
 }
 
-.form-box-header{
+.form-box header{
     font-size: 25px;
     font-weight: 600;
     padding-bottom: 10px;
@@ -1041,7 +1041,7 @@ footer{
 
 .btn{
     height: 35px;
-    background: rgba(76, 68, 182, 0.8);
+    background: var(--accent);
     border: 0;
     border-radius: 5px;
     color: #fff;
@@ -1073,4 +1073,3 @@ footer{
     margin-bottom: 10px;
     color: red;
 }
-
