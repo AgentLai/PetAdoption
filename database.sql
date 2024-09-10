@@ -86,3 +86,8 @@ VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tar
 
 INSERT INTO Admin (MemberID, Username, Password) 
 VALUES (1, 'PetAdmin', '@dmin2024_PetHaven');
+
+INSERT INTO Pets (name, PetSpecies, Breed, Age, Gender, Status, image_url) VALUES
+('Bella', 'Dog', 'Labrador', 3, 'Female', 'Available', 'Images/Snow(dog).jpg'),
+('Max', 'Cat', 'Siamese', 2, 'Male', 'Available', 'Images/Mars(cat).jpg'),
+('Charlie', 'Dog', 'Beagle', 4, 'Male', 'Adopted', 'Images/floofa(dog).jpg');
