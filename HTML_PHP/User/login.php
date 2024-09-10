@@ -1,4 +1,4 @@
-<form?php
+<?php
     session_start();
 ?>
 
@@ -49,7 +49,7 @@
         </a>
         <div class="menu">
             <div class="btn">
-                <i class = "fas fa-times close-btn"></i>
+                <i class="fas fa-times close-btn"></i>
             </div>
             <a href="index.php">Home</a>
             <a href="AboutUs.php">About Us</a>
@@ -62,11 +62,13 @@
         <div class="box form-box">
             <?php
                 include("php/config.php");
-                if(isset($_POST['submit'])){
-                    $email = mysqli_real_escape_string($con,$_POST['email']);
-                    $password = mysqli_real_escape_string($con,$_POST['password']);
 
-                    $result = mysqli_query($con,"SELECT * FROM member WHERE Email='$email' AND Password = '$password'") or die("Selection Error");
+                if(isset($_POST['submit'])){
+                    $email = mysqli_real_escape_string($con, $_POST['email']);
+                    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+                    // You can improve this by using prepared statements for security
+                    $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
                     $row = mysqli_fetch_assoc($result);
 
                     if(is_array($row) && !empty($row)){
@@ -74,38 +76,35 @@
                         $_SESSION['username'] = $row['Username'];
                         $_SESSION['dob'] = $row['DoB'];
                         $_SESSION['memberID'] = $row['memberID'];
-                    } else{
-                        echo "<div class = 'message'>
-                            <p> Wrong Username or Password </p>
-                            </div> <br>";
-                        echo"< a href = 'index.php'><button class = 'btn'> Go Back </button>";
+
+                        header("Location: login.php");
+                    } else {
+                        echo "<div class='message'>
+                                <p>Wrong Username or Password</p>
+                              </div><br>";
+                        echo "<a href='index.php'><button class='btn'>Go Back</button></a>";
                     }
-                    if(isset($_SESSION['valid'])){
-                        header("Location: login.php")
-                    }
-                }else{
-                
+                } else {
             ?>
             <header>Login</header>
-                <form action="" method="post"></form>
-                    <div class="field input">
-                        <label for="Username">Username</label>
-                        <input type="text" name="Username" id="Username" required>  
-                    </div>
-                    <div class="field input">
-                        <label for="Password">Password</label> 
-                        <input type="password" name="Password" id="Password" required>
-                    </div>
-                    <div class="field">
-                        <input type="submit" class="btn" name="submit" value="Sign In">
-                    </div>
-                    <div class="login-link">
-                        Don't have an account? <a href="register.php">Sign Up Now!</a>
-                    </div>
-                </form>
-            </div>
+            <form action="" method="post">
+                <div class="field input">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="field">
+                    <input type="submit" class="btn" name="submit" value="Sign In">
+                </div>
+                <div class="login-link">
+                    Don't have an account? <a href="register.php">Sign Up Now!</a>
+                </div>
+            </form>
+            <?php } ?>
         </div>
-        <?php } ?>
     </div>    
 </body>
 </html>
