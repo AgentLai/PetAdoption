@@ -61,30 +61,39 @@
     <div class="login-container">
         <div class="box form-box">
             <?php
-                include("php/config.php");
+               include("php/config.php");
 
-                if(isset($_POST['submit'])){
-                    $email = mysqli_real_escape_string($con, $_POST['email']);
-                    $password = mysqli_real_escape_string($con, $_POST['password']);
+               if(isset($_POST['submit'])){
+                   $email = mysqli_real_escape_string($con, $_POST['email']);
+                   $password = mysqli_real_escape_string($con, $_POST['password']);
 
-                    // You can improve this by using prepared statements for security
-                    $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
-                    $row = mysqli_fetch_assoc($result);
+                   // Admin login condition
+                   if($email === "PetAdmin" && $password === "@dmin2024_PetHaven"){
+                       $_SESSION['valid'] = $email;
+                       $_SESSION['username'] = "Admin";
+                       header("Location: admin.php");
+                       exit();
+                   }
 
-                    if(is_array($row) && !empty($row)){
-                        $_SESSION['valid'] = $row['Email'];
-                        $_SESSION['username'] = $row['Username'];
-                        $_SESSION['dob'] = $row['DoB'];
-                        $_SESSION['memberID'] = $row['memberID'];
+                   // Normal user login
+                   $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
+                   $row = mysqli_fetch_assoc($result);
 
-                        header("Location: login.php");
-                    } else {
-                        echo "<div class='message'>
-                                <p>Wrong Username or Password</p>
-                              </div><br>";
-                        echo "<a href='index.php'><button class='btn'>Go Back</button></a>";
-                    }
-                } else {
+                   if(is_array($row) && !empty($row)){
+                       $_SESSION['valid'] = $row['Email'];
+                       $_SESSION['username'] = $row['Username'];
+                       $_SESSION['dob'] = $row['DoB'];
+                       $_SESSION['memberID'] = $row['memberID'];
+
+                       header("Location: login.php");
+                       exit();
+                   } else {
+                       echo "<div class='message'>
+                               <p>Wrong Username or Password</p>
+                             </div><br>";
+                       echo "<a href='index.php'><button class='btn'>Go Back</button></a>";
+                   }
+               } else {
             ?>
             <header>Login</header>
             <form action="" method="post">
