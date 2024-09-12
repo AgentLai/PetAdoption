@@ -49,16 +49,6 @@ CREATE TABLE Transaction (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
-CREATE TABLE ChatHistory (
-    ChatID INT AUTO_INCREMENT PRIMARY KEY,
-    SenderUserID INT,
-    ReceiverUserID INT,
-    Message TEXT NOT NULL,
-    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (SenderUserID) REFERENCES Member(MemberID),
-    FOREIGN KEY (ReceiverUserID) REFERENCES Member(MemberID)
-);
-
 CREATE TABLE AdoptionApplication (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT,
@@ -66,17 +56,6 @@ CREATE TABLE AdoptionApplication (
     ApplicationDate DATE,
     Status ENUM('Accepted', 'Denied', 'Ongoing', 'Submitted', 'Cancelled') NOT NULL,
     Comments TEXT,
-    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
-    FOREIGN KEY (PetID) REFERENCES Pets(PetID)
-);
-
-CREATE TABLE Reviews (
-    ReviewID INT AUTO_INCREMENT PRIMARY KEY,
-    MemberID INT,
-    PetID INT,
-    Rating INT CHECK (Rating BETWEEN 1 AND 5),
-    Comments TEXT,
-    ReviewDate DATE,
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
