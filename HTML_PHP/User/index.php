@@ -57,7 +57,7 @@
         </div>
 
         <button class = "btn-2" onclick="window.location.href='register.php'">
-        <p>Sign Up Now</p>
+        <p>Login</p>
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         </button>
 
@@ -75,7 +75,7 @@
         </p>
         <div class="hero-headlines-buttons">
             <button class="btn-3"><a href="index.php#pets">Our Pets</a></button>
-          <button class="btn-3 btn-transparent">Contact Us!</button>
+            <button class="btn-4 btn-transparent"><a href="FAQs.php#contact">Contact Us!</a></button>
         </div>
       </div>
       <div class="hero-images">
@@ -276,7 +276,7 @@
         <div class="links">
           <a href="index.php#requirements">Requirements</a>
           <a href="index.php#stories">Stories</a>
-          <a href="index.php#footer">Contact Us</a>
+          <a href="FAQs.php#contact">Contact Us</a>
         </div>
       </div>
     </div>

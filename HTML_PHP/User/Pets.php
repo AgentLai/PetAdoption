@@ -37,7 +37,7 @@
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
-    <title>Pet Haven</title>
+    <title>Pet Haven | Pets </title>
   </head>
   <body>
     <nav>
@@ -65,12 +65,85 @@
         </div>
     </nav>
       
-      
-      
-      
-      
-      
-      
+ <div class="filter-container">
+  <aside class="filters">
+    <h3>Filter by Species</h3>
+    <a class="filter-btn" href="Pets.php?species=Dog">Dogs</a>
+    <a class="filter-btn" href="Pets.php?species=Cat">Cats</a>
+    <a class="filter-btn" href="Pets.php">All</a> <!-- Reset filter -->
+
+    <h3>Filter by Gender</h3>
+    <a class="filter-btn" href="Pets.php?gender=Male">Male</a>
+    <a class="filter-btn" href="Pets.php?gender=Female">Female</a>
+  </aside>
+
+     <div class="pet-list-container">     
+<?php
+// Include database connection
+$servername = "localhost";
+$username = "root"; // Adjust with your DB username
+$password = ""; // Adjust with your DB password
+$dbname = "PetHaven"; // Adjust with your DB name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch filter values from the URL
+    $species = isset($_GET['species']) ? $conn->real_escape_string($_GET['species']) : '';
+    $gender = isset($_GET['gender']) ? $conn->real_escape_string($_GET['gender']) : '';
+    
+ // Build SQL query with filters
+    $sql = "SELECT * FROM Pets";
+    $conditions = [];
+
+    if (!empty($species)) {
+        $conditions[] = "PetSpecies = '$species'";
+    }
+    if (!empty($gender)) {
+        $conditions[] = "Gender = '$gender'";
+    }
+
+    if (count($conditions) > 0) {
+        $sql .= " WHERE " . implode(' AND ', $conditions);
+    }
+
+$result = $conn->query($sql);
+
+// Check if there are results and display them
+if ($result->num_rows > 0) {
+    echo "<div class='pets-list'>";
+    while ($row = $result->fetch_assoc()) {
+        echo "
+        <div class='pets-item'>
+            <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+            <h3>" . $row['Name'] . "</h3>
+            <p>Species: " . $row['PetSpecies'] . "</p>
+            <p>Breed: " . $row['Breed'] . "</p>
+            <p>Age: " . $row['Age'] . "</p>
+            <p>Gender: " . $row['Gender'] . "</p>
+            <p>Price: $" . $row['Price'] . "</p>
+            <p>Status: " . $row['Status'] . "</p>
+        </div>
+        ";
+    }
+    echo "</div>";
+} else {
+    echo "<p>No pets found matching the criteria.</p>";
+}
+
+// Close connection
+$conn->close();
+?>      
+     </div>
+ </div>     
+ 
+       
+           
       
    <!-- Footer Section -->
  <footer id="footer">
@@ -85,7 +158,7 @@
         <div class="links">
           <a href="index.php#requirements">Requirements</a>
           <a href="index.php#stories">Stories</a>
-          <a href="index.php#footer">Contact Us</a>
+          <a href="FAQs.php#contact">Contact Us</a>
         </div>
       </div>
     </div>
@@ -116,11 +189,4 @@
 
   </body>
 </html>  
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 

@@ -37,7 +37,15 @@
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
     <script src="Faq.js" defer></script>
-    <title>Pet Haven</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Pet Haven | FAQ's </title>
   </head>
   <body>
     <nav>
@@ -64,10 +72,11 @@
             <i class="fas fa-bars menu-btn"></i>
         </div>
     </nav>
-      <div class="faq-section">
-          <h2 class="title">FAQs</h2>
-          
-          <div class="faq">
+       <div class="faq-Banner">
+         <h1>FAQ's</h1>
+      </div>
+      <div class="faq-section"> 
+            <div class="faq">
               <div class="question">
                 <h3>How can I adopt a pet?</h3>
                   
@@ -78,7 +87,7 @@
               </div>
               <div class="answer">
                   <p>
-                      To adopt a pet, browse our available pets online, choose one that fits your family and lifestyle, and fill out the adoption application.
+                     <i class="fa-solid fa-bone"></i> To adopt a pet, browse our available pets online, choose one that fits your family and lifestyle, and fill out the adoption application.
                       After submission, our team will review your application and contact you to discuss the next steps, which may include a meet-and-greet with the pet.
                   </p>
               </div>
@@ -94,7 +103,7 @@
               </div>
               <div class="answer">
                   <p>
-                     Adoption fees vary based on the type and age of the pet.
+                    <i class="fa-solid fa-cat"></i>  Adoption fees vary based on the type and age of the pet.
                      Generally, adoption fees cover vaccinations, spaying/neutering, and other veterinary care. Specific fees are listed on each pet’s profile page.
                   </p>
               </div>
@@ -110,7 +119,7 @@
               </div>
               <div class="answer">
                   <p>
-                     We understand that sometimes adoptions don’t work out. If you need to return a pet, please contact us immediately.
+                      <i class="fa-solid fa-dog"></i> We understand that sometimes adoptions don’t work out. If you need to return a pet, please contact us immediately.
                      We’ll work with you to find the best solution, whether it’s returning the pet to us or finding a more suitable home.
                   </p>
               </div>
@@ -130,24 +139,50 @@
               </div>
               <div class="answer">
                   <p>
-                      Consider your lifestyle, the time you can dedicate to a pet, your living environment, and your budget. 
+                      <i class="fa-solid fa-person"></i> Consider your lifestyle, the time you can dedicate to a pet, your living environment, and your budget. 
                       Pets require time, attention, and financial resources for food, healthcare, and other needs.
                   </p>
               </div>
           </div>
       </div>
-      <div class="Contact-container">
-          <div>
+      
+ <!-- Contact Section -->     
+ <div class="Contact-container" id="contact">
                <div class="rich-wrapper--hero-vertical flex w-full flex-col justify-center text-center">
                    <h1>Contact us</h1>
-                   <p>Looking to contact PetHaven? There's a few ways to do it—check out all your options below.</p>
+                   <p>Looking to contact <i class="fa-solid fa-phone-volume"></i> <b>Pet<span style="color: #87c7af">Haven</span></b> ? There's a few ways to do it—check out all your options below.</p>
                </div>
-          </div>
-      </div> 
-     
+          
+     <div class="faq-contact-info">
+         
+              <div class="faq-contact-box">
+                  <div class="contact-phone">    
+              <h4><i class="fa-solid fa-phone"></i>Phone Number</h4>
+              <p>
+                  +60 17-816 3645(Douglas)
+              </p>
+                  </div>
+              </div>    
+         
+              <div class="faq-contact-box">
+                   <div class="contact-email">
+              <h4><i class="fa-regular fa-envelope"></i>Email</h4>
+              <p>
+                   pethaven@gmail.com
+              </p>
+                   </div>
+              </div>    
+          
+     </div>     
       
-      
-      
+ <!-- Location Map -->    
+ <div class="Map-section">
+     <div class="Map-box">
+         <h1>Our Location</h1>
+       
+     </div>
+     <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d1984.0800623329678!2d116.094487!3d5.9726747!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwNTgnMjAuOSJOIDExNsKwMDUnNDIuNSJF!5e0!3m2!1sen!2smy!4v1725699026013!5m2!1sen!2smy"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ </div>
       
       
       
@@ -166,7 +201,7 @@
         <div class="links">
           <a href="index.php#requirements">Requirements</a>
           <a href="index.php#stories">Stories</a>
-          <a href="index.php#footer">Contact Us</a>
+          <a href="FAQs.php#contact">Contact Us</a>
         </div>
       </div>
     </div>
