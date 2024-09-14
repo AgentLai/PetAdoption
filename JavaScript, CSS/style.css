@@ -837,6 +837,83 @@ iframe:hover{
     opacity: 1;
 }
 
+/* Profile CSS*/
+/* Custom styles for profile.php elements */
+
+/* Container for the profile page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Light background for the profile section */
+.light-style {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* General card style for profile sections */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Profile tab styles */
+.list-group-item {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover, .list-group-item.active {
+    background-color: #87c7af; /* Accent color */
+    color: white;
+}
+
+/* Form controls for editing profile */
+.form-control {
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #87c7af;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #72a693;
+}
+
+/* Reset button */
+.btn-default {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-default:hover {
+    background-color: #bbb;
+}
+
+
 
 /* Footer CSS */
 footer{

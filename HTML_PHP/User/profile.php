@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     </nav>
 
     <!-- Profile Page Content -->
-    <div class="container light-style flex-grow-1 container-p-y">
+    <div class="Profile-container light-style flex-grow-1 container-p-y">
         <h4 class="font-weight-bold py-3 mb-4">Account <b class="accent">Settings</b></h4>
 
         <div class="card overflow-hidden">
