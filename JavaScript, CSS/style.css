@@ -1578,16 +1578,18 @@ footer{
     flex-grow: 1;
 }
 
-/* Style for the pets list */
+/* Style for the members list */
 .members-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  margin-top: 40px;
   margin-left: 215px;
   margin-right: 200px;
+  margin-bottom: 20px;
 }
 
-/* Pet items styling */
+/* Members items styling */
 .members-item {
   padding: 20px;
   background-color: white;
@@ -1599,10 +1601,28 @@ footer{
   flex-direction: column; /* Stack items vertically */
 }
 
-/* Hover effect for pet items - enlarge and emphasize */
+/* Hover effect for members items - enlarge and emphasize */
 .members-item:hover {
   transform: scale(1.05); /* Slightly enlarge on hover */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.members-title h1{
+  font-size: 36px;
+  font-family: "Arvo", serif;
+  margin-left: 215px; /* Aligns the title with the content */
+  margin-top: 140px;
+  margin-bottom: 20px;
+  color: #333; /* Optional: Change the color */
+}
+
+.pets-title h1{
+  font-size: 36px;
+  font-family: "Arvo", serif;
+  margin-left: 215px; /* Aligns the title with the content */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333; /* Optional: Change the color */
 }
 
 .members-item img {
@@ -1624,10 +1644,11 @@ footer{
     margin-bottom: 5px;
 }
 
-.pets-item p {
+.members-item p {
     font-family: "Playfair Display", serif;
     margin: 10px 0;
     font-size: 21px;
 }
+
 
 
