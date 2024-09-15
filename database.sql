@@ -5,7 +5,8 @@ CREATE TABLE Member (
     LastName VARCHAR(50) NOT NULL,
     DOB DATE,
     Email VARCHAR(100) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL
+    Password VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255)
 );
 
 CREATE TABLE Admin (
@@ -14,6 +15,7 @@ CREATE TABLE Admin (
     Username VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+    Email VARCHAR(100) UNIQUE NOT NULL,
 );
 
 CREATE TABLE Settings (
@@ -27,7 +29,7 @@ CREATE TABLE Settings (
 CREATE TABLE Pets (
     PetID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(50) NOT NULL,
-    Pictures TEXT,
+    image_url VARCHAR(255),
     Age INT,
     PetSpecies VARCHAR(50),
     Breed VARCHAR(50),
@@ -48,11 +50,11 @@ CREATE TABLE AdoptionHistory (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
-INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password) 
-VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000');
+INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password, image_url) 
+VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000', 'Images/Admin_img.jpeg');
 
-INSERT INTO Admin (MemberID, Username, Password) 
-VALUES (1, 'PetAdmin', '@dmin2024_PetHaven');
+INSERT INTO Admin (MemberID, Username, Email, Password) 
+VALUES (1, 'PetAdmin', 'PetHaven@gmail.com' ,'@dmin2024_PetHaven');
 
 INSERT INTO Pets (name, PetSpecies, Breed, Age, Gender, Status, image_url) VALUES
 ('Bella', 'Dog', 'Labrador', 3, 'Female', 'Available', 'Images/Snow(dog).jpg'),
