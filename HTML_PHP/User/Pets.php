@@ -36,7 +36,19 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-
+    <script src="Pets.js" defer></script>
+    <!-- Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <title>Pet Haven | Pets </title>
   </head>
   <body>
@@ -66,18 +78,53 @@
     </nav>
       
  <div class="filter-container">
-  <aside class="filters">
-    <h3>Filter by Species</h3>
-    <a class="filter-btn" href="Pets.php?species=Dog">Dogs</a>
-    <a class="filter-btn" href="Pets.php?species=Cat">Cats</a>
-    <a class="filter-btn" href="Pets.php">All</a> <!-- Reset filter -->
+  <aside class="filters">   
+  <form method="GET" action="Pets.php">
+      <!-- Filter by Species -->
+      <h3>Species</h3>
+      <label>
+        <input type="checkbox" name="species[]" value="Dog" 
+          <?php if(in_array('Dog', $_GET['species'] ?? [])) echo 'checked'; ?>> Dogs
+      </label><br>
+      <label>
+        <input type="checkbox" name="species[]" value="Cat" 
+          <?php if(in_array('Cat', $_GET['species'] ?? [])) echo 'checked'; ?>> Cats
+      </label><br>
 
-    <h3>Filter by Gender</h3>
-    <a class="filter-btn" href="Pets.php?gender=Male">Male</a>
-    <a class="filter-btn" href="Pets.php?gender=Female">Female</a>
+      <!-- Filter by Gender -->
+      <h3>Gender</h3>
+      <label>
+        <input type="checkbox" name="gender[]" value="Male"
+          <?php if(in_array('Male', $_GET['gender'] ?? [])) echo 'checked'; ?>> Male
+      </label><br>
+      <label>
+        <input type="checkbox" name="gender[]" value="Female"
+          <?php if(in_array('Female', $_GET['gender'] ?? [])) echo 'checked'; ?>> Female
+      </label><br>
+
+      <!-- Filter by Status -->
+      <h3>Status</h3>
+      <label>
+        <input type="checkbox" name="status[]" value="Available"
+          <?php if(in_array('Available', $_GET['status'] ?? [])) echo 'checked'; ?>> Available
+      </label><br>
+      <label>
+        <input type="checkbox" name="status[]" value="Pending"
+          <?php if(in_array('Pending', $_GET['status'] ?? [])) echo 'checked'; ?>> Pending
+      </label><br>
+      <label>
+        <input type="checkbox" name="status[]" value="Adopted"
+          <?php if(in_array('Adopted', $_GET['status'] ?? [])) echo 'checked'; ?>> Adopted
+      </label><br>
+
+      <!-- Submit button -->
+      <button type="submit" class="filter-btn">Apply Filters</button>
+    </form>
   </aside>
 
-     <div class="pet-list-container">     
+  <!-- Your pet list code remains the same -->
+  <div class="pet-list-container">
+    <!-- PHP code to display filtered pets -->
 <?php
 // Include database connection
 $servername = "localhost";
@@ -93,41 +140,83 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch filter values from the URL
-    $species = isset($_GET['species']) ? $conn->real_escape_string($_GET['species']) : '';
-    $gender = isset($_GET['gender']) ? $conn->real_escape_string($_GET['gender']) : '';
-    
- // Build SQL query with filters
-    $sql = "SELECT * FROM Pets";
-    $conditions = [];
+// Fetch filter values from the URL and handle multiple selections
+$species = isset($_GET['species']) ? $_GET['species'] : [];
+$gender = isset($_GET['gender']) ? $_GET['gender'] : [];
+$status = isset($_GET['status']) ? $_GET['status'] : [];
 
-    if (!empty($species)) {
-        $conditions[] = "PetSpecies = '$species'";
-    }
-    if (!empty($gender)) {
-        $conditions[] = "Gender = '$gender'";
-    }
+// Build SQL query with filters
+$sql = "SELECT * FROM Pets";
+$conditions = [];
 
-    if (count($conditions) > 0) {
-        $sql .= " WHERE " . implode(' AND ', $conditions);
-    }
+// Check species filter
+if (!empty($species)) {
+    $species_list = implode("','", array_map([$conn, 'real_escape_string'], $species));
+    $conditions[] = "PetSpecies IN ('$species_list')";
+}
+
+// Check gender filter
+if (!empty($gender)) {
+    $gender_list = implode("','", array_map([$conn, 'real_escape_string'], $gender));
+    $conditions[] = "Gender IN ('$gender_list')";
+}
+
+// Check status filter
+if (!empty($status)) {
+    $status_list = implode("','", array_map([$conn, 'real_escape_string'], $status));
+    $conditions[] = "Status IN ('$status_list')";
+}
+
+// Append conditions to SQL query
+if (count($conditions) > 0) {
+    $sql .= " WHERE " . implode(' AND ', $conditions);
+}
 
 $result = $conn->query($sql);
 
 // Check if there are results and display them
 if ($result->num_rows > 0) {
     echo "<div class='pets-list'>";
+    
     while ($row = $result->fetch_assoc()) {
+        $petID = $row['PetID'];
         echo "
-        <div class='pets-item'>
+        <div class='pets-item' onclick='openModal($petID)'>
             <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+          <div class='pets-name'>       
             <h3>" . $row['Name'] . "</h3>
+          </div>      
             <p>Species: " . $row['PetSpecies'] . "</p>
             <p>Breed: " . $row['Breed'] . "</p>
             <p>Age: " . $row['Age'] . "</p>
             <p>Gender: " . $row['Gender'] . "</p>
-            <p>Price: $" . $row['Price'] . "</p>
             <p>Status: " . $row['Status'] . "</p>
+        </div>
+                
+       <!-- Modal for Quick View -->
+        <div id='modal-$petID' class='modal'>
+          <div class='modal-content'>
+            <span class='close' onclick='closeModal($petID)'>&times;</span>
+            <div class='modal-body'>
+              <div class='modal-image'>
+                <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+              </div>
+              <div class='modal-info'>
+                <h3>" . $row['Name'] . "</h3>
+                <p>Species: " . $row['PetSpecies'] . "</p>
+                <p>Breed: " . $row['Breed'] . "</p>
+                <p>Age: " . $row['Age'] . "</p>
+                <p>Gender: " . $row['Gender'] . "</p>
+                <p>Description: " . $row['description'] . "</p>
+                <p>Status: " . $row['Status'] . "</p>
+                    
+                 <!-- Inquire Us Button -->
+                  <div class='inquire-container'>
+                     <a href='index.php#requirements'><div class='inquire-btn'>Inquire Us</div></a>
+                 </div>   
+              </div>
+            </div>
+          </div>
         </div>
         ";
     }
@@ -141,7 +230,7 @@ $conn->close();
 ?>      
      </div>
  </div>     
- 
+
        
            
       

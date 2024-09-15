@@ -103,8 +103,8 @@
               </div>
               <div class="answer">
                   <p>
-                    <i class="fa-solid fa-cat"></i>  Adoption fees vary based on the type and age of the pet.
-                     Generally, adoption fees cover vaccinations, spaying/neutering, and other veterinary care. Specific fees are listed on each pet’s profile page.
+                    <i class="fa-solid fa-cat"></i>  At PetHaven fees are not involved when adopting. Instead we have fees that provides vaccinations, spaying/neutering, and other veterinary care for the pet, 
+                    which we would discuss after the application of a pet is submitted.
                   </p>
               </div>
           </div>

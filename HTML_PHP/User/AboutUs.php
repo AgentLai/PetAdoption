@@ -36,7 +36,14 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
     <title>Pet Haven |  About Us</title>
   </head>
   <body>
@@ -73,7 +80,7 @@
      <div class="MoreAbout">
         <div class="MoreAbout-wrapper">
             <h2>Learn More About Us!</h2>
-         <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
+          <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
         <b>Pet<span style="color: #87c7af">Haven</span></b> is a sanctuary where the hopes of animals seeking their forever homes intertwine with the dreams of compassionate individuals eager to provide them with the love and care they deserve. 
         At <b>Pet<span style="color: #87c7af">Haven</span></b>, we believe that every pet is a cherished life waiting for a chance to flourish in a nurturing environment. 
         <br><br>
@@ -110,7 +117,7 @@
         <div class="links">
           <a href="index.php#requirements">Requirements</a>
           <a href="index.php#stories">Stories</a>
-          <a href="index.php#footer">Contact Us</a>
+          <a href="FAQs.php#contact">Contact Us</a>
         </div>
       </div>
     </div>
