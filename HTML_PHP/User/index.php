@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,30 +45,40 @@
     <title>Pet Haven</title>
   </head>
   <body>
-    <nav>
-        <a href="index.html" class ="brand">
-            <h1>Pet<b class="accent">Haven</b></h1>
-        </a>
-        <div class="menu">
-            <div class="btn">
-                <i class = "fas fa-times close-btn"></i>
-            </div>
-            <a href="index.php">Home</a>
-            <a href="AboutUs.php">About Us</a>
-            <a href="Pets.php">Pets</a>
-            <a href="FAQs.php">FAQ's</a>
-            <a href="index.php#stories">Stories</a>
-        </div>
-
-        <button class = "btn-2" onclick="window.location.href='Login.php'">
-        <p>Login</p>
-        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-        </button>
-
+  <nav>
+    <a href="index.php" class="brand">
+      <h1>Pet<b class="accent">Haven</b></h1>
+    </a>
+    <div class="menu">
         <div class="btn">
-            <i class="fas fa-bars menu-btn"></i>
+            <i class="fas fa-times close-btn"></i>
         </div>
-    </nav>
+        <a href="index.php">Home</a>
+        <a href="AboutUs.php">About Us</a>
+        <a href="Pets.php">Pets</a>
+        <a href="FAQs.php">FAQ's</a>
+        <a href="index.php#stories">Stories</a>
+    </div>
+    <div class="btn-2">
+        <?php if (isset($_SESSION['MemberID'])): ?>
+            <!-- Display username when logged in -->
+            <button onclick="window.location.href='profile.php'">
+              <i class="fa-regular fa-user"></i>
+              <p><?php echo htmlspecialchars($_SESSION['Username']); ?></p>
+            </button>
+        <?php else: ?>
+            <!-- Display login button when not logged in -->
+            <button onclick="window.location.href='Login.php'">
+              <p>Login</p>
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+        <?php endif; ?>
+    </div>
+    <div class="btn">
+        <i class="fas fa-bars menu-btn"></i>
+    </div>
+  </nav>
+
     <!--Hero Page Section-->
     <section class="heropage">
       <div class="hero-headlines">

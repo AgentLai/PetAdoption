@@ -83,9 +83,9 @@
                        $_SESSION['valid'] = $row['Email'];
                        $_SESSION['username'] = $row['Username'];
                        $_SESSION['dob'] = $row['DoB'];
-                       $_SESSION['memberID'] = $row['memberID'];
+                       $_SESSION['MemberID'] = $row['MemberID'];
 
-                       header("Location: login.php");
+                       header("Location: index.php");
                        exit();
                    } else {
                        echo "<div class='message'>
