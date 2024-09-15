@@ -68,7 +68,7 @@
                    $password = mysqli_real_escape_string($con, $_POST['password']);
 
                    // Admin login condition
-                   if($email === "PetAdmin" && $password === "@dmin2024_PetHaven"){
+                   if($email === "PetAdmin@gmail.com" && $password === "@dmin2024_PetHaven"){
                        $_SESSION['valid'] = $email;
                        $_SESSION['username'] = "Admin";
                        header("Location: admin.php");
