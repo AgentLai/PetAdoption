@@ -46,111 +46,80 @@
             <a href="applications.php">Applications</a>
         </div>    
     </nav>
-    <div class="member-list-container">
-    <?php
-    // Include database connection
-    $servername = "localhost";
-    $username = "root"; // Adjust with your DB username
-    $password = ""; // Adjust with your DB password
-    $dbname = "PetHaven"; // Adjust with your DB name
-    
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error   );
-    }
-    if ($user_result->num_rows > 0) {
-    echo "<div class='members-list'>";
+
+
+<?php
+// Assume connection to the database is already established
+
+// Fetch current members (users)
+$user_sql = "SELECT * FROM Member";
+$user_result = $conn->query($user_sql);
+
+if ($user_result->num_rows > 0) {
+    echo "<div class='users-list'>";
     
     while ($row = $user_result->fetch_assoc()) {
         $memberID = $row['MemberID'];
         echo "
-        <div class='members-item' onclick='openModal($memberID)'>
-            <div class='members-name'>       
-                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-            </div>
-            <p>Member ID: ".$row['MemberID'] ."</p>    
-            <p>Username: " . $row['Username'] . "</p>
-            <p>Email: " . $row['Email'] . "</p>
-            <p>DOB: " . $row['DOB'] . "</p>
-        </div>
-                
-        <!-- Modal for Quick View -->
-        <div id='modal-$memberID' class='modal'>
-          <div class='modal-content'>
-            <span class='close' onclick='closeModal($memberID)'>&times;</span>
-            <div class='modal-body'>
-              <div class='modal-info'>
-                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-                <p>Member ID: ".$row['MemberID'] ."</p>    
+        <div class='user-item'>
+            <div class='user-info'>
+                <h4>" . $row['FirstName'] . " " . $row['LastName'] . "</h4>
                 <p>Username: " . $row['Username'] . "</p>
                 <p>Email: " . $row['Email'] . "</p>
                 <p>DOB: " . $row['DOB'] . "</p>
-              </div>
             </div>
-          </div>
+            <div class='user-actions'>
+                <button onclick='openEditModal($memberID)'>Edit</button>
+                <button onclick='deleteUser($memberID)'>Delete</button>
+            </div>
+        </div>
+        
+        <!-- Edit Modal -->
+        <div id='edit-modal-$memberID' class='modal'>
+            <div class='modal-content'>
+                <span class='close' onclick='closeEditModal($memberID)'>&times;</span>
+                <h3>Edit User</h3>
+                <form action='update_user.php' method='POST'>
+                    <input type='hidden' name='memberID' value='$memberID'>
+                    <label>First Name:</label>
+                    <input type='text' name='firstName' value='" . $row['FirstName'] . "' required>
+                    <label>Last Name:</label>
+                    <input type='text' name='lastName' value='" . $row['LastName'] . "' required>
+                    <label>Username:</label>
+                    <input type='text' name='username' value='" . $row['Username'] . "' required>
+                    <label>Email:</label>
+                    <input type='email' name='email' value='" . $row['Email'] . "' required>
+                    <label>DOB:</label>
+                    <input type='date' name='dob' value='" . $row['DOB'] . "' required>
+                    <button type='submit'>Update</button>
+                </form>
+            </div>
         </div>
         ";
     }
     echo "</div>";
 } else {
-    echo "<p>No members found matching the criteria.</p>";
+    echo "<p>No users found.</p>";
 }
-// Close connection
-$conn->close();
-?> 
-    <div class="pet-list-container">
-<?php
-if ($result->num_rows > 0) {
-    echo "<div class='pets-list'>";
-    
-    while ($row = $result->fetch_assoc()) {
-        $petID = $row['PetID'];
-        echo "
-        <div class='pets-item' onclick='openModal($petID)'>
-            <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
-          <div class='pets-name'>       
-            <h3>" . $row['Name'] . "</h3>
-          </div>      
-            <p>Species: " . $row['PetSpecies'] . "</p>
-            <p>Breed: " . $row['Breed'] . "</p>
-            <p>Age: " . $row['Age'] . "</p>
-            <p>Gender: " . $row['Gender'] . "</p>
-            <p>Status: " . $row['Status'] . "</p>
-        </div>
-                
-       <!-- Modal for Quick View -->
-        <div id='modal-$petID' class='modal'>
-          <div class='modal-content'>
-            <span class='close' onclick='closeModal($petID)'>&times;</span>
-            <div class='modal-body'>
-              <div class='modal-image'>
-                <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
-              </div>
-              <div class='modal-info'>
-                <h3>" . $row['Name'] . "</h3>
-                <p>Species: " . $row['PetSpecies'] . "</p>
-                <p>Breed: " . $row['Breed'] . "</p>
-                <p>Age: " . $row['Age'] . "</p>
-                <p>Gender: " . $row['Gender'] . "</p>
-                <p>Description: " . $row['description'] . "</p>
-                <p>Status: " . $row['Status'] . "</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        ";
+?>
+
+<script>
+function openEditModal(memberID) {
+    document.getElementById('edit-modal-' + memberID).style.display = "block";
+}
+
+function closeEditModal(memberID) {
+    document.getElementById('edit-modal-' + memberID).style.display = "none";
+}
+
+function deleteUser(memberID) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        window.location.href = 'delete_user.php?id=' + memberID; // Redirect to delete script
     }
-    echo "</div>";
-} else {
-    echo "<p>No pets found matching the criteria.</p>";
 }
-// Close connection
-$conn->close();
-?>   
-    <footer id="footer">
+</script>
+</body>
+<footer id="footer">
       <div class="footer-container">
         <div class="footer-links">
           <h2>Quick Links</h2>
