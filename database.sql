@@ -38,24 +38,12 @@ CREATE TABLE Pets (
     Colour VARCHAR(50)
 );
 
-CREATE TABLE Transaction (
-    TransactionID INT AUTO_INCREMENT PRIMARY KEY,
-    MemberID INT,
-    PetID INT,
-    Date DATE,
-    Time TIME,
-    Amount DECIMAL(10, 2),
-    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
-    FOREIGN KEY (PetID) REFERENCES Pets(PetID)
-);
-
-CREATE TABLE AdoptionApplication (
+CREATE TABLE AdoptionHistory (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT,
     PetID INT,
     ApplicationDate DATE,
-    Status ENUM('Accepted', 'Denied', 'Ongoing', 'Submitted', 'Cancelled') NOT NULL,
-    Comments TEXT,
+    Status ENUM('Accepted', 'Denied', 'Cancelled') NOT NULL,
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
