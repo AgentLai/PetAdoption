@@ -56,7 +56,7 @@
             <a href="index.php#stories">Stories</a>
         </div>
 
-        <button class = "btn-2" onclick="window.location.href='register.php'">
+        <button class = "btn-2" onclick="window.location.href='Login.php'">
         <p>Login</p>
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         </button>
@@ -74,8 +74,8 @@
           Available for Adoption.
         </p>
         <div class="hero-headlines-buttons">
-            <button class="btn-3"><a href="index.php#pets">Our Pets</a></button>
-            <button class="btn-4 btn-transparent"><a href="FAQs.php#contact">Contact Us!</a></button>
+            <a href="index.php#pets"><button class="btn-3">Our Pets</button></a>
+            <a href="FAQs.php#contact"><button class="btn-4 btn-transparent">Contact Us!</button></a>
         </div>
       </div>
       <div class="hero-images">
@@ -156,10 +156,10 @@
           <h3>Dan</h3>
         </div>
       </div>
-      <button class="btn-3 btn-pets">
-          <a href="Pets.php">Find More</a>
+       <a href="Pets.php"><button class="btn-3 btn-pets">
+          Find More
         <i class="fa-solid fa-arrow-right-long"></i>
-      </button>
+           </button></a>
     </section>
     <!--About Section-->
     <div class="about" id="about">
@@ -190,7 +190,7 @@
             <h6>Community Loved</h6>
           </div>
         </div>
-        <button class="btn-3"><a href="AboutUs.php">Learn More</a></button>
+        <a href="AboutUs.php"><button class="btn-3">Learn More</button></a>
       </div>
       <img src="Images/about-img.png" alt="img">
     </div>
@@ -213,11 +213,10 @@
             <i class="fa-solid fa-quote-right"></i>
           </div>
           <p class="testimony-text">
-            I had an incredible experience adopting my new furry friend from Pet Haven! 
-            The staff was kind, knowledgeable, and truly cared about matching me with the perfect pet. 
-            The adoption process was smooth and well-organized, and they provided all the support I needed 
-            to help my pet settle into their new home. My new companion has brought so much joy into my life, 
-            and I couldn't be happier with Pet Haven. Highly recommend!
+            I had a wonderful experience adopting my furry friend from PetHaven! 
+            The staff was kind, knowledgeable, and focused on finding the perfect match. 
+            The adoption process was smooth, and they gave me all the support I needed. 
+            My new companion brings so much joy, and I highly recommend PetHaven!
           </p>
         </div>
         <!--testimony item 2-->
@@ -233,10 +232,9 @@
             <i class="fa-solid fa-quote-right"></i>
           </div>
           <p class="testimony-text">
-            I recently adopted my cat, Benedict, through Pet Haven. The staff was incredibly helpful, 
-            answering all my questions and ensuring Luna was the perfect match for my home. 
-            The adoption process was smooth and well-organized, and I felt supported every step of the way. 
-            Benedict has brought so much joy into my life, and I'm so grateful to Pet Haven for helping us find each other. 
+           I adopted my cat, Benedict, through PetHaven, and the staff was incredibly helpful, answering all my questions and ensuring he was the perfect match. 
+           The process was smooth, and I'm so grateful to PetHaven for bringing us together. 
+           Benedict has brought so much joy to my life!
           </p>
         </div>
         <!--testimony item 3-->
@@ -252,11 +250,9 @@
             <i class="fa-solid fa-quote-right"></i>
           </div>
           <p class="testimony-text">
-            I adopted my new furry friend through Pet Haven, and the experience was fantastic! 
-            The staff was incredibly helpful and made the entire process smooth and stress-free. 
-            They truly care about the well-being of the animals and ensured I was well-prepared to bring my new pet home. 
-            My dog settled in quickly and has become a beloved member of the family. 
-            I highly recommend Pet Haven to anyone looking to adopt a pet!
+            I adopted my furry friend through PetHaven, and it was a fantastic experience! 
+            The staff was helpful and made the process smooth. They truly care about the animals and ensured I was ready to bring my pet home. 
+            My dog settled in quickly and is now a beloved family member. Highly recommend PetHaven!
           </p>
         </div>
       </div>
