@@ -3,14 +3,14 @@ session_start();
 include 'config.php';
 
 // Check if the user is logged in
-if (!isset($_SESSION['memberID'])) {
+if (!isset($_SESSION['MemberID'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
     exit();
 }
 
-$memberID = $_SESSION['memberID'];
+$memberID = $_SESSION['MemberID'];
 $query = "SELECT Username, FirstName, LastName, DOB, Email FROM Member WHERE MemberID = ?";
-$stmt = $conn->prepare($query);
+$stmt = $con->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,14 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
 
     // Update user details in the database
     $update_query = "UPDATE Member SET FirstName = ?, LastName = ?, DOB = ?, Email = ? WHERE MemberID = ?";
-    $update_stmt = $conn->prepare($update_query);
+    $update_stmt = $con->prepare($update_query);
     $update_stmt->bind_param("sssii", $first_name, $last_name, $dob, $email, $memberID);
 
     if ($update_stmt->execute()) {
         $update_success_message = "Profile updated successfully.";
         // Refresh the user data after update
         $query = "SELECT Username, FirstName, LastName, DOB, Email, Password FROM Member WHERE MemberID = ?";
-        $stmt = $conn->prepare($query);
+        $stmt = $con->prepare($query);
         $stmt->bind_param("i", $memberID);
         $stmt->execute();
         $result = $stmt->get_result();
