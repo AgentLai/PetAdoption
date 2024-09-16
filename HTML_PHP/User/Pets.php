@@ -69,12 +69,12 @@ session_start();
         <a href="FAQs.php">FAQ's</a>
         <a href="index.php#stories">Stories</a>
     </div>
-    <div class="btn-2">
+    <div class="login-btn">
         <?php if (isset($_SESSION['MemberID'])): ?>
             <!-- Display username when logged in -->
             <button onclick="window.location.href='profile.php'">
               <i class="fa-regular fa-user"></i>
-              <p><?php echo htmlspecialchars($_SESSION['Username']); ?></p>
+              <p><?php echo htmlspecialchars($_SESSION['username']); ?></p>
             </button>
         <?php else: ?>
             <!-- Display login button when not logged in -->
