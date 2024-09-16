@@ -49,9 +49,6 @@
 
 
 <?php
-// Assume connection to the database is already established
-
-// Fetch current members (users)
 $user_sql = "SELECT * FROM Member";
 $user_result = $conn->query($user_sql);
 
@@ -60,6 +57,7 @@ if ($user_result->num_rows > 0) {
     
     while ($row = $user_result->fetch_assoc()) {
         $memberID = $row['MemberID'];
+        // User info display
         echo "
         <div class='user-item'>
             <div class='user-info'>
@@ -68,13 +66,16 @@ if ($user_result->num_rows > 0) {
                 <p>Email: " . $row['Email'] . "</p>
                 <p>DOB: " . $row['DOB'] . "</p>
             </div>
+
             <div class='user-actions'>
                 <button onclick='openEditModal($memberID)'>Edit</button>
                 <button onclick='deleteUser($memberID)'>Delete</button>
             </div>
         </div>
-        
-        <!-- Edit Modal -->
+        ";
+
+        // Edit Modal for each user
+        echo "
         <div id='edit-modal-$memberID' class='modal'>
             <div class='modal-content'>
                 <span class='close' onclick='closeEditModal($memberID)'>&times;</span>
