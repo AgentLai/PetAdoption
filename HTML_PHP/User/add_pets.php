@@ -61,3 +61,83 @@
             <a href="applications.php">Applications</a>
         </div>    
     </nav>
+    <div class="pets-item">
+        <h1>Add a New Pet</h1>
+        <form action="add_pets.php" method="POST" enctype="multipart/form-data">
+        <label for="name">Pet Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="image_url">Image URL:</label>
+        <input type="text" id="image_url" name="image_url"><br><br>
+
+        <label for="age">Age (in years):</label>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="species">Species:</label>
+        <input type="text" id="species" name="species"><br><br>
+
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed"><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+
+        <label for="price">Price (in USD):</label>
+        <input type="number" step="0.01" id="price" name="price"><br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
+            <option value="Deceased">Deceased</option>
+        </select><br><br>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size"><br><br>
+
+        <label for="colour">Colour:</label>
+        <input type="text" id="colour" name="colour"><br><br>
+
+        <input type="submit" name="submit" value="Add Pet">
+        </form>
+    </div>
+    <?php
+    // Include the config.php to get the connection details
+    include 'config.php';
+
+    // Check if the form has been submitted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // Get form data
+        $name = $_POST['name'];
+        $image_url = $_POST['image_url'];
+        $age = $_POST['age'];
+        $species = $_POST['species'];
+        $breed = $_POST['breed'];
+        $gender = $_POST['gender'];
+        $price = $_POST['price'];
+        $status = $_POST['status'];
+        $size = $_POST['size'];
+        $colour = $_POST['colour'];
+
+        // Prepare SQL query to insert data into the Pets table
+        $sql = "INSERT INTO Pets (Name, image_url, Age, PetSpecies, Breed, Gender, Price, Status, Size, Colour)
+                VALUES ('$name', '$image_url', '$age', '$species', '$breed', '$gender', '$price', '$status', '$size', '$colour')";
+
+        // Execute the query and check if it was successful
+        if ($conn->query($sql) === TRUE) {
+            echo "New pet added successfully!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+
+    // Close the connection
+    $conn->close();
+    ?>
+</body>
+</html>
