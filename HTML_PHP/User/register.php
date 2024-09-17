@@ -69,12 +69,13 @@
             include("php/config.php");
             if(isset($_POST['submit'])){
 
-                $firstName = $_POST['firstName'];
-                $lastName = $_POST['lastName'];
-                $dob = $_POST['dob'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-            $verify_query = mysqli_query($con, "SELECT Email FROM member WHERE Email = '$email'");
+                $firstName = $_POST['FirstName'];
+                $lastName = $_POST['LastName'];
+                $username = $_POST['Username'];
+                $dob = $_POST['DOB'];
+                $email = $_POST['Email'];
+                $password = $_POST['Password'];
+                $verify_query = mysqli_query($con, "SELECT Email FROM Member WHERE Email = '$email'");
             if(mysqli_num_rows($verify_query)!=0){
                 echo"<div class = 'message'>
                      <p> This email is in use, please try again </p>
@@ -82,7 +83,7 @@
                 echo "<a href='javascript:self:histoy:back()'><button class = 'btn'> Go Back </button>";
             }
             else{
-                mysqli_query($con, "INSERT INTO member(firstName, lastName, Email, DOB, Password) VALUES('$firstName','$lastName','$dob','$email','$password')") or die("Error Occured");
+                mysqli_query($con, "INSERT INTO Member(FirstName, LastName, Username, Email, DOB, Password) VALUES('$firstName','$lastName','$username','$dob','$email','$password')") or die("Error Occured");
                 echo"<div class = 'message'>
                         <p> Registration Success! </p>
                     </div> <br>";
@@ -93,28 +94,28 @@
             <header>Sign Up</header>
             <form action="" method="post">
                 <div class="field input">
-                    <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName"  required>
+                    <label for="FirstName">First Name</label>
+                    <input type="text" name="FirstName" id="FirstName" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" id="lastName" required>
+                    <label for="LastName">Last Name</label>
+                    <input type="text" name="LastName" id="LastName" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <label for="dob">Date Of Birth</label>
-                    <input type="date" name="dob" id="dob" required>
+                    <label for="Username">Username</label>
+                    <input type="text" name="Username" id="Userame" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <label for="DOB">Date Of Birth</label>
+                    <input type="date" name="DOB" id="DOB" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
+                    <label for="Email">Email</label>
+                    <input type="email" name="Email" id="Email" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <label for="password">Confirm Password</label>
-                    <input type="cpassword" name="password" id="cpassword" required>
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" id="Password" autocomplete="off" required>
                 </div>
                 <div class="field">
                     <input type="submit" class="btn" name="submit" value="Sign Up" required>
