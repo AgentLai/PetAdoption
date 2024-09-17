@@ -158,6 +158,7 @@ nav.sticky{
     font-weight: 500;  /* Bold text */
 }
 
+
 /*Hero Section*/
 .heropage{
     margin-top: 150px;
@@ -310,6 +311,135 @@ nav.sticky{
     font-weight: 600;
 }
 
+.requirements-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.requirements-footer img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.application-button {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.application-button button {
+  height: 53px;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.application-button button:hover {
+  background-color: var(--accent);
+}
+.application-button {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.application-button button {
+  height: 53px;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.application-button button:hover {
+  background-color: var(--accent);
+}
+
+/* Application Modal */
+.application-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+/* Modal Content */
+.application-modal-content {
+    background-color: #f9f9f9;
+    margin: 5% auto; /* Centered vertically and horizontally */
+    padding: 30px;
+    border: 1px solid #ccc;
+    width: 80%; /* Adjustable width */
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Close button */
+.close-application {
+    color: #555;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-application:hover,
+.close-application:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form Labels */
+.application-modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form Inputs and Textareas */
+.application-modal-content input,
+.application-modal-content textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+.application-modal-content button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.application-modal-content button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
 /*INDEX-Pets Section*/
 .pets {
     display: flex;
@@ -352,7 +482,7 @@ nav.sticky{
 
 .btn-pets{
     width: 269px;
-    height: 60;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1540,7 +1670,7 @@ footer{
 
 .btn-login{
     height: 35px;
-    background: var(--accent);
+    background: rgba(76, 68, 182, 0.8);
     border: 0;
     border-radius: 5px;
     color: #fff;
@@ -1559,7 +1689,7 @@ footer{
     width: 100%;
 }
 
-.login-links{
+.login-links {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -1577,12 +1707,14 @@ footer{
 
 .message{
     text-align: center;
-    background: #f9eded;
+    background: #fff;
     padding: 15px 0px;
     border: 1px solid #699669;
     border-radius: 5px;
     margin-bottom: 10px;
     color: red;
+    font-weight: 400;
+    font-size: 25px;
 }
 
 /***Admin Users****/
@@ -1661,6 +1793,3 @@ footer{
     margin: 10px 0;
     font-size: 21px;
 }
-
-
-
