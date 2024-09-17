@@ -1,7 +1,6 @@
 <?php
-session_start();
+    session_start();  // Start the session to access session variables
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,9 +11,10 @@ session_start();
     <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
+    <script src="index_application.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js"></script>
     <!-- For Icons -->
     <link
       rel="stylesheet"
@@ -31,34 +31,41 @@ session_start();
       referrerpolicy="no-referrer"
     ></script>
     <!-- Link For Gsap - Scroll Trigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
       integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
     <!-- Link For Lenis - Smooth Scrolling -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
+   
     <title>Pet Haven</title>
   </head>
   <body>
-  <nav>
-    <a href="index.php" class="brand">
-      <h1>Pet<b class="accent">Haven</b></h1>
-    </a>
-    <div class="menu">
-        <div class="btn">
-            <i class="fas fa-times close-btn"></i>
+    <nav>
+        <a href="index.html" class ="brand">
+            <h1>Pet<b class="accent">Haven</b></h1>
+        </a>
+        <div class="menu">
+            <div class="btn">
+                <i class = "fas fa-times close-btn"></i>
+            </div>
+            <a href="index.php">Home</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Pets.php">Pets</a>
+            <a href="FAQs.php">FAQ's</a>
+            <a href="index.php#stories">Stories</a>
         </div>
-        <a href="index.php">Home</a>
-        <a href="AboutUs.php">About Us</a>
-        <a href="Pets.php">Pets</a>
-        <a href="FAQs.php">FAQ's</a>
-        <a href="index.php#stories">Stories</a>
-    </div>
+
        <div class="login-btn">
         <?php if (isset($_SESSION['MemberID'])): ?>
             <!-- Display username when logged in -->
@@ -78,7 +85,7 @@ session_start();
         <i class="fas fa-bars menu-btn"></i>
     </div>
   </nav>
-
+      
     <!--Hero Page Section-->
     <section class="heropage">
       <div class="hero-headlines">
@@ -146,9 +153,51 @@ session_start();
             </div>   
         </div>
       </div>
-      <img src="Images/requirements-img.png" alt="img">
+    <div class="requirements-footer">
+    <img src="Images/requirements-img.png" alt="img">
+      
+      <!-- Add button for quick view of the application form -->
+  <div class="application-button">
+    <?php if (isset($_SESSION['MemberID'])): ?>
+      <button id="submitApplicationButton">
+          Submit an Application
+      </button>
+    <?php else: ?>
+      <button onclick="window.location.href='Login.php'">
+          Login to Submit an Application
+      </button>
+    <?php endif; ?>
+  </div>
+  </div>
     </section>
 
+    <!-- Application Modal -->
+<div id="applicationModal" class="application-modal">
+    <div class="application-modal-content">
+        <span class="close-application">&times;</span>
+        <!-- Your form goes here -->
+        <form id="applicationForm">
+            <!-- Form fields -->
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" required><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="phone" required><br>
+
+            <label for="address">Address:</label>
+            <textarea name="address" id="address" required></textarea><br>
+
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" name="pet_name" id="pet_name" required><br>
+
+            <label for="reason">Why do you want to adopt this pet?</label>
+            <textarea name="reason" id="reason" required></textarea><br>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+</div>
+    
     <!--Pets Section-->
     <section class="pets" id="pets">
       <div class="pets-headlines">
