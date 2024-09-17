@@ -50,6 +50,25 @@ CREATE TABLE AdoptionHistory (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
+CREATE TABLE adoption_applications (
+    ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
+    MemberID INT NOT NULL,
+    PetID INT NOT NULL,
+    PetName VARCHAR(100) NOT NULL,
+    FullName VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    PhoneNumber VARCHAR(20),
+    Address TEXT NOT NULL,
+    Occupation VARCHAR(100),
+    HouseholdSize INT,
+    PetExperience VARCHAR(255),
+    ReasonForAdopting TEXT,
+    Status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    ApplicationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (MemberID) REFERENCES member(MemberID),
+    FOREIGN KEY (PetID) REFERENCES pets(PetID)
+);
+
 INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password, image_url) 
 VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000', 'Images/Admin_img.jpeg');
 
