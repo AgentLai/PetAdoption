@@ -892,6 +892,29 @@ nav.sticky{
   font-size: 23px;
 }
 
+/* Style for select elements */
+select {
+    width: 100%; /* Full width to match other form inputs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    margin-bottom: 15px; /* Space below each select */
+}
+
+/* Style for option elements */
+select option {
+    padding: 10px; /* Space inside options */
+}
+
+/* Optional: Style for select when focused */
+select:focus {
+    border-color: #4CAF50; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
 /* Close button */
 .close {
   position: absolute;
@@ -2144,6 +2167,34 @@ hr {
 }
 
 .pets-actions .btn-3:hover{
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.add-pet {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Optional for vertical centering */
+    height: 20vh;
+}
+
+.add-pet-btn {
+    width: 205px;
+    height: 53px;
+    background-color: var(--black);
+    font-size: 24px;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid var(--black);
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+
+.add-pet-btn a{
+    color: white;
+}
+
+.add-pet-btn:hover{
     background-color: var(--accent);
     border: 1px solid var(--accent);
 }

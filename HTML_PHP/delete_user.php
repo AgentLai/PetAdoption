@@ -1,11 +1,20 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include the database connection file
 include 'config.php';
 
-// Check if the 'MemberID' is passed via GET request
-if (isset($_GET['MemberID'])) {
-    // Get the MemberID from the URL
-    $memberID = $_GET['MemberID'];
+// Check if the 'MemberID' is passed via POST request
+if (isset($_POST['MemberID'])) {
+    // Get the MemberID from the POST request
+    $memberID = $_POST['MemberID'];
+
+    // Validate that MemberID is a number
+    if (!filter_var($memberID, FILTER_VALIDATE_INT)) {
+        die("Invalid MemberID.");
+    }
 
     // Prepare a SQL query to delete the member from the Member table
     $sql = "DELETE FROM Member WHERE MemberID = ?";
@@ -17,9 +26,13 @@ if (isset($_GET['MemberID'])) {
 
         // Execute the statement
         if ($stmt->execute()) {
-            echo "Member deleted successfully.";
+            if ($stmt->affected_rows > 0) {
+                echo "Member deleted successfully.";
+            } else {
+                echo "No member found with ID: $memberID.";
+            }
         } else {
-            echo "Error deleting member: " . $conn->error;
+            echo "Error deleting member: " . $stmt->error;
         }
 
         // Close the statement

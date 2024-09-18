@@ -122,7 +122,27 @@ function closeEditModal(memberID) {
 
 function deleteUser(memberID) {
     if (confirm('Are you sure you want to delete this user?')) {
-        window.location.href = 'delete_user.php?id=' + memberID; // Redirect to delete script
+        // Create an XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        // Configure it: POST-request for the URL /delete_user.php
+        xhr.open('POST', 'delete_user.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        // Set up a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Update the UI or provide feedback
+                alert(xhr.responseText);
+                if (xhr.responseText.includes('successfully')) {
+                    document.getElementById('member-' + memberID).remove(); // Remove the user from the list
+                }
+            } else {
+                alert('Error: ' + xhr.statusText);
+            }
+        };
+        
+        // Send the request with the memberID
+        xhr.send('MemberID=' + encodeURIComponent(memberID));
     }
 }
 </script>

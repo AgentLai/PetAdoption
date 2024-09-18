@@ -29,7 +29,6 @@
     <title>Pet Haven</title>
 </head>
 
-
 <body>
     <!-- Navbar -->
     <nav>
@@ -47,99 +46,169 @@
         </div>    
     </nav>
 
-<div class="pet-list-container">
-<?php
-// Include the database connection file
-include 'config.php';
-
-// Fetch all pets from the database
-$pet_sql = "SELECT * FROM Pets";
-$pet_result = $conn->query($pet_sql);
-
-
-echo "<div class='members-title'><h1>Pets</h1></div>";
-
-if ($pet_result->num_rows > 0) {
-    echo "<div class='pets-list'>";
-    
-    while ($row = $pet_result->fetch_assoc()) {
-        $petID = $row['PetID'];
-        // Pet info display
-        echo "
-        <div class='pets-item'>
-            <div class='pets-info'>
-                <h4>" . htmlspecialchars($row['PetName']) . "</h4>
-                <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
-                <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
-                <p>Age: " . htmlspecialchars($row['Age']) . "</p>
-                <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
-                <p>Status: " . htmlspecialchars($row['Status']) . "</p>
-                <img src='" . htmlspecialchars($row['image_url']) . "' alt='Pet Image' style='max-width: 150px;'>
-            </div>
-
-            <div class='pets-actions'>
-                <button class='btn-3' onclick='openEditModal($petID)'>Edit</button>
-                <button class='btn-3' onclick='deletePet($petID)'>Delete</button>
-            </div>
+    <div class="pet-list-container">
+        <div class='pets-title'>
+            <h1>Pets</h1>
         </div>
-        ";
 
-        // Edit Modal for each pet
-        echo "
-        <div id='edit-modal-$petID' class='modal'>
-            <div class='modal-content'>
-                <span class='close' onclick='closeEditModal($petID)'>&times;</span>
-                <h3>Edit Pet</h3>
-                <form action='update_pet.php' method='POST'>
-                    <input type='hidden' name='petID' value='$petID'>
-                    <label>Name:</label>
-                    <input type='text' name='name' value='" . htmlspecialchars($row['PetName']) . "' required>
-                    <label>Image URL:</label>
-                    <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
-                    <label>Age:</label>
-                    <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "'>
-                    <label>Species:</label>
-                    <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "'>
-                    <label>Breed:</label>
-                    <input type='text' name='breed' value='" . htmlspecialchars($row['Breed']) . "'>
-                    <label>Gender:</label>
-                    <select name='gender' required>
-                        <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
-                        <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
-                    </select>
-                    <select name='status' required>
-                        <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
-                        <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
-                        <option value='Adopted'" . ($row['Status'] == 'Adopted' ? ' selected' : '') . ">Adopted</option>
-                        <option value='Deceased'" . ($row['Status'] == 'Deceased' ? ' selected' : '') . ">Deceased</option>
-                    </select>
-                    <button type='submit'>Update</button>
-                </form>
-            </div>
+        <?php
+        // Include the database connection file
+        include 'config.php';
+
+        // Fetch all pets from the database
+        $pet_sql = "SELECT * FROM Pets";
+        $pet_result = $conn->query($pet_sql);
+
+        if ($pet_result->num_rows > 0) {
+            echo "<div class='pets-list'>";
+            
+            while ($row = $pet_result->fetch_assoc()) {
+                $petID = $row['PetID'];
+                // Pet info display
+                echo "
+                <div id='pet-$petID' class='pets-item'>
+                    <div class='pets-info'>
+                        <h4>" . htmlspecialchars($row['PetName']) . "</h4>
+                        <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
+                        <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
+                        <p>Age: " . htmlspecialchars($row['Age']) . "</p>
+                        <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
+                        <p>Status: " . htmlspecialchars($row['Status']) . "</p>
+                        <img src='" . htmlspecialchars($row['image_url']) . "' alt='Pet Image' style='max-width: 150px;'>
+                    </div>
+
+                    <div class='pets-actions'>
+                        <button class='btn-3' onclick='openEditModal($petID)'>Edit</button>
+                        <button class='btn-3' onclick='deletePet($petID)'>Delete</button>
+                    </div>
+                </div>
+                ";
+
+                // Edit Modal for each pet
+                echo "
+                <div id='edit-modal-$petID' class='modal'>
+                    <div class='modal-content'>
+                        <span class='close' onclick='closeEditModal($petID)'>&times;</span>
+                        <h3>Edit Pet</h3>
+                        <form action='update_pet.php' method='POST'>
+                            <input type='hidden' name='petID' value='$petID'>
+                            <label>Name:</label>
+                            <input type='text' name='name' value='" . htmlspecialchars($row['PetName']) . "' required>
+                            <label>Image URL:</label>
+                            <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
+                            <label>Age:</label>
+                            <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "'>
+                            <label>Species:</label>
+                            <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "'>
+                            <label>Breed:</label>
+                            <input type='text' name='breed' value='" . htmlspecialchars($row['Breed']) . "'>
+                            <label>Gender:</label>
+                            <select name='gender' required>
+                                <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
+                                <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
+                            </select>
+                            <select name='status' required>
+                                <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
+                                <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
+                                <option value='Adopted'" . ($row['Status'] == 'Adopted' ? ' selected' : '') . ">Adopted</option>
+                                <option value='Deceased'" . ($row['Status'] == 'Deceased' ? ' selected' : '') . ">Deceased</option>
+                            </select>
+                            <button type='submit'>Update</button>
+                        </form>
+                    </div>
+                </div>
+                ";
+            }
+            echo "</div>";
+        } else {
+            echo "<p>No pets found.</p>";
+        }
+        ?>
+    </div>
+
+    <!-- Add Pet Modal -->
+    <div id='add-modal' class='modal'>
+        <div class='modal-content'>
+            <span class='close' onclick='closeAddModal()'>&times;</span>
+            <h3>Add Pet</h3>
+            <form action='add_pet.php' method='POST'>
+                <label>Name:</label>
+                <input type='text' name='name' required>
+                <label>Image URL:</label>
+                <input type='text' name='image_url'>
+                <label>Age:</label>
+                <input type='number' name='age'>
+                <label>Species:</label>
+                <input type='text' name='petSpecies'>
+                <label>Breed:</label>
+                <input type='text' name='breed'>
+                <label>Gender:</label>
+                <select name='gender' required>
+                    <option value='Male'>Male</option>
+                    <option value='Female'>Female</option>
+                </select>
+                <label>Status:</label>
+                <select name='status' required>
+                    <option value='Available'>Available</option>
+                    <option value='Pending'>Pending</option>
+                    <option value='Adopted'>Adopted</option>
+                    <option value='Deceased'>Deceased</option>
+                </select>
+                <label>Description:</label>
+                <input type='text' name='petDesc'> <!-- Added field -->
+                <button type='submit'>Add Pet</button>
+            </form>
         </div>
-        ";
+    </div>
+
+    </div>
+    <div class="add-pet">
+        <button class='add-pet-btn' onclick='openAddModal()'>Add Pet</button>
+    </div>
+    <script>
+    function openEditModal(petID) {
+        document.getElementById('edit-modal-' + petID).style.display = "block";
     }
-    echo "</div>";
-} else {
-    echo "<p>No pets found.</p>";
-}
-?>
-</div>
 
-<script>
-function openEditModal(petID) {
-    document.getElementById('edit-modal-' + petID).style.display = "block";
-}
+    function closeEditModal(petID) {
+        document.getElementById('edit-modal-' + petID).style.display = "none";
+    }
 
-function closeEditModal(petID) {
-    document.getElementById('edit-modal-' + petID).style.display = "none";
-}
-
-function deletePet(petID) {
+    function deletePet(petID) {
     if (confirm('Are you sure you want to delete this pet?')) {
-        window.location.href = 'delete_pet.php?id=' + petID; // Redirect to delete script
+        // Create an XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        // Configure it: POST-request for the URL /delete_pet.php
+        xhr.open('POST', 'delete_pet.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        // Set up a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Update the UI or provide feedback
+                alert(xhr.responseText);
+                if (xhr.responseText.includes('successfully')) {
+                    document.getElementById('pet-' + petID).remove(); // Remove the pet from the list
+                }
+            } else {
+                alert('Error: ' + xhr.statusText);
+            }
+        };
+        
+        // Send the request with the PetID
+        xhr.send('PetID=' + encodeURIComponent(petID));
+        }
     }
-}
+
+
+
+    function openAddModal() {
+        document.getElementById('add-modal').style.display = "block";
+    }
+
+    function closeAddModal() {
+        document.getElementById('add-modal').style.display = "none";
+    }
 </script>
 
 </body>

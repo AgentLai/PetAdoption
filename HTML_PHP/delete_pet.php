@@ -1,25 +1,38 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include the database connection file
 include 'config.php';
 
-// Check if the 'MemberID' is passed via GET request
-if (isset($_GET['PetID'])) {
-    // Get the MemberID from the URL
-    $memberID = $_GET['PetID'];
+// Check if the 'PetID' is passed via POST request
+if (isset($_POST['PetID'])) {
+    // Get the PetID from the POST request
+    $petID = $_POST['PetID'];
 
-    // Prepare a SQL query to delete the member from the Member table
+    // Validate that PetID is a number
+    if (!filter_var($petID, FILTER_VALIDATE_INT)) {
+        die("Invalid PetID.");
+    }
+
+    // Prepare a SQL query to delete the pet from the Pets table
     $sql = "DELETE FROM Pets WHERE PetID = ?";
 
     // Initialize a prepared statement
     if ($stmt = $conn->prepare($sql)) {
         // Bind the parameter (i stands for integer)
-        $stmt->bind_param("i", $memberID);
+        $stmt->bind_param("i", $petID);
 
         // Execute the statement
         if ($stmt->execute()) {
-            echo "Pet deleted successfully.";
+            if ($stmt->affected_rows > 0) {
+                echo "Pet deleted successfully.";
+            } else {
+                echo "No pet found with ID: $petID.";
+            }
         } else {
-            echo "Error deleting pet: " . $conn->error;
+            echo "Error deleting pet: " . $stmt->error;
         }
 
         // Close the statement
