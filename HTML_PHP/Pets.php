@@ -1,5 +1,5 @@
 <?php
-session_start();
+   session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,21 +55,22 @@ session_start();
     <title>Pet Haven | Pets </title>
   </head>
   <body>
-  <nav>
-    <a href="index.php" class="brand">
-      <h1>Pet<b class="accent">Haven</b></h1>
-    </a>
-    <div class="menu">
-        <div class="btn">
-            <i class="fas fa-times close-btn"></i>
+    <nav>
+        <a href="index.html" class ="brand">
+            <h1>Pet<b class="accent">Haven</b></h1>
+        </a>
+        <div class="menu">
+            <div class="btn">
+                <i class = "fas fa-times close-btn"></i>
+            </div>
+            <a href="index.php">Home</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Pets.php">Pets</a>
+            <a href="FAQs.php">FAQ's</a>
+            <a href="index.php#stories">Stories</a>
         </div>
-        <a href="index.php">Home</a>
-        <a href="AboutUs.php">About Us</a>
-        <a href="Pets.php">Pets</a>
-        <a href="FAQs.php">FAQ's</a>
-        <a href="index.php#stories">Stories</a>
-    </div>
-    <div class="login-btn">
+
+        <div class="login-btn">
         <?php if (isset($_SESSION['MemberID'])): ?>
             <!-- Display username when logged in -->
             <button onclick="window.location.href='profile.php'">
@@ -194,9 +195,9 @@ if ($result->num_rows > 0) {
         $petID = $row['PetID'];
         echo "
         <div class='pets-item' onclick='openModal($petID)'>
-            <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+            <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
           <div class='pets-name'>       
-            <h3>" . $row['Name'] . "</h3>
+            <h3>" . $row['PetName'] . "</h3>
           </div>      
             <p>Species: " . $row['PetSpecies'] . "</p>
             <p>Breed: " . $row['Breed'] . "</p>
@@ -211,10 +212,10 @@ if ($result->num_rows > 0) {
             <span class='close' onclick='closeModal($petID)'>&times;</span>
             <div class='modal-body'>
               <div class='modal-image'>
-                <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+                <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
               </div>
               <div class='modal-info'>
-                <h3>" . $row['Name'] . "</h3>
+                <h3>" . $row['PetName'] . "</h3>
                 <p>Species: " . $row['PetSpecies'] . "</p>
                 <p>Breed: " . $row['Breed'] . "</p>
                 <p>Age: " . $row['Age'] . "</p>

@@ -28,16 +28,15 @@ CREATE TABLE Settings (
 
 CREATE TABLE Pets (
     PetID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL,
+    PetName VARCHAR(50) NOT NULL,
     image_url VARCHAR(255),
     Age INT,
     PetSpecies VARCHAR(50),
     Breed VARCHAR(50),
     Gender ENUM('Male', 'Female'),
-    Price DECIMAL(10, 2),
+    description VARCHAR(255),
     Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL,
-    Size VARCHAR(50),
-    Colour VARCHAR(50)
+ 
 );
 
 CREATE TABLE AdoptionHistory (
@@ -75,7 +74,11 @@ VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tar
 INSERT INTO Admin (MemberID, Username, Email, Password) 
 VALUES (1, 'PetAdmin', 'PetHaven@gmail.com' ,'@dmin2024_PetHaven');
 
-INSERT INTO Pets (name, PetSpecies, Breed, Age, Gender, Status, image_url) VALUES
-('Bella', 'Dog', 'Labrador', 3, 'Female', 'Available', 'Images/Snow(dog).jpg'),
-('Max', 'Cat', 'Siamese', 2, 'Male', 'Available', 'Images/Mars(cat).jpg'),
-('Charlie', 'Dog', 'Beagle', 4, 'Male', 'Adopted', 'Images/floofa(dog).jpg');
+INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Breed, Gender, Status, description)
+VALUES 
+('Henry', 'floofa(dog).jpg', 3, 'Dog', 'Border Collie', 'Male', 'Available', 'Henry was taken in after his previous owners gave him up'),
+('Bella', 'Phoenix(dog).jpg', 3, 'Dog', 'Corgi', 'Female', 'Available',  'Bella is a hyper active dog that loves the outdoors'),
+('Max', 'burger(cat).jpg', 2, 'Cat', 'Siamese', 'Male', 'Available', 'Max is a quiet and calm Siamese, ideal for indoor...'),
+('Coco', 'Coco(cat).jpg', 3, 'Cat', 'Domestic Shorthair', 'Female', 'Adopted',  'Coco likes to cuddle with the people she trust '),
+('Mimi', 'Mimi(cat).jpg', 2, 'Cat', 'Maine Coon', 'Female', 'Available',  'Mimi is a calm cat, that likes to look out the windows whenever it is raining'),
+('Dan', 'muffin(dog).jpg', 4, 'Dog', 'Golden Retriever', 'Male', 'Available',  'Dan is a loyal golden retriever that likes to play with other dogs');
