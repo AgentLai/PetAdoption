@@ -14,8 +14,8 @@ CREATE TABLE Admin (
     MemberID INT NOT NULL,
     Username VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
     Email VARCHAR(100) UNIQUE NOT NULL,
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
 
 CREATE TABLE Settings (
@@ -35,8 +35,7 @@ CREATE TABLE Pets (
     Breed VARCHAR(50),
     Gender ENUM('Male', 'Female'),
     PetDesc VARCHAR(255),
-    Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL,
- 
+    Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL
 );
 
 CREATE TABLE AdoptionHistory (

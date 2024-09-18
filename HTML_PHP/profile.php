@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
@@ -124,135 +124,110 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     </nav>
 
     <!-- Profile Page Content -->
-    <div class="Profile-container light-style flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-4">Account <b class="accent">Settings</b></h4>
+  <div class="profile-container">
+    <h4>Account Settings</h4>
 
-        <div class="card overflow-hidden">
-            <div class="row no-gutters row-bordered row-border-light">
-                <div class="col-md-3 pt-0">
-                    <div class="list-group list-group-flush account-settings-links">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="tab-content">
-                        <!-- General Settings -->
-                        <div class="tab-pane fade active show" id="account-general">
-                            <div class="card-body media align-items-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
-                                <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                            <?php if (isset($update_error_message)) { ?>
-                                    <div class="alert alert-danger"><?php echo $update_error_message; ?></div>
-                                <?php } ?>
-                                <?php if (isset($update_success_message)) { ?>
-                                    <div class="alert alert-success"><?php echo $update_success_message; ?></div>
-                                <?php } ?>
-                                
-                                <form method="POST">
-                                    <div class="form-group">
-                                        <label class="form-label">Username</label>
-                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['Username']); ?>" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">First Name</label>
-                                        <input type="text" name="first_name" class="form-control" value="<?php echo htmlspecialchars($user['FirstName']); ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Last Name</label>
-                                        <input type="text" name="last_name" class="form-control" value="<?php echo htmlspecialchars($user['LastName']); ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" name="dob" class="form-control" value="<?php echo htmlspecialchars($user['DOB']); ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($user['Email']); ?>" required>
-                                    </div>
-                                    <button type="submit" name="save_changes" class="btn btn-primary">Save Changes</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <!-- Change Password -->
-                        <div class="tab-pane fade" id="account-change-password">
-                            <div class="card-body pb-2">
-                            <?php if (isset($password_error_message)) { ?>
-                                    <div class="alert alert-danger"><?php echo $password_error_message; ?></div>
-                                <?php } ?>
-                                <?php if (isset($password_success_message)) { ?>
-                                    <div class="alert alert-success"><?php echo $password_success_message; ?></div>
-                                <?php } ?>
-
-                                <form method="POST">
-                                    <div class="form-group">
-                                        <label class="form-label">Current password</label>
-                                        <input type="password" name="current_password" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">New password</label>
-                                        <input type="password" name="new_password" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Confirm new password</label>
-                                        <input type="password" name="confirm_password" class="form-control" required>
-                                    </div>
-                                    <button type="submit" name="change_password" class="btn btn-primary">Change Password</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <!-- Info -->
-                        <div class="tab-pane fade" id="account-info">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4">Contacts</h6>
-                                <div class="form-group">
-                                    <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" value="+0 (123) 456 7891">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Social Links -->
-                        <div class="tab-pane fade" id="account-social-links">
-                            <div class="card-body pb-2">
-                                <div class="form-group">
-                                    <label class="form-label">Twitter</label>
-                                    <input type="text" class="form-control" value="https://twitter.com/user">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Instagram</label>
-                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="list-group-container">
+            <div class="list-groups">
+                <a class="list-group-item list-group-item-action active" data-toggle="list" href="profile.php#account-general">General</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-change-password">Change password</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-info">Info</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-adoption-history">Adoption History</a>
             </div>
         </div>
 
-        <div class="text-right mt-3">
-            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-            <button type="button" class="btn btn-default">Cancel</button>
+        <div class="content-section">
+            <!-- General Settings -->
+            <div class="profile-account" id="account-general">
+                <div class="profile-header">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="profile-image">
+                    <div class="profile-media">
+                        <label>
+                            Upload new photo
+                            <input type="file">
+                        </label>
+                        &nbsp;
+                        <button type="button">Reset</button>
+                        <div class="media-requirements">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                    </div>
+                </div>
+                
+                <div class="profile-card-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" value="AgentLai" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control" value="Douglas" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" value="Lai" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" name="dob" class="form-control" value="2000-12-02" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" value="douglaslys-sm23@student.tarc.edu.my" required>
+                        </div>
+                        <div class="save-changes">
+                              <button type="submit" class="save-btn">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Change Password -->
+            <div class="password-change" id="account-change-password">
+                <div class="password-card-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="form-label">Current password</label>
+                            <input type="password" name="current_password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">New password</label>
+                            <input type="password" name="new_password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm new password</label>
+                            <input type="password" name="confirm_password" class="form-control" required>
+                        </div>
+                          <div class="save-changes">
+                             <button type="submit" name="change_password" class="save-btn">Save Password</button>
+                         </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Adoption History -->
+            <div class="adoption-history" id="account-adoption-history">
+                <h5>Adoption History</h5>
+                <div class="adoption-item">
+                    <strong>Pet Name:</strong> Bella
+                    <br>
+                    <strong>Status:</strong> Approved
+                </div>
+                <div class="adoption-item">
+                    <strong>Pet Name:</strong> Max
+                    <br>
+                    <strong>Status:</strong> Pending
+                </div>
+            </div>
         </div>
     </div>
+
+
+    
+    <a href="logout.php"><button class="logout-btn">Logout</button></a>
+    
+</div>
+
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
