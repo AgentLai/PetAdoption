@@ -34,7 +34,7 @@ CREATE TABLE Pets (
     PetSpecies VARCHAR(50),
     Breed VARCHAR(50),
     Gender ENUM('Male', 'Female'),
-    description VARCHAR(255),
+    PetDesc VARCHAR(255),
     Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL,
  
 );
@@ -74,7 +74,7 @@ VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tar
 INSERT INTO Admin (MemberID, Username, Email, Password) 
 VALUES (1, 'PetAdmin', 'PetHaven@gmail.com' ,'@dmin2024_PetHaven');
 
-INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Breed, Gender, Status, description)
+INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Breed, Gender, Status, PetDesc)
 VALUES 
 ('Henry', 'floofa(dog).jpg', 3, 'Dog', 'Border Collie', 'Male', 'Available', 'Henry was taken in after his previous owners gave him up'),
 ('Bella', 'Phoenix(dog).jpg', 3, 'Dog', 'Corgi', 'Female', 'Available',  'Bella is a hyper active dog that loves the outdoors'),
