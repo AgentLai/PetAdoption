@@ -62,6 +62,9 @@ const sr = ScrollReveal({
     sr.reveal(".testimonials h1", {delay:"500"});
     sr.reveal(".testimonials h6");
     sr.reveal(".testimony-item", {delay:"1000"});
+    
+    sr.reveal(".MoreAbout", {delay:"1000"});
+    
     sr.reveal(".footer-brand");
     sr.reveal(".footer-links", {delay:"500", origin:"left"});
     sr.reveal(".footer-contact-info", {delay:"500", origin:"right"});
