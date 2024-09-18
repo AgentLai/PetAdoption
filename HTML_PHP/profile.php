@@ -10,7 +10,7 @@ if (!isset($_SESSION['MemberID'])) {
 
 $memberID = $_SESSION['MemberID'];
 $query = "SELECT Username, FirstName, LastName, DOB, Email FROM Member WHERE MemberID = ?";
-$stmt = $con->prepare($query);
+$stmt = $conn->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,14 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
 
     // Update user details in the database
     $update_query = "UPDATE Member SET FirstName = ?, LastName = ?, DOB = ?, Email = ? WHERE MemberID = ?";
-    $update_stmt = $con->prepare($update_query);
+    $update_stmt = $conn->prepare($update_query);
     $update_stmt->bind_param("sssii", $first_name, $last_name, $dob, $email, $memberID);
 
     if ($update_stmt->execute()) {
         $update_success_message = "Profile updated successfully.";
         // Refresh the user data after update
         $query = "SELECT Username, FirstName, LastName, DOB, Email, Password FROM Member WHERE MemberID = ?";
-        $stmt = $con->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $memberID);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -81,9 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">

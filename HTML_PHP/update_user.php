@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 
     // Redirect back to the user list (or another page)
-    header("Location: user_list.php");
+    header("Location: manage_user.php");
     exit();
 } else {
     echo "<p>Invalid request method.</p>";

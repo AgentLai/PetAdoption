@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 
     // Redirect back to the pets list (or another page)
-    header("Location: manage_pets.php");
+    header("Location: manage_pet.php");
     exit();
 } else {
     echo "<p>Invalid request method.</p>";

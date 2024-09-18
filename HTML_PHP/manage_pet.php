@@ -41,13 +41,13 @@
                 <i class="fas fa-times close-btn"></i>
             </div>
             <a href="admin.php">Dashboard</a>
-            <a href="manage_users.php">Users</a>
-            <a href="manage_pets.php">Pets</a>
+            <a href="manage_user.php">Users</a>
+            <a href="manage_pet.php">Pets</a>
             <a href="applications.php">Applications</a>
         </div>    
     </nav>
 
-
+<div class="pet-list-container">
 <?php
 // Include the database connection file
 include 'config.php';
@@ -56,6 +56,9 @@ include 'config.php';
 $pet_sql = "SELECT * FROM Pets";
 $pet_result = $conn->query($pet_sql);
 
+
+echo "<div class='members-title'><h1>Pets</h1></div>";
+
 if ($pet_result->num_rows > 0) {
     echo "<div class='pets-list'>";
     
@@ -63,8 +66,8 @@ if ($pet_result->num_rows > 0) {
         $petID = $row['PetID'];
         // Pet info display
         echo "
-        <div class='pet-item'>
-            <div class='pet-info'>
+        <div class='pets-item'>
+            <div class='pets-info'>
                 <h4>" . htmlspecialchars($row['PetName']) . "</h4>
                 <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
                 <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
@@ -74,9 +77,9 @@ if ($pet_result->num_rows > 0) {
                 <img src='" . htmlspecialchars($row['image_url']) . "' alt='Pet Image' style='max-width: 150px;'>
             </div>
 
-            <div class='pet-actions'>
-                <button onclick='openEditModal($petID)'>Edit</button>
-                <button onclick='deletePet($petID)'>Delete</button>
+            <div class='pets-actions'>
+                <button class='btn-3' onclick='openEditModal($petID)'>Edit</button>
+                <button class='btn-3' onclick='deletePet($petID)'>Delete</button>
             </div>
         </div>
         ";
@@ -121,6 +124,7 @@ if ($pet_result->num_rows > 0) {
     echo "<p>No pets found.</p>";
 }
 ?>
+</div>
 
 <script>
 function openEditModal(petID) {

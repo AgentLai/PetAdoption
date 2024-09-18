@@ -64,8 +64,8 @@
                include("config.php");
 
                if(isset($_POST['submit'])){
-                   $email = mysqli_real_escape_string($con, $_POST['email']);
-                   $password = mysqli_real_escape_string($con, $_POST['password']);
+                   $email = mysqli_real_escape_string($conn, $_POST['email']);
+                   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
                    // Admin login condition
                    if($email === "PetAdmin@gmail.com" && $password === "@dmin2024_PetHaven"){
@@ -76,7 +76,7 @@
                    }
 
                    // Normal user login
-                   $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
+                   $result = mysqli_query($conn, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
                    $row = mysqli_fetch_assoc($result);
 
                    if(is_array($row) && !empty($row)){
