@@ -77,8 +77,8 @@ VALUES (1, 'PetAdmin', 'PetHaven@gmail.com' ,'@dmin2024_PetHaven');
 INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Breed, Gender, Status, description)
 VALUES 
 ('Henry', 'floofa(dog).jpg', 3, 'Dog', 'Border Collie', 'Male', 'Available', 'Henry was taken in after his previous owners gave him up'),
-('Bella', 'Phoenix(dog).jpg', 3, 'Dog', 'Samoyed', 'Female', 'Available',  'Bella is a hyper active dog that loves the outdoors'),
+('Bella', 'Phoenix(dog).jpg', 3, 'Dog', 'Corgi', 'Female', 'Available',  'Bella is a hyper active dog that loves the outdoors'),
 ('Max', 'burger(cat).jpg', 2, 'Cat', 'Siamese', 'Male', 'Available', 'Max is a quiet and calm Siamese, ideal for indoor...'),
-('Coco', 'Coco(cat).jpg', 3, 'Cat', 'Domestic Shorthair', 'Female', 'Adopted',  'Coco likes to cuddle to the people she trust '),
+('Coco', 'Coco(cat).jpg', 3, 'Cat', 'Domestic Shorthair', 'Female', 'Adopted',  'Coco likes to cuddle with the people she trust '),
 ('Mimi', 'Mimi(cat).jpg', 2, 'Cat', 'Maine Coon', 'Female', 'Available',  'Mimi is a calm cat, that likes to look out the windows whenever it is raining'),
 ('Dan', 'muffin(dog).jpg', 4, 'Dog', 'Golden Retriever', 'Male', 'Available',  'Dan is a loyal golden retriever that likes to play with other dogs');
