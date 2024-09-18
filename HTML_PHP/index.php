@@ -228,7 +228,7 @@
     <div class="about" id="about">
       <div class="about-headlines">
         <h1>About Us!</h1>
-        <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="black">
+        <p data-bg-color="#cccccc" data-fg-color="black">
           PetHaven is not just a 
           <b>pet adoption website</b>; it's a haven for both pets in search of
           their forever homes and compassionate individuals ready to welcome 
