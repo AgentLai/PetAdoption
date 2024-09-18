@@ -165,7 +165,7 @@ nav.sticky{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("Images/hero-background-image.png");
+    background-image: url("../Pictures/img/hero-background-image.png");
 }
 
 .hero-headlines{
@@ -262,7 +262,7 @@ nav.sticky{
     align-items: center;
     justify-content: center;
     display: flex;
-    background-image: url("Images/requirements-background-img.png");
+    background-image: url("../Pictures/img/requirements-background-img.png");
 }
 
 .requirements-headlines{
@@ -1623,8 +1623,8 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 90vh;
-    background-image: url("Images/hero-background-image.png");
+    min-height: 100vh;
+    background-image: url("../Pictures/img/hero-background-image.png");
     background-repeat: no-repeat;
     background-size: 100%;
 }

@@ -12,7 +12,7 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
@@ -66,7 +66,7 @@
         <div class="box form-box">
 
         <?php
-            include("php/config.php");
+            include("config.php");
             if(isset($_POST['submit'])){
 
                 $firstName = $_POST['FirstName'];
@@ -120,7 +120,7 @@
                 <div class="field">
                     <input type="submit" class="btn" name="submit" value="Sign Up" required>
                 </div>
-                <div class="links">
+                <div class="login-links">
                     Already a member? <a href="login.php">Login Now!</a>
                 </div>
             </form>

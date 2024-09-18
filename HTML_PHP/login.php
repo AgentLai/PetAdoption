@@ -9,7 +9,7 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
     <script src="index.js" defer></script>
     <!-- For Scroll Reveal -->
@@ -61,7 +61,7 @@
     <div class="login-container">
         <div class="box form-box">
             <?php
-               include("php/config.php");
+               include("config.php");
 
                if(isset($_POST['submit'])){
                    $email = mysqli_real_escape_string($con, $_POST['email']);

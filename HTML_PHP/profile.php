@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
