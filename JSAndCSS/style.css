@@ -1793,3 +1793,142 @@ footer{
     margin: 10px 0;
     font-size: 21px;
 }
+
+/* PROFILE */
+
+.profile-container {
+    max-width: 1200px;
+    margin: 150px auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+}
+
+.profile-container h4 {
+    font-size: 38px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+.list-group-container {
+    float: left;
+    width: 25%;
+}
+
+.list-groups {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-group-item {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.list-group-item.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.content-section {
+    float: right;
+    width: 70%;
+    padding-left: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.profile-media {
+    margin-left: 20px;
+}
+
+.media-requirements {
+    color: #777;
+    font-size: 12px;
+}
+
+.profile-card-body,
+.password-card-body,
+.adoption-history {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-changes {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.save-btn, .cancel-btn, .logout-link {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    width: 205px;
+    height: 53px;
+    background-color: var(--black);
+    font-size: 24px;
+    color: white;
+    border-radius: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--black);
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+
+.logout-btn a{
+    color: white;
+}
+
+.logout-btn:hover{
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.adoption-item {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin: 10px 0;
+}
