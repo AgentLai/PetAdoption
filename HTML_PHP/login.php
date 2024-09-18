@@ -11,7 +11,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="index.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- For Icons -->

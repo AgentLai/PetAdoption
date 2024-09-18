@@ -10,7 +10,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/Pets.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- For Icons -->

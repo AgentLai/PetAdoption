@@ -12,7 +12,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
