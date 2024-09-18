@@ -91,8 +91,8 @@
                        echo "<div class='message'>
                                <p>Wrong Username or Password</p>
                              </div><br>";
-                       echo "<a href='index.php'><button class='btn'>Go Back</button></a>";
-                   }
+                       echo "<button class='btn' onclick=\"window.location.href='index.php';\">Go Back</button>";
+                    }
                } else {
             ?>
             <header>Login</header>

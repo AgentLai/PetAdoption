@@ -8,7 +8,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -47,29 +47,36 @@
         </div>    
     </nav>
 
-
+<div class="member-list-container">
 <?php
+include("config.php");
 $user_sql = "SELECT * FROM Member";
 $user_result = $conn->query($user_sql);
 
+echo "<div class='members-title'><h1>Members</h1></div>";
+
 if ($user_result->num_rows > 0) {
-    echo "<div class='users-list'>";
+    echo "<div class='members-list'>";
     
     while ($row = $user_result->fetch_assoc()) {
         $memberID = $row['MemberID'];
         // User info display
         echo "
-        <div class='user-item'>
-            <div class='user-info'>
-                <h4>" . $row['FirstName'] . " " . $row['LastName'] . "</h4>
-                <p>Username: " . $row['Username'] . "</p>
-                <p>Email: " . $row['Email'] . "</p>
-                <p>DOB: " . $row['DOB'] . "</p>
+        <div class='members-item'>
+            <div class='members-info'>
+                <img src='" . $row['image_url'] . "' alt='" . "' />
+            <div class='members-name'>
+                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
+            </div>
+            <p>Member ID: " . $row['MemberID'] . "</p>
+            <p>Username: " . $row['Username'] . "</p>
+            <p>Email: " . $row['Email'] . "</p>
+            <p>DOB: " . $row['DOB'] . "</p>
             </div>
 
-            <div class='user-actions'>
-                <button onclick='openEditModal($memberID)'>Edit</button>
-                <button onclick='deleteUser($memberID)'>Delete</button>
+            <div class='members-actions'>
+              <button onclick='openEditModal($memberID)'>Edit</button>
+              <button onclick='deleteUser($memberID)'>Delete</button>
             </div>
         </div>
         ";
@@ -103,7 +110,7 @@ if ($user_result->num_rows > 0) {
     echo "<p>No users found.</p>";
 }
 ?>
-
+</div>
 <script>
 function openEditModal(memberID) {
     document.getElementById('edit-modal-' + memberID).style.display = "block";
@@ -119,6 +126,7 @@ function deleteUser(memberID) {
     }
 }
 </script>
+
 </body>
 <footer id="footer">
       <div class="footer-container">

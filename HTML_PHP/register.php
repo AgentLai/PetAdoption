@@ -14,7 +14,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/style.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -83,7 +83,7 @@
                 echo "<a href='javascript:self:histoy:back()'><button class = 'btn'> Go Back </button>";
             }
             else{
-                mysqli_query($con, "INSERT INTO Member(FirstName, LastName, Username, Email, DOB, Password) VALUES('$firstName','$lastName','$username','$dob','$email','$password')") or die("Error Occured");
+                mysqli_query($con, "INSERT INTO Member(FirstName, LastName, Username, Email, DOB, Password) VALUES('$firstName','$lastName','$username','$email','$dob','$password')") or die("Error Occured");
                 echo"<div class = 'message'>
                         <p> Registration Success! </p>
                     </div> <br>";
@@ -129,5 +129,4 @@
     </div>
     
 </body>
-</html>
 </html>

@@ -65,15 +65,12 @@ if ($pet_result->num_rows > 0) {
         echo "
         <div class='pet-item'>
             <div class='pet-info'>
-                <h4>" . htmlspecialchars($row['Name']) . "</h4>
+                <h4>" . htmlspecialchars($row['PetName']) . "</h4>
                 <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
                 <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
                 <p>Age: " . htmlspecialchars($row['Age']) . "</p>
                 <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
-                <p>Price: $" . number_format($row['Price'], 2) . "</p>
                 <p>Status: " . htmlspecialchars($row['Status']) . "</p>
-                <p>Size: " . htmlspecialchars($row['Size']) . "</p>
-                <p>Colour: " . htmlspecialchars($row['Colour']) . "</p>
                 <img src='" . htmlspecialchars($row['image_url']) . "' alt='Pet Image' style='max-width: 150px;'>
             </div>
 
@@ -93,7 +90,7 @@ if ($pet_result->num_rows > 0) {
                 <form action='update_pet.php' method='POST'>
                     <input type='hidden' name='petID' value='$petID'>
                     <label>Name:</label>
-                    <input type='text' name='name' value='" . htmlspecialchars($row['Name']) . "' required>
+                    <input type='text' name='name' value='" . htmlspecialchars($row['PetName']) . "' required>
                     <label>Image URL:</label>
                     <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
                     <label>Age:</label>
@@ -107,19 +104,12 @@ if ($pet_result->num_rows > 0) {
                         <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
                         <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
                     </select>
-                    <label>Price:</label>
-                    <input type='number' step='0.01' name='price' value='" . htmlspecialchars($row['Price']) . "'>
-                    <label>Status:</label>
                     <select name='status' required>
                         <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
                         <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
                         <option value='Adopted'" . ($row['Status'] == 'Adopted' ? ' selected' : '') . ">Adopted</option>
                         <option value='Deceased'" . ($row['Status'] == 'Deceased' ? ' selected' : '') . ">Deceased</option>
                     </select>
-                    <label>Size:</label>
-                    <input type='text' name='size' value='" . htmlspecialchars($row['Size']) . "'>
-                    <label>Colour:</label>
-                    <input type='text' name='colour' value='" . htmlspecialchars($row['Colour']) . "'>
                     <button type='submit'>Update</button>
                 </form>
             </div>

@@ -56,8 +56,8 @@
                 <i class="fas fa-times close-btn"></i>
             </div>
             <a href="admin.php">Dashboard</a>
-            <a href="manage_users.php">Users</a>
-            <a href="manage_pets.php">Pets</a>
+            <a href="manage_user.php">Users</a>
+            <a href="manage_pet.php">Pets</a>
             <a href="applications.php">Applications</a>
         </div>    
     </nav>

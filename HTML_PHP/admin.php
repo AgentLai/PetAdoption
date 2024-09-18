@@ -8,7 +8,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -52,8 +52,8 @@
                 <i class="fas fa-times close-btn"></i>
             </div>
             <a href="admin.php">Dashboard</a>
-            <a href="manage_users.php">Users</a>
-            <a href="manage_pets.php">Pets</a>
+            <a href="manage_user.php">Users</a>
+            <a href="manage_pet.php">Pets</a>
             <a href="applications.php">Applications</a>
         </div>    
     </nav>
@@ -122,28 +122,32 @@ if ($user_result->num_rows > 0) {
 <div class="pet-list-container">
 <?php
 // Fetch pets from the database
-$pet_sql = "SELECT PetID, Name, PetSpecies, Breed, Age, Gender, Status, image_url, PetDesc FROM pets";
+$pet_sql = "SELECT PetID, PetName, PetSpecies, Breed, Age, Gender, Status, image_url, PetDesc FROM pets";
 $result = $conn->query($pet_sql);
 
 echo "<div class='pets-title'><h1>Pets</h1></div>";
 
-if ($result->num_rows > 0) {
-    echo "<div class='pets-list'>";
-
-    while ($row = $result->fetch_assoc()) {
-        $petID = $row['PetID'];
-        echo "
-        <div class='pets-item' onclick='openModal($petID)'>
-            <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
-            <div class='pets-name'>
-                <h3>" . $row['Name'] . "</h3>
-            </div>
-            <p>Species: " . $row['PetSpecies'] . "</p>
-            <p>Breed: " . $row['Breed'] . "</p>
-            <p>Age: " . $row['Age'] . "</p>
-            <p>Gender: " . $row['Gender'] . "</p>
-            <p>Status: " . $row['Status'] . "</p>
-        </div>
+if ($result === false) {
+  // Handle the query error here
+  echo "<p>Error executing query: " . mysqli_error($conn) . "</p>";
+} else {
+  if ($result->num_rows > 0) {
+      echo "<div class='pets-list'>";
+      while ($row = $result->fetch_assoc()) {
+          $petID = $row['PetID'];
+          echo "
+          <div class='pets-item' onclick='openModal($petID)'>
+              <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
+              <div class='pets-name'>
+                  <h3>" . $row['PetName'] . "</h3>
+              </div>
+              <p>Species: " . $row['PetSpecies'] . "</p>
+              <p>Breed: " . $row['Breed'] . "</p>
+              <p>Age: " . $row['Age'] . "</p>
+              <p>Gender: " . $row['Gender'] . "</p>
+              <p>Description: " . $row['PetDesc'] . "</p>
+              <p>Status: " . $row['Status'] . "</p>
+          </div>
 
         <!-- Modal for Quick View -->
         <div id='modal-$petID' class='modal'>
@@ -151,10 +155,10 @@ if ($result->num_rows > 0) {
             <span class='close' onclick='closeModal($petID)'>&times;</span>
             <div class='modal-body'>
               <div class='modal-image'>
-                <img src='" . $row['image_url'] . "' alt='" . $row['Name'] . "' />
+                <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
               </div>
               <div class='modal-info'>
-                <h3>" . $row['Name'] . "</h3>
+                <h3>" . $row['PetName'] . "</h3>
                 <p>Species: " . $row['PetSpecies'] . "</p>
                 <p>Breed: " . $row['Breed'] . "</p>
                 <p>Age: " . $row['Age'] . "</p>
@@ -170,6 +174,7 @@ if ($result->num_rows > 0) {
     echo "</div>";
 } else {
     echo "<p>No pets found matching the criteria.</p>";
+}
 }
 
 // Close connection
