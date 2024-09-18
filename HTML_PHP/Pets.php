@@ -220,7 +220,7 @@ if ($result->num_rows > 0) {
                 <p>Breed: " . $row['Breed'] . "</p>
                 <p>Age: " . $row['Age'] . "</p>
                 <p>Gender: " . $row['Gender'] . "</p>
-                <p>Description: " . $row['description'] . "</p>
+                <p>Description: " . $row['PetDesc'] . "</p>
                 <p>Status: " . $row['Status'] . "</p>
                     
                  <!-- Inquire Us Button -->
