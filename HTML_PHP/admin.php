@@ -122,7 +122,7 @@ if ($user_result->num_rows > 0) {
 <div class="pet-list-container">
 <?php
 // Fetch pets from the database
-$pet_sql = "SELECT PetID, Name, PetSpecies, Breed, Age, Gender, Status, image_url, description FROM pets";
+$pet_sql = "SELECT PetID, Name, PetSpecies, Breed, Age, Gender, Status, image_url, PetDesc FROM pets";
 $result = $conn->query($pet_sql);
 
 echo "<div class='pets-title'><h1>Pets</h1></div>";
@@ -159,7 +159,7 @@ if ($result->num_rows > 0) {
                 <p>Breed: " . $row['Breed'] . "</p>
                 <p>Age: " . $row['Age'] . "</p>
                 <p>Gender: " . $row['Gender'] . "</p>
-                <p>Description: " . $row['description'] . "</p>
+                <p>Description: " . $row['PetDesc'] . "</p>
                 <p>Status: " . $row['Status'] . "</p>
               </div>
             </div>
