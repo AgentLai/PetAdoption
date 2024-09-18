@@ -67,29 +67,41 @@
 
         <?php
             include("config.php");
-            if(isset($_POST['submit'])){
-
+            if (isset($_POST['submit'])) {
+            
                 $firstName = $_POST['FirstName'];
                 $lastName = $_POST['LastName'];
                 $username = $_POST['Username'];
                 $dob = $_POST['DOB'];
                 $email = $_POST['Email'];
                 $password = $_POST['Password'];
-                $verify_query = mysqli_query($con, "SELECT Email FROM Member WHERE Email = '$email'");
-            if(mysqli_num_rows($verify_query)!=0){
-                echo"<div class = 'message'>
-                     <p> This email is in use, please try again </p>
-                    </div> <br>";
-                echo "<a href='javascript:self:histoy:back()'><button class = 'btn'> Go Back </button>";
-            }
-            else{
-                mysqli_query($con, "INSERT INTO Member(FirstName, LastName, Username, Email, DOB, Password) VALUES('$firstName','$lastName','$username','$email','$dob','$password')") or die("Error Occured");
-                echo"<div class = 'message'>
-                        <p> Registration Success! </p>
-                    </div> <br>";
-                echo "<a href='index.php'><button class = 'btn'> Go Back </button>";
-            }
-        }else{
+
+                // Sanitize and validate inputs
+                $email = mysqli_real_escape_string($conn, $email);
+                $password = mysqli_real_escape_string($conn, $password); // Optional: hash the password for security
+            
+                $verify_query = mysqli_query($conn, "SELECT Email FROM Member WHERE Email = '$email'");
+                if (mysqli_num_rows($verify_query) != 0) {
+                    echo "<div class='message'>
+                            <p>This email is in use, please try again.</p>
+                          </div> <br>";
+                    echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                } else {
+                    $insert_query = mysqli_query($conn, "INSERT INTO Member (FirstName, LastName, Username, Email, DOB, Password) VALUES ('$firstName', '$lastName', '$username', '$email', '$dob', '$password')");
+                
+                    if ($insert_query) {
+                        echo "<div class='message'>
+                                <p>Registration Success!</p>
+                              </div> <br>";
+                        echo "<a href='index.php'><button class='btn'>Go to Home</button></a>";
+                    } else {
+                        echo "<div class='message'>
+                                <p>Error occurred during registration: " . mysqli_error($conn) . "</p>
+                              </div> <br>";
+                        echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                    }
+                }
+            } else {
         ?>
             <header>Sign Up</header>
             <form action="" method="post">
@@ -125,7 +137,9 @@
                 </div>
             </form>
         </div>
-        <?php } ?>
+        <?php 
+        } 
+        ?>
     </div>
     
 </body>
