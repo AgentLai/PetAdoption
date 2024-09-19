@@ -129,6 +129,10 @@
                     <label for="Password">Password</label>
                     <input type="password" name="Password" id="Password" autocomplete="off" required>
                 </div>
+                <div class="field input">
+                    <label for="password">Confirm Password</label>
+                    <input type="cpassword" name="password" id="cpassword" required>
+                </div>
                 <div class="field">
                     <input type="submit" class="btn-login" name="submit" value="Sign Up" required>
                 </div>
