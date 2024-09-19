@@ -75,11 +75,24 @@
                 $dob = $_POST['DOB'];
                 $email = $_POST['Email'];
                 $password = $_POST['Password'];
-
+                $confirm_password = $_POST['password']; // confirm password field
+            
                 // Sanitize and validate inputs
                 $email = mysqli_real_escape_string($conn, $email);
-                $password = mysqli_real_escape_string($conn, $password); // Optional: hash the password for security
             
+                // Check if password and confirm password match
+                if ($password != $confirm_password) {
+                    echo "<div class='message'>
+                            <p>Passwords do not match. Please try again.</p>
+                          </div> <br>";
+                    echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                    exit();
+                }
+
+                // Hash the password
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Check if the email is already in use
                 $verify_query = mysqli_query($conn, "SELECT Email FROM Member WHERE Email = '$email'");
                 if (mysqli_num_rows($verify_query) != 0) {
                     echo "<div class='message'>
@@ -87,7 +100,8 @@
                           </div> <br>";
                     echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
                 } else {
-                    $insert_query = mysqli_query($conn, "INSERT INTO Member (FirstName, LastName, Username, Email, DOB, Password) VALUES ('$firstName', '$lastName', '$username', '$email', '$dob', '$password')");
+                    // Insert the user data into the database
+                    $insert_query = mysqli_query($conn, "INSERT INTO Member (FirstName, LastName, Username, Email, DOB, Password) VALUES ('$firstName', '$lastName', '$username', '$email', '$dob', '$hashed_password')");
                 
                     if ($insert_query) {
                         echo "<div class='message'>
@@ -99,7 +113,7 @@
                                 <p>Error occurred during registration: " . mysqli_error($conn) . "</p>
                               </div> <br>";
                         echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
-                    }
+            }
                 }
             } else {
         ?>
@@ -131,7 +145,7 @@
                 </div>
                 <div class="field input">
                     <label for="password">Confirm Password</label>
-                    <input type="cpassword" name="password" id="cpassword" required>
+                    <input type="password" name="cpassword" id="password" required>
                 </div>
                 <div class="field">
                     <input type="submit" class="btn-login" name="submit" value="Sign Up" required>
