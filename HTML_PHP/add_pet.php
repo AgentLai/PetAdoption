@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $executeResult = $stmt->execute();
     if ($executeResult) {
         // Redirect to manage_pets.php after success
-        header("Location: manage_pets.php");
+        header("Location: manage_pet.php");
         exit();
     } else {
         echo "<p>Error adding pet: " . $stmt->error . "</p>";

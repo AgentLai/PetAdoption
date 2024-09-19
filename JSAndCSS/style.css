@@ -1756,6 +1756,7 @@ footer{
   margin-bottom: 20px;
 }
 
+
 /* Members items styling */
 .members-item {
   padding: 20px;
@@ -1768,6 +1769,10 @@ footer{
   flex-direction: column; /* Stack items vertically */
 }
 
+.members-info img{
+   margin-left: 50px;
+}
+
 /* Hover effect for members items - enlarge and emphasize */
 .members-item:hover {
   transform: scale(1.05); /* Slightly enlarge on hover */
@@ -1776,7 +1781,7 @@ footer{
 
 .members-title h1{
   font-size: 36px;
-  font-family: "Arvo", serif;
+  font-family: "Nunito Sans", serif;
   margin-left: 215px; /* Aligns the title with the content */
   margin-top: 140px;
   margin-bottom: 20px;
@@ -1785,7 +1790,6 @@ footer{
 
 .pets-title h1{
   font-size: 36px;
-  font-family: "Arvo", serif;
   margin-left: 215px; /* Aligns the title with the content */
   margin-top: 20px;
   margin-bottom: 20px;
@@ -1793,7 +1797,7 @@ footer{
 }
 
 .members-item img {
-  margin: 0 auto;
+  margin: 50px;
   width: 250.53px;
   height: 250.53px;
   border-radius: 8px;
@@ -2089,58 +2093,12 @@ hr {
     margin-left: 215px;
     margin-right: 200px;
     margin-bottom: 20px;
-  }
-  
-  /* Members items styling */
-.pets-item {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-    cursor: pointer; /* Makes the item appear clickable */
-    display: flex; /* Enable flexbox */
-    flex-direction: column; /* Stack items vertically */
-}
-  
-  /* Hover effect for members items - enlarge and emphasize */
-.pets-item:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
-  
-.pets-title h1{
-    font-size: 36px;
-    font-family: "Arvo", serif;
-    margin-left: 215px; /* Aligns the title with the content */
-    margin-top: 140px;
-    margin-bottom: 20px;
-    color: #333; /* Optional: Change the color */
 }
 
-.pets-item img {
-    margin: 0 auto;
-    width: 250.53px;
-    height: 250.53px;
-    border-radius: 8px;
-}
-   
-.pets-name{
-    text-align: center;
+.pets_info img{
+    margin-left: 50px;
 }
   
-.pets-name h3{
-    margin-top: 10px;
-    font-family: "Josefin Slab", serif;
-    font-size: 31px;
-    margin-bottom: 5px;
-}
-  
-.pets-item p {
-    font-family: "Playfair Display", serif;
-    margin: 10px 0;
-    font-size: 21px;
-}
 
 .pets-actions {
     display: flex;

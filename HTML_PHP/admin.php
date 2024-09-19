@@ -60,15 +60,6 @@
             <a href="manage_pet.php">Pets</a>
             <a href="applications.php">Applications</a>
         </div>
-      <div class="login-btn">
-      <?php if (isset($_SESSION['AdminID'])): ?>
-    <!-- Display username when logged in -->
-      <button onclick="window.location.href='profile.php'">
-      <i class="fa-regular fa-user"></i>
-      <p><?php echo htmlspecialchars($_SESSION['Username']); ?></p>
-    </button>
-      <?php endif; ?>
-    </div>  
     </nav>
     
 <div class="member-list-container">
