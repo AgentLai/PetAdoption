@@ -2036,7 +2036,6 @@ hr {
     margin-top: 140px;
     padding-left: 10px;
     padding-right: 10px;
-    background-image: url("../Pictures/img/hero-background-image.png");
 }
 
 .application-container h2{
@@ -2326,7 +2325,7 @@ table tr:nth-child(even) {
 }
 
 .pets_info img{
-    margin-left: 50px;
+    margin-left: 20px;
 }
   
 

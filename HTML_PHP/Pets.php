@@ -133,6 +133,7 @@
       <!-- Submit button -->
       <button type="submit" class="filter-btn">Apply Filters</button>
     </form>
+    
   </aside>
 
   <!-- Your pet list code remains the same -->

@@ -43,7 +43,7 @@
             <a href="admin.php">Dashboard</a>
             <a href="manage_user.php">Users</a>
             <a href="manage_pet.php">Pets</a>
-            <a href="application.php">Applications</a>
+            <a href="applications.php">Applications</a>
         </div>    
     </nav>
 
