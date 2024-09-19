@@ -207,15 +207,15 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-            <img src="../Pictures/img/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Henry</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/img/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Cats/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
           <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/img/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Dan</h3>
         </div>
       </div>

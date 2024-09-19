@@ -93,7 +93,7 @@
                         echo "<div class='message'>
                                 <p>Registration Success!</p>
                               </div> <br>";
-                        echo "<a href='index.php'><button class='btn'>Go to Home</button></a>";
+                        echo "<a href='index.php'><button class='btn-3'>Go to Home</button></a>";
                     } else {
                         echo "<div class='message'>
                                 <p>Error occurred during registration: " . mysqli_error($conn) . "</p>
@@ -130,7 +130,7 @@
                     <input type="password" name="Password" id="Password" autocomplete="off" required>
                 </div>
                 <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Sign Up" required>
+                    <input type="submit" class="btn-login" name="submit" value="Sign Up" required>
                 </div>
                 <div class="login-links">
                     Already a member? <a href="login.php">Login Now!</a>

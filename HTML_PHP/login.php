@@ -106,7 +106,7 @@
                     <input type="password" name="password" id="password" required>
                 </div>
                 <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Sign In">
+                    <button type="submit" class="btn-login" name="submit">Sign In</button>
                 </div>
                 <div class="login-link">
                     Don't have an account? <a href="register.php">Sign Up Now!</a>

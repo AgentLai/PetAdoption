@@ -65,13 +65,13 @@ if ($user_result->num_rows > 0) {
         <div class='members-item'>
             <div class='members-info'>
                 <img src='" . $row['image_url'] . "' alt='" . "' />
-                <div class='members-name'>
-                    <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-                </div>
-                <p>Member ID: " . $row['MemberID'] . "</p>
-                <p>Username: " . $row['Username'] . "</p>
-                <p>Email: " . $row['Email'] . "</p>
-                <p>DOB: " . $row['DOB'] . "</p>
+            <div class='members-name'>
+                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
+            </div>
+            <p>Member ID: " . $row['MemberID'] . "</p>
+            <p>Username: " . $row['Username'] . "</p>
+            <p>Email: " . $row['Email'] . "</p>
+            <p>DOB: " . $row['DOB'] . "</p>
             </div>
 
             <div class='members-actions'>

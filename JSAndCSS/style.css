@@ -552,7 +552,7 @@ nav.sticky{
 
 
 .MoreAbout-Banner{
-   background-image: url(Images/Doggos.jpg);
+   background-image: url(../Pictures/Dogs/Doggos.jpg);
    background-size: cover;
    background-position: center center;
    top: 100px;
@@ -962,7 +962,7 @@ select:focus {
 /* FAQs Css */
 
 .faq-Banner{
-   background-image: url(Images/faq_cat.jpg);
+   background-image: url(../Pictures/Cats/faq_cat.jpg);
    background-size: cover;
    background-position: center center;
    top: 80px;
@@ -1681,6 +1681,7 @@ footer{
     flex-direction: column;
 }
 
+
 .form-box form .input input{
     height: 40px;
     width: 100%;
@@ -1691,22 +1692,29 @@ footer{
     outline: none;
 }
 
-.btn-login{
-    height: 35px;
-    background: rgba(76, 68, 182, 0.8);
-    border: 0;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 15px;
+.btn-login {
+    margin-left: 0px;
+    width: 402px;
+    height: 40px;
+    background-color: var(--black);
+    font-size: 21px;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid var(--black);
+    transition: all 0.2s ease-out;
     cursor: pointer;
-    transition: all .3s;
-    margin-top: 10px;
-    padding: 0px 10px;
+    letter-spacing: 2px;
 }
 
-.btn-login:hover{
-    opacity: 0.82;
+.btn-login a {
+    color: white;
 }
+
+.btn-login:hover {
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
 
 .submit{
     width: 100%;
