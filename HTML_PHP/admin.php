@@ -48,7 +48,7 @@
 <body>
     <!-- Navbar -->
     <nav>
-        <a href="index.html" class="brand">
+        <a href="index.php" class="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -91,7 +91,6 @@ if ($user_result->num_rows > 0) {
         $memberID = $row['MemberID'];
         echo "
         <div class='members-item' onclick='openModal($memberID)'>
-            <img src='" . $row['image_url'] . "' alt='" . "' />
             <div class='members-name'>
                 <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
             </div>
@@ -188,46 +187,6 @@ $conn->close();
 ?>
 </div>
         
-    <footer id="footer">
-      <div class="footer-container">
-        <div class="footer-links">
-          <h2>Quick Links</h2>
-          <div class="link-container">
-            <div class="links">
-              <a href="index.php#about">About</a>
-              <a href="index.php#pets">Pets</a>
-            </div>
-            <div class="links">
-              <a href="index.php#requirements">Requirements</a>
-              <a href="index.php#stories">Stories</a>
-              <a href="FAQs.php#contact">Contact Us</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-brand">
-          <h1>Pet<b class="accent">Haven</b></h1>
-          <p>Find Your Purrfect furry friend Today!</p>
-          <div class="socials">
-            <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="/"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="/"><i class="fa-brands fa-twitter"></i></a>
-            <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>   
-          </div>
-        </div>
-        <div class="footer-contact-info">
-          <div class="contact-info-item">
-            <i class="fa-regular fa-envelope"></i>
-            <p>pethaven@gmail.com</p>
-          </div>
-          <div class="contact-info-item">
-            <i class="fa-solid fa-phone"></i>
-            <p>+60 17-816 3645(Douglas)</p>
-          </div>
-        </div>
-      </div>
-        <p class="copyright">All Rights Reserved to <b>Pet Haven</b></p>
-     </footer>
-    <!-- Footer Section End -->
 
   </body>
 </html>

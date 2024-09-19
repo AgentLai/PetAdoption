@@ -14,7 +14,7 @@
     <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/style.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -85,7 +85,7 @@
                     echo "<div class='message'>
                             <p>Passwords do not match. Please try again.</p>
                           </div> <br>";
-                    echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                    echo "<a href='javascript:history.back()'><button class='again-btn'>Go Back</button></a>";
                     exit();
                 }
 
@@ -107,12 +107,12 @@
                         echo "<div class='message'>
                                 <p>Registration Success!</p>
                               </div> <br>";
-                        echo "<a href='index.php'><button class='btn-3'>Go to Home</button></a>";
+                        echo "<a href='index.php'><button class='again-btn'>Go to Home</button></a>";
                     } else {
                         echo "<div class='message'>
                                 <p>Error occurred during registration: " . mysqli_error($conn) . "</p>
                               </div> <br>";
-                        echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                        echo "<a href='javascript:history.back()'><button class='again-btn'>Go Back</button></a>";
             }
                 }
             } else {

@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 
     <!-- Profile Page Content -->
     <div class="profile-container" id="account-general">
-    <h4>Account Settings</h4>
+        <h4>Account Settings</h4>
 
     <div class="row">
         <div class="list-group-container">
@@ -151,16 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
         <div class="content-section">
             <!-- General Settings -->
             <div class="profile-account">
-                <div class="profile-header">
-                    <img src="<?php echo htmlspecialchars($user['image_url']); ?>" alt="Profile Image" class="profile-image">
-                    <div class="profile-media">
-                        <button type="button" class="input-btn" id="uploadBtn">Upload new photo</button>
-                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                        <button type="button" class="input-btn" id="resetBtn">Reset</button>
-                        <div class="media-requirements">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                    </div>
-                </div>
-                
                 <div class="profile-card-body">
                 <form method="POST" action="update_profile.php">
                     <div class="form-group">
@@ -251,9 +241,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                   </div>
             </div>
         </div>
-
-
-    
     <a href="logout.php"><button class="logout-btn">Log out</button></a>
     
 </div>

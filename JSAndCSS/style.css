@@ -345,27 +345,6 @@ nav.sticky{
 .application-button button:hover {
   background-color: var(--accent);
 }
-.application-button {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.application-button button {
-  height: 53px;
-  padding: 10px 20px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.application-button button:hover {
-  background-color: var(--accent);
-}
 
 /* Application Modal */
 .application-modal {
@@ -427,7 +406,7 @@ nav.sticky{
 
 /* Submit Button */
 .application-modal-content button {
-    background-color: #4CAF50; /* Green background */
+    background-color: black; /* Green background */
     color: white; /* White text */
     padding: 15px 20px;
     border: none;
@@ -437,7 +416,7 @@ nav.sticky{
 }
 
 .application-modal-content button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: var(--accent); /* Darker green on hover */
 }
 
 /*INDEX-Pets Section*/
@@ -875,11 +854,12 @@ nav.sticky{
 
 .modal-body {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px; /* Space between image and info */
 }
 
 .modal-image img {
+  margin-left: 50px;
   max-width: 450px; /* Control the size of the image */
   height: 450px;
   border-radius: 10px;
@@ -1752,10 +1732,7 @@ footer{
 
 .message{
     text-align: center;
-    background: #fff;
     padding: 15px 0px;
-    border: 1px solid #699669;
-    border-radius: 5px;
     margin-bottom: 10px;
     color: red;
     font-weight: 400;
@@ -2059,6 +2036,7 @@ hr {
     margin-top: 140px;
     padding-left: 10px;
     padding-right: 10px;
+    background-image: url("../Pictures/img/hero-background-image.png");
 }
 
 .application-container h2{
@@ -2076,8 +2054,8 @@ table {
 }
 
 table thead {
-    background-color: #4CAF50;
-    color: white;
+    background-color: black;
+    color: var(--accent);
 }
 
 table th, table td {
@@ -2409,6 +2387,27 @@ table tr:nth-child(even) {
     border: 1px solid var(--accent);
 }
 
+.again-btn{
+    width: 205px;
+    height: 53px;
+    background-color: var(--black);
+    font-size: 24px;
+    color: white;
+    border-radius: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--black);
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+    margin-left: 95px;
+}
 
+.again-btn a{
+    color: white;
+}
+
+.again-btn:hover{
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+}
 
 

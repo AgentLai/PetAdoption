@@ -76,7 +76,7 @@
                    }
 
                    // Normal user login
-                   $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email'") or die("Selection Error");
+                   $result = mysqli_query($conn, "SELECT * FROM member WHERE Email='$email'") or die("Selection Error");
                    $row = mysqli_fetch_assoc($result);
 
                    if ($row && password_verify($password, $row['Password'])) {
@@ -91,7 +91,7 @@
                        echo "<div class='message'>
                                <p>Wrong Username or Password</p>
                              </div><br>";
-                       echo "<button class='btn' onclick=\"window.location.href='index.php';\">Go Back</button>";
+                        echo "<a href='login.php'><button class='again-btn'>Try Again</button></a>";
                     }
                } else {
             ?>
@@ -99,7 +99,7 @@
             <form action="" method="post">
                 <div class="field input">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email" autocomplete="off" required>
                 </div>
                 <div class="field input">
                     <label for="password">Password</label>
