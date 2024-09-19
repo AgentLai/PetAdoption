@@ -76,10 +76,10 @@
                    }
 
                    // Normal user login
-                   $result = mysqli_query($conn, "SELECT * FROM member WHERE Email='$email' AND Password='$password'") or die("Selection Error");
+                   $result = mysqli_query($con, "SELECT * FROM member WHERE Email='$email'") or die("Selection Error");
                    $row = mysqli_fetch_assoc($result);
 
-                   if(is_array($row) && !empty($row)){
+                   if ($row && password_verify($password, $row['Password'])) {
                        $_SESSION['valid'] = $row['Email'];
                        $_SESSION['username'] = $row['Username'];
                        $_SESSION['dob'] = $row['DoB'];
