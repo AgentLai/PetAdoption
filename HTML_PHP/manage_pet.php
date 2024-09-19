@@ -68,14 +68,17 @@
                 echo "
                 <div id='pet-$petID' class='pets-item'>
                     <div class='pets-info'>
-                        <h4>" . htmlspecialchars($row['PetName']) . "</h4>
-                        <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
-                        <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
-                        <p>Age: " . htmlspecialchars($row['Age']) . "</p>
-                        <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
-                        <p>Status: " . htmlspecialchars($row['Status']) . "</p>
-                        <img src='" . htmlspecialchars($row['image_url']) . "' alt='Pet Image' style='max-width: 150px;'>
+                    <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
+                <div class='pets-name'>
+                    <h3>" . $row['PetName'] . "</h3>
                     </div>
+                    <p>Species: " . $row['PetSpecies'] . "</p>
+                    <p>Breed: " . $row['Breed'] . "</p>
+                    <p>Age: " . $row['Age'] . "</p>
+                    <p>Gender: " . $row['Gender'] . "</p>
+                    <p>Description: " . $row['PetDesc'] . "</p>
+                    <p>Status: " . $row['Status'] . "</p>
+                </div>
 
                     <div class='pets-actions'>
                         <button class='btn-3' onclick='openEditModal($petID)'>Edit</button>
@@ -102,11 +105,14 @@
                             <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "'>
                             <label>Breed:</label>
                             <input type='text' name='breed' value='" . htmlspecialchars($row['Breed']) . "'>
+                            <label>Description:</label>
+                            <input type='text' name='petDesc' value='" . htmlspecialchars($row['PetDesc']) . "'>
                             <label>Gender:</label>
                             <select name='gender' required>
                                 <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
                                 <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
                             </select>
+                            <label>Status:</label>
                             <select name='status' required>
                                 <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
                                 <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>

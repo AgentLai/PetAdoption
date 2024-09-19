@@ -561,47 +561,55 @@ nav.sticky{
 }
 
 
-.MoreAbout-Banner h1{
-    margin-left: 700px;
-    padding-top: 475px;
-    font-size: 120px;
-    color: #fff;
-    font-family: "Arvo",serif;
-    font-weight: 700;
+.MoreAbout-Banner{
+    background-image: url(../Pictures/Dogs/Doggos.jpg);
+    background-size: cover;
+    background-position: center center;
+    top: 100px;
+    width: 100%;
+    height: 100vh;
+ }
  
+ 
+.MoreAbout-Banner h1{
+     margin-left: 700px;
+     padding-top: 475px;
+     font-size: 120px;
+     color: #fff;
+     font-family: "Arvo",serif;
+     font-weight: 700;
+  
 }
-
+ 
 .MoreAbout-wrapper{
     width: 90%;
     margin: 0 auto;
 }
-
+ 
 .MoreAbout{
-     width: 100%;
-     height: 800px;
-     top: 10px;
-     margin-bottom: 400px;
+    width: 100%;
+    height: 1000px;
+    top: 10px;
+    margin-bottom: 400px;
 }
-
+ 
 .MoreAbout h2{
-    font-family: "Arvo",serif;
-    font-size: 44px;
-    margin: 0;
-    padding-top: 30px;
-    letter-spacing: 4px;
-    font-weight: 900;
+     font-family: "Arvo",serif;
+     font-size: 44px;
+     margin: 0;
+     padding-top: 30px;
+     letter-spacing: 4px;
+     font-weight: 900;
 }
-
+ 
 .MoreAbout p{
     font-family: "Playfair Display", serif;
     line-height: 1.2em;
     padding: 2% 0;
     font-size: 32px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 1px;
 }
-
-
 
 /*INDEXTestimonial Section*/
 .testimonials{
@@ -816,6 +824,10 @@ nav.sticky{
   height: 250.53px;
   border-radius: 8px;
 }
+
+.pets-info img{
+    margin-left: 50px;
+} 
 
 
 .pets-name{
@@ -1677,7 +1689,8 @@ footer{
 
 .form-box form .field{
     display: flex;
-    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     flex-direction: column;
 }
 
@@ -1693,9 +1706,10 @@ footer{
 }
 
 .btn-login {
+    margin-top: 20px; /* Adjust this value as needed */
     margin-left: 0px;
     width: 402px;
-    height: 40px;
+    height: 30px;
     background-color: var(--black);
     font-size: 21px;
     color: white;
@@ -1974,8 +1988,8 @@ footer{
 }
 
 .logout-btn {
-    margin-left: 30px;
-    width: 215px;
+    margin-left: 0px;
+    width: 270px;
     height: 40px;
     background-color: var(--black);
     font-size: 21px;
@@ -1992,7 +2006,7 @@ footer{
 }
 
 .logout-btn:hover{
-    background-color: var(--accent);
+    background-color: red;
     border: 1px solid var(--accent);
 }
 
@@ -2041,13 +2055,6 @@ hr {
 }
 
 /***Admin logout**/
-.admin-logout {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Optional for vertical centering */
-    height: 20vh;
-}
-
 .admin-logout-btn {
     width: 205px;
     height: 53px;
@@ -2055,7 +2062,7 @@ hr {
     font-size: 24px;
     color: white;
     border-radius: 12px;
-    border: 1px solid var(--black);
+    border: 0px solid var(--black);
     transition: all 0.2s ease-out;
     cursor: pointer;
 }
@@ -2065,8 +2072,8 @@ hr {
 }
 
 .admin-logout-btn:hover{
-    background-color: var(--accent);
-    border: 1px solid var(--accent);
+    background-color: red;
+    border: 0px solid var(--accent);
 }
 
 

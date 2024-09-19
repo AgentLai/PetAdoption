@@ -75,7 +75,7 @@
                 $dob = $_POST['DOB'];
                 $email = $_POST['Email'];
                 $password = $_POST['Password'];
-                $confirm_password = $_POST['password']; // confirm password field
+                $confirm_password = $_POST['cpassword']; // confirm password field
             
                 // Sanitize and validate inputs
                 $email = mysqli_real_escape_string($conn, $email);

@@ -60,6 +60,7 @@
             <a href="manage_pet.php">Pets</a>
             <a href="applications.php">Applications</a>
         </div>
+        <a href="logout.php"><button class="admin-logout-btn">Log out</button></a>
     </nav>
     
 <div class="member-list-container">
@@ -186,11 +187,6 @@ if ($result === false) {
 $conn->close();
 ?>
 </div>
-
-  <div class="admin-logout">
-    <a href="logout.php"><button class="admin-logout-btn">Log out</button></a>
-  </div>
-   
         
     <footer id="footer">
       <div class="footer-container">

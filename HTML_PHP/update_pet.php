@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $petSpecies = $_POST['petSpecies'];
     $breed = $_POST['breed'];
     $gender = $_POST['gender'];
+    $petDesc = $_POST['petDesc'];
     $status = $_POST['status'];
 
     // Print received data for debugging
