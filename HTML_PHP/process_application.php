@@ -8,20 +8,20 @@ if (isset($_POST['application_id'])) {
     if (isset($_POST['approve'])) {
         // Update the application status to 'Approved'
         $query = "UPDATE adoption_applications SET Status = 'Approved' WHERE ApplicationID = '$applicationID'";
-        if (mysqli_query($con, $query)) {
+        if (mysqli_query($conn, $query)) {
             $_SESSION['message'] = "Application approved successfully.";
         } else {
-            $_SESSION['message'] = "Error approving application: " . mysqli_error($con);
+            $_SESSION['message'] = "Error approving application: " . mysqli_error($conn);
         }
     }
 
     if (isset($_POST['deny'])) {
         // Update the application status to 'Denied'
         $query = "UPDATE adoption_applications SET Status = 'Rejected' WHERE ApplicationID = '$applicationID'";
-        if (mysqli_query($con, $query)) {
+        if (mysqli_query($conn, $query)) {
             $_SESSION['message'] = "Application denied successfully.";
         } else {
-            $_SESSION['message'] = "Error denying application: " . mysqli_error($con);
+            $_SESSION['message'] = "Error denying application: " . mysqli_error($conn);
         }
     }
 }

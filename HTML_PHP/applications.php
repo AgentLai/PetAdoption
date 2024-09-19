@@ -4,7 +4,7 @@ include("config.php");
 
 // Fetch all submitted adoption applications
 $query = "SELECT * FROM adoption_applications WHERE Status = 'Pending'";
-$result = mysqli_query($con, $query);
+$result = mysqli_query($conn, $query);
 
 ?>
 
@@ -14,7 +14,7 @@ $result = mysqli_query($con, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adoption Applications</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../JSAndCSS/style.css">
 </head>
 <body>
     <!-- Navbar -->

@@ -190,7 +190,7 @@
             <label for="pet_name">Pet Name:</label>
             <input type="text" name="pet_name" id="pet_name" required><br>
 
-            <label for="reason">Why do you want to adopt this pet?</label>x
+            <label for="reason">Why do you want to adopt this pet?</label>
             <textarea name="reason" id="reason" required></textarea><br>
 
             <button type="submit">Submit Application</button>

@@ -8,10 +8,8 @@ if (!isset($_SESSION['MemberID'])) {
     exit();
 }
 
-
-
 $memberID = $_SESSION['MemberID'];
-$query = "SELECT Username, FirstName, LastName, DOB, Email FROM Member WHERE MemberID = ?";
+$query = "SELECT Username, FirstName, LastName, DOB, Email, image_url  FROM Member WHERE MemberID = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
@@ -19,27 +17,33 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $dob = $_POST['dob'];
-    $email = $_POST['email'];
+    // Sanitize and validate form data
+    $first_name = htmlspecialchars($_POST['first_name']);
+    $last_name = htmlspecialchars($_POST['last_name']);
+    $dob = htmlspecialchars($_POST['dob']);
+    $email = htmlspecialchars($_POST['email']);
 
-    // Update user details in the database
-    $update_query = "UPDATE Member SET FirstName = ?, LastName = ?, DOB = ?, Email = ? WHERE MemberID = ?";
-    $update_stmt = $conn->prepare($update_query);
-    $update_stmt->bind_param("sssii", $first_name, $last_name, $dob, $email, $memberID);
-
-    if ($update_stmt->execute()) {
-        $update_success_message = "Profile updated successfully.";
-        // Refresh the user data after update
-        $query = "SELECT Username, FirstName, LastName, DOB, Email, Password FROM Member WHERE MemberID = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $memberID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $update_error_message = "Invalid email format.";
     } else {
-        $update_error_message = "Error updating profile.";
+        // Update user details in the database
+        $update_query = "UPDATE Member SET FirstName = ?, LastName = ?, DOB = ?, Email = ? WHERE MemberID = ?";
+        $update_stmt = $conn->prepare($update_query);
+        $update_stmt->bind_param("ssssi", $first_name, $last_name, $dob, $email, $memberID);
+
+        if ($update_stmt->execute()) {
+            $update_success_message = "Profile updated successfully.";
+            // Refresh the user data after update
+            $query = "SELECT Username, FirstName, LastName, DOB, Email FROM Member WHERE MemberID = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $memberID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+        } else {
+            $update_error_message = "Error updating profile: " . $update_stmt->error;
+        }
     }
 }
 
@@ -48,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
+
+    // Debug: Check what the current password is
+    var_dump($user['Password']); // This should output the hashed password from the database
 
     // Validate current password
     if (password_verify($current_password, $user['Password'])) {
@@ -63,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 
             if ($update_stmt->execute()) {
                 $password_success_message = "Password changed successfully.";
+                header('Location: profile.php?password_update=success'); // Redirect after success
+                exit();
             } else {
                 $password_error_message = "Error updating password.";
             }
@@ -143,48 +152,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
             <!-- General Settings -->
             <div class="profile-account">
                 <div class="profile-header">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="profile-image">
+                    <img src="<?php echo htmlspecialchars($user['image_url']); ?>" alt="Profile Image" class="profile-image">
                     <div class="profile-media">
                         <button type="button" class="input-btn" id="uploadBtn">Upload new photo</button>
                         <input type="file" id="fileInput" accept="image/*" style="display: none;">
-            &nbsp;
                         <button type="button" class="input-btn" id="resetBtn">Reset</button>
                         <div class="media-requirements">Allowed JPG, GIF or PNG. Max size of 800K</div>
                     </div>
                 </div>
                 
                 <div class="profile-card-body">
-                    <form method="POST">
-                        <div class="form-group">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" value="AgentLai" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">First Name</label>
-                            <input type="text" name="first_name" class="form-control" value="Douglas" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" value="Lai" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" name="dob" class="form-control" value="2000-12-02" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" value="douglaslys-sm23@student.tarc.edu.my" required>
-                        </div>
-                              <button type="submit" class="save-btn">Save Changes</button>
-                    </form>
+                <form method="POST" action="update_profile.php">
+                    <div class="form-group">
+                        <label class="form-label" for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control" value="<?php echo htmlspecialchars($user['FirstName']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control" value="<?php echo htmlspecialchars($user['LastName']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" class="form-control" value="<?php echo htmlspecialchars($user['DOB']); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($user['Email']); ?>" required>
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+
+                    <?php
+                    if (isset($update_success_message)) {
+                        echo "<p>$update_success_message</p>";
+                    }
+
+                    if (isset($update_error_message)) {
+                        echo "<p>$update_error_message</p>";
+                    }
+                    ?>
                 </div>
             </div>
-
+                    
             <!-- Change Password -->
             <div class="password-change" id="account-change-password">
-                  <h5>Change Password</h5>
+                <h5>Change Password</h5>
                 <div class="password-card-body">
-                    <form method="POST">
+                    <form method="POST" action="update_password.php">
                         <div class="form-group">
                             <label class="form-label">Current password</label>
                             <input type="password" name="current_password" class="form-control" required>
@@ -201,7 +215,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                     </form>
                 </div>
             </div>
-
             <?php
                // Get the MemberID from the session
               $member_id = $_SESSION['MemberID'];
@@ -241,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 
 
     
-    <a href="logout.php"><button class="logout-btn">Logout</button></a>
+    <a href="logout.php"><button class="logout-btn">Log out</button></a>
     
 </div>
 
