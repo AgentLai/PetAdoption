@@ -8,9 +8,11 @@ if (!isset($_SESSION['MemberID'])) {
     exit();
 }
 
+
+
 $memberID = $_SESSION['MemberID'];
 $query = "SELECT Username, FirstName, LastName, DOB, Email FROM Member WHERE MemberID = ?";
-$stmt = $conn->prepare($query);
+$stmt = $con->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,14 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
 
     // Update user details in the database
     $update_query = "UPDATE Member SET FirstName = ?, LastName = ?, DOB = ?, Email = ? WHERE MemberID = ?";
-    $update_stmt = $conn->prepare($update_query);
+    $update_stmt = $con->prepare($update_query);
     $update_stmt->bind_param("sssii", $first_name, $last_name, $dob, $email, $memberID);
 
     if ($update_stmt->execute()) {
         $update_success_message = "Profile updated successfully.";
         // Refresh the user data after update
         $query = "SELECT Username, FirstName, LastName, DOB, Email, Password FROM Member WHERE MemberID = ?";
-        $stmt = $conn->prepare($query);
+        $stmt = $con->prepare($query);
         $stmt->bind_param("i", $memberID);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -81,9 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/index.js" defer></script>
+    <script src="IndexJava.js" defer></script>
+    <script src="profile.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -124,31 +127,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     </nav>
 
     <!-- Profile Page Content -->
-  <div class="profile-container">
+    <div class="profile-container" id="account-general">
     <h4>Account Settings</h4>
 
     <div class="row">
         <div class="list-group-container">
             <div class="list-groups">
-                <a class="list-group-item list-group-item-action active" data-toggle="list" href="profile.php#account-general">General</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-change-password">Change password</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-info">Info</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php#account-adoption-history">Adoption History</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-general">General</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-adoption-history">Adoption History</a>
             </div>
         </div>
 
         <div class="content-section">
             <!-- General Settings -->
-            <div class="profile-account" id="account-general">
+            <div class="profile-account">
                 <div class="profile-header">
                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="profile-image">
                     <div class="profile-media">
-                        <label>
-                            Upload new photo
-                            <input type="file">
-                        </label>
-                        &nbsp;
-                        <button type="button">Reset</button>
+                        <button type="button" class="input-btn" id="uploadBtn">Upload new photo</button>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            &nbsp;
+                        <button type="button" class="input-btn" id="resetBtn">Reset</button>
                         <div class="media-requirements">Allowed JPG, GIF or PNG. Max size of 800K</div>
                     </div>
                 </div>
@@ -175,15 +175,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                             <label class="form-label">Email</label>
                             <input type="email" name="email" class="form-control" value="douglaslys-sm23@student.tarc.edu.my" required>
                         </div>
-                        <div class="save-changes">
                               <button type="submit" class="save-btn">Save Changes</button>
-                        </div>
                     </form>
                 </div>
             </div>
 
             <!-- Change Password -->
             <div class="password-change" id="account-change-password">
+                  <h5>Change Password</h5>
                 <div class="password-card-body">
                     <form method="POST">
                         <div class="form-group">
@@ -198,29 +197,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                             <label class="form-label">Confirm new password</label>
                             <input type="password" name="confirm_password" class="form-control" required>
                         </div>
-                          <div class="save-changes">
-                             <button type="submit" name="change_password" class="save-btn">Save Password</button>
-                         </div>
+                        <button type="submit" name="change_password" class="save-btn">Save Password</button>
                     </form>
                 </div>
             </div>
 
+            <?php
+               // Get the MemberID from the session
+              $member_id = $_SESSION['MemberID'];
+
+               // Query to get adoption applications for the logged-in member
+               $query = "SELECT PetName, Status FROM adoption_applications WHERE MemberID = '$member_id'";
+               $result = mysqli_query($con, $query);
+              ?>
+            
             <!-- Adoption History -->
-            <div class="adoption-history" id="account-adoption-history">
-                <h5>Adoption History</h5>
-                <div class="adoption-item">
-                    <strong>Pet Name:</strong> Bella
-                    <br>
-                    <strong>Status:</strong> Approved
-                </div>
-                <div class="adoption-item">
-                    <strong>Pet Name:</strong> Max
-                    <br>
-                    <strong>Status:</strong> Pending
-                </div>
+            <div class="adoption-history">
+                 <h5>Adoption History</h5>
+
+            <?php
+                  if (mysqli_num_rows($result) > 0) {
+                  // Loop through the results and display each application
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $pet_name = htmlspecialchars($row['PetName']);
+                  $status = htmlspecialchars($row['Status']);
+                  
+                echo "<div class='adoption-item'>
+                    <div class='adoption-header'>
+                        <strong>Pet Name:</strong> $pet_name
+                    </div>
+                    <div class='adoption-status'  id='account-adoption-history'>
+                        <strong>Status:</strong> <span class='status'>$status</span>
+                    </div>
+                  </div>";
+                }
+             } else {
+        echo "<p>No adoption history found.</p>";
+    }
+    ?>
+                  </div>
             </div>
         </div>
-    </div>
 
 
     
@@ -228,9 +245,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     
 </div>
 
-
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
