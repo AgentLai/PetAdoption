@@ -9,6 +9,7 @@ CREATE TABLE Member (
     image_url VARCHAR(255)
 );
 
+
 CREATE TABLE Admin (
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT NOT NULL,
