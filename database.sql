@@ -6,7 +6,7 @@ CREATE TABLE Member (
     DOB DATE,
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    image_url VARCHAR(255)
+    Status ENUM('Active','Inactive','Blacklisted') NOT NULL
 );
 
 
@@ -49,7 +49,7 @@ CREATE TABLE AdoptionHistory (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
-CREATE TABLE adoption_applications (
+CREATE TABLE AdoptionApplication (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT NOT NULL,
     PetID INT NOT NULL,
