@@ -36,7 +36,7 @@ CREATE TABLE Pets (
     Breed VARCHAR(50),
     Gender ENUM('Male', 'Female'),
     PetDesc VARCHAR(255),
-    Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL
+    Status ENUM('Available', 'Pending', 'Unavailable') NOT NULL
 );
 
 CREATE TABLE AdoptionHistory (
