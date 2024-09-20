@@ -8,9 +8,9 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/Pets.js" defer></script>
+    <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- For Icons -->
@@ -39,7 +39,7 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-    <script src="../JSAndCSS/Pets.js" defer></script>
+    <script src="Pets.js" defer></script>
     <!-- Fonts -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +56,7 @@
   </head>
   <body>
     <nav>
-        <a href="index.php" class ="brand">
+        <a href="index.html" class ="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -133,7 +133,6 @@
       <!-- Submit button -->
       <button type="submit" class="filter-btn">Apply Filters</button>
     </form>
-    
   </aside>
 
   <!-- Your pet list code remains the same -->
@@ -194,6 +193,7 @@ if ($result->num_rows > 0) {
     
     while ($row = $result->fetch_assoc()) {
         $petID = $row['PetID'];
+        $petName = $row['PetName'];  // Ensure petName is defined here
         echo "
         <div class='pets-item' onclick='openModal($petID)'>
             <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
@@ -224,13 +224,33 @@ if ($result->num_rows > 0) {
                 <p>Description: " . $row['PetDesc'] . "</p>
                 <p>Status: " . $row['Status'] . "</p>
                     
-                 <!-- Inquire Us Button -->
-                  <div class='inquire-container'>
-                     <a href='index.php#requirements'><div class='inquire-btn'>Inquire Us</div></a>
-                 </div>   
-              </div>
+               ";
+
+        // Show either "Submit Application" button or "Log in" button
+        if (isset($_SESSION['MemberID'])) {
+            // User is logged in, show Submit Application button
+            echo "
+                <div class='submit-application-container'>
+                   <button class='application-btn' onclick='openApplicationModal($petID, \"$petName\")'>
+                        Submit Application
+                    </button>
+                </div>
+            ";
+        } else {
+            // User is not logged in, show Login button
+            echo "
+                <div class='submit-application-container'>
+                    <button class='application-btn' onclick='window.location.href=\"Login.php\"'>
+                        Log in to Submit Application
+                    </button>
+                </div>
+            ";
+        }
+
+        echo "
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
         ";
     }
@@ -244,7 +264,33 @@ $conn->close();
 ?>      
      </div>
  </div>     
+      
+<div id="applicationModal" class="application-modal">
+    <div class="application-modal-content">
+        <span class="close-application">&times;</span>
+        <!-- Application Form -->
+        <form id="applicationForm" method="POST" action="submit_application.php">
+            <!-- Hidden Pet ID field -->
+            <input type="hidden" name="pet_id" id="pet_id">
+            <input type="hidden" name="pet_name" id="pet_name">
 
+            <!-- Form fields -->
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" required><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="phone" required><br>
+
+            <label for="address">Address:</label>
+            <textarea name="address" id="address" required></textarea><br>
+
+            <label for="reason">Why do you want to adopt this pet?</label>
+            <textarea name="reason" id="reason" required></textarea><br>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+</div>
        
            
       
