@@ -93,6 +93,10 @@
  <div class="filter-container">
   <aside class="filters">   
   <form method="GET" action="Pets.php">
+    <!-- Filter by Name -->
+      <h3>Search by Name</h3>
+<input type="text" name="search_query" value="<?php echo isset($_GET['search_query']) ? htmlspecialchars($_GET['search_query']) : ''; ?>" placeholder="Enter pet name..."><br>
+
       <!-- Filter by Species -->
       <h3>Species</h3>
       <label>
@@ -157,6 +161,7 @@ if ($conn->connect_error) {
 $species = isset($_GET['species']) ? $_GET['species'] : [];
 $gender = isset($_GET['gender']) ? $_GET['gender'] : [];
 $status = isset($_GET['status']) ? $_GET['status'] : [];
+$search_query = isset($_GET['search_query']) ? $conn->real_escape_string($_GET['search_query']) : '';
 
 // Build SQL query with filters
 $sql = "SELECT * FROM Pets";
@@ -180,6 +185,11 @@ if (!empty($status)) {
     $conditions[] = "Status IN ('$status_list')";
 }
 
+// Check search query
+if (!empty($search_query)) {
+    $conditions[] = "PetName LIKE '%$search_query%'";
+}
+
 // Append conditions to SQL query
 if (count($conditions) > 0) {
     $sql .= " WHERE " . implode(' AND ', $conditions);
@@ -194,6 +204,13 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $petID = $row['PetID'];
         $petName = $row['PetName'];  // Ensure petName is defined here
+        
+          // Query to count the number of applications for this pet
+        $appCountSql = "SELECT COUNT(*) as count FROM adoption_applications WHERE PetID = $petID";
+        $appCountResult = $conn->query($appCountSql);
+        $appCountRow = $appCountResult->fetch_assoc();
+        $appCount = $appCountRow['count'];
+
         echo "
         <div class='pets-item' onclick='openModal($petID)'>
             <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
@@ -223,6 +240,9 @@ if ($result->num_rows > 0) {
                 <p>Gender: " . $row['Gender'] . "</p>
                 <p>Description: " . $row['PetDesc'] . "</p>
                 <p>Status: " . $row['Status'] . "</p>
+                 <div class='application-count-container'>
+        <p class='application-count'><i class='fa-solid fa-user'></i>Applied:</p>$appCount
+    </div>
                     
                ";
 
