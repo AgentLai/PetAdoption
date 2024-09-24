@@ -71,7 +71,7 @@ $user = $result->fetch_assoc();
     </nav>
 
     <!-- Profile Page Content -->
-    <div class="profile-container" id="account-general">
+    <div class="profile-container">
     <h4>Account Settings</h4>
 
     <div class="row">
@@ -80,6 +80,7 @@ $user = $result->fetch_assoc();
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php">General</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php">Change password</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="adoption_history.php">Adoption History</a>
+                <a href="logout.php"><button class="logout-btn">Log out</button></a>
             </div>
         </div>
         
@@ -120,7 +121,6 @@ $user = $result->fetch_assoc();
          </div>
     </div>
     
-  <a href="logout.php"><button class="logout-btn">Log out</button></a>
     
 </div>
 
