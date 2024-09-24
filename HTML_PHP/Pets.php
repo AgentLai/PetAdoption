@@ -218,7 +218,7 @@ if ($result->num_rows > 0) {
             <h3>" . $row['PetName'] . "</h3>
           </div>      
             <p>Species: " . $row['PetSpecies'] . "</p>
-            <p>Breed: " . $row['Breed'] . "</p>
+            <p>Breed: " . $row['Dog_breed'] . $row['Cat_breed'] ."</p>
             <p>Age: " . $row['Age'] . "</p>
             <p>Gender: " . $row['Gender'] . "</p>
             <p>Status: " . $row['Status'] . "</p>
@@ -235,7 +235,7 @@ if ($result->num_rows > 0) {
               <div class='modal-info'>
                 <h3>" . $row['PetName'] . "</h3>
                 <p>Species: " . $row['PetSpecies'] . "</p>
-                <p>Breed: " . $row['Breed'] . "</p>
+                <p>Breed: " . $row['Dog_breed'] . $row['Cat_breed'] ."</p>
                 <p>Age: " . $row['Age'] . "</p>
                 <p>Gender: " . $row['Gender'] . "</p>
                 <p>Description: " . $row['PetDesc'] . "</p>
