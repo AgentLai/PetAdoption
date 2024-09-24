@@ -80,46 +80,62 @@ if ($conn->connect_error) {
 }
 
 // Fetch members from the database
-$user_sql = "SELECT MemberID, FirstName, LastName, Username, Email, DOB, image_url FROM member";
+$user_sql = "SELECT MemberID, FirstName, LastName, Username, Email, DOB, Status FROM member";
 $user_result = $conn->query($user_sql);
 
 echo "<div class='members-title'><h1>Members</h1></div>";
 
 if ($user_result->num_rows > 0) {
-    echo "<div class='members-list'>";
-    while ($row = $user_result->fetch_assoc()) {
-        $memberID = $row['MemberID'];
-        echo "
-        <div class='members-item' onclick='openModal($memberID)'>
-            <div class='members-name'>
-                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-            </div>
-            <p>Member ID: " . $row['MemberID'] . "</p>
-            <p>Username: " . $row['Username'] . "</p>
-            <p>Email: " . $row['Email'] . "</p>
-            <p>DOB: " . $row['DOB'] . "</p>
-        </div>
+  echo "
+  <table class='members-table'>
+      <thead>
+          <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Member ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>DOB</th>
+              <th>Status</th>
+          </tr>
+      </thead>
+      <tbody>";
 
-        <!-- Modal for Quick View -->
-        <div id='modal-$memberID' class='modal'>
-          <div class='modal-content'>
-            <span class='close' onclick='closeModal($memberID)'>&times;</span>
-            <div class='modal-body'>
-              <div class='modal-info'>
-                <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-                <p>Member ID: " . $row['MemberID'] . "</p>
-                <p>Username: " . $row['Username'] . "</p>
-                <p>Email: " . $row['Email'] . "</p>
-                <p>DOB: " . $row['DOB'] . "</p>
-              </div>
+  while ($row = $user_result->fetch_assoc()) {
+      $memberID = $row['MemberID'];
+      echo "
+      <tr onclick='openModal($memberID)'>
+          <td>" . htmlspecialchars($row['FirstName']) . "</td>
+          <td>" . htmlspecialchars($row['LastName']) . "</td>
+          <td>" . htmlspecialchars($row['MemberID']) . "</td>
+          <td>" . htmlspecialchars($row['Username']) . "</td>
+          <td>" . htmlspecialchars($row['Email']) . "</td>
+          <td>" . htmlspecialchars($row['DOB']) . "</td>
+          <td>" . htmlspecialchars($row['Status']) . "</td>
+      </tr>
+
+      <!-- Modal for Quick View -->
+      <div id='modal-$memberID' class='modal'>
+        <div class='modal-content'>
+          <span class='close' onclick='closeModal($memberID)'>&times;</span>
+          <div class='modal-body'>
+            <div class='modal-info'>
+              <h3>" . htmlspecialchars($row['FirstName']) . " " . htmlspecialchars($row['LastName']) . "</h3>
+              <p>Member ID: " . htmlspecialchars($row['MemberID']) . "</p>
+              <p>Username: " . htmlspecialchars($row['Username']) . "</p>
+              <p>Email: " . htmlspecialchars($row['Email']) . "</p>
+              <p>DOB: " . htmlspecialchars($row['DOB']) . "</p>
             </div>
           </div>
-        </div>";
-    }
+        </div>
+      </div>";
+  }
 
-    echo "</div>";
+  echo "
+      </tbody>
+  </table>";
 } else {
-    echo "<p>No members found matching the criteria.</p>";
+  echo "<p>No members found matching the criteria.</p>";
 }
 ?>
 </div>
@@ -137,50 +153,66 @@ if ($result === false) {
   echo "<p>Error executing query: " . mysqli_error($conn) . "</p>";
 } else {
   if ($result->num_rows > 0) {
-      echo "<div class='pets-list'>";
+      echo "
+      <table class='pets-table'>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Pet Name</th>
+            <th>Species</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>";
+      
       while ($row = $result->fetch_assoc()) {
           $petID = $row['PetID'];
           echo "
-          <div class='pets-item' onclick='openModal($petID)'>
-              <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
-              <div class='pets-name'>
-                  <h3>" . $row['PetName'] . "</h3>
-              </div>
-              <p>Species: " . $row['PetSpecies'] . "</p>
-              <p>Breed: " . $row['Breed'] . "</p>
-              <p>Age: " . $row['Age'] . "</p>
-              <p>Gender: " . $row['Gender'] . "</p>
-              <p>Description: " . $row['PetDesc'] . "</p>
-              <p>Status: " . $row['Status'] . "</p>
-          </div>
+          <tr>
+            <td><img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' width='100' /></td>
+            <td>" . htmlspecialchars($row['PetName']) . "</td>
+            <td>" . htmlspecialchars($row['PetSpecies']) . "</td>
+            <td>" . htmlspecialchars($row['Breed']) . "</td>
+            <td>" . htmlspecialchars($row['Age']) . "</td>
+            <td>" . htmlspecialchars($row['Gender']) . "</td>
+            <td>" . htmlspecialchars($row['PetDesc']) . "</td>
+            <td>" . htmlspecialchars($row['Status']) . "</td>
+          </tr>
 
-        <!-- Modal for Quick View -->
-        <div id='modal-$petID' class='modal'>
-          <div class='modal-content'>
-            <span class='close' onclick='closeModal($petID)'>&times;</span>
-            <div class='modal-body'>
-              <div class='modal-image'>
-                <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
-              </div>
-              <div class='modal-info'>
-                <h3>" . $row['PetName'] . "</h3>
-                <p>Species: " . $row['PetSpecies'] . "</p>
-                <p>Breed: " . $row['Breed'] . "</p>
-                <p>Age: " . $row['Age'] . "</p>
-                <p>Gender: " . $row['Gender'] . "</p>
-                <p>Description: " . $row['PetDesc'] . "</p>
-                <p>Status: " . $row['Status'] . "</p>
+          <!-- Modal for Quick View -->
+          <div id='modal-$petID' class='modal'>
+            <div class='modal-content'>
+              <span class='close' onclick='closeModal($petID)'>&times;</span>
+              <div class='modal-body'>
+                <div class='modal-image'>
+                  <img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' />
+                </div>
+                <div class='modal-info'>
+                  <h3>" . htmlspecialchars($row['PetName']) . "</h3>
+                  <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
+                  <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
+                  <p>Age: " . htmlspecialchars($row['Age']) . "</p>
+                  <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
+                  <p>Description: " . htmlspecialchars($row['PetDesc']) . "</p>
+                  <p>Status: " . htmlspecialchars($row['Status']) . "</p>
+                </div>
               </div>
             </div>
-          </div>
-        </div>";
-    }
+          </div>";
+      }
 
-    echo "</div>";
-} else {
-    echo "<p>No pets found matching the criteria.</p>";
+      echo "
+        </tbody>
+      </table>";
+  } else {
+      echo "<p>No pets found matching the criteria.</p>";
+  }
 }
-}
+
 
 // Close connection
 $conn->close();

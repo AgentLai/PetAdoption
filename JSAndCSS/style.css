@@ -2595,3 +2595,49 @@ table tr:nth-child(even) {
     background-color: var(--accent);
     border: 1px solid var(--accent);
 }
+
+.members-table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 275px;
+}
+
+.members-table th, .members-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.members-table th {
+    background-color: black;
+    color: var(--accent);
+}
+
+.members-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.pets-table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 275px;
+}
+
+.pets-table th, .pets-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.pets-table th {
+    background-color: black;
+    color: var(--accent);
+}
+
+.pets-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
