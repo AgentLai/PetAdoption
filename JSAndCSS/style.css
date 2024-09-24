@@ -2218,6 +2218,11 @@ hr {
     margin: 10px 0;
 }
 
+.no-history{
+    text-align: center;
+    font-size: 23px;
+}
+
 /* Application Review*/
 .application-container{
     margin-top: 140px;
