@@ -56,94 +56,178 @@ $user_result = $conn->query($user_sql);
 echo "<div class='members-title'><h1>Members</h1></div>";
 
 if ($user_result->num_rows > 0) {
-    echo "<div class='members-list'>";
+    echo "
+    <table class='members-table'>
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>";
     
     while ($row = $user_result->fetch_assoc()) {
         $memberID = $row['MemberID'];
-        // User info display
-        echo "
-        <div class='members-item'>
-            <div class='members-info'>
-                <div class='members-name'>
-                    <h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>
-                </div>
-                <p>Member ID: " . $row['MemberID'] . "</p>
-                <p>Username: " . $row['Username'] . "</p>
-                <p>Email: " . $row['Email'] . "</p>
-                <p>DOB: " . $row['DOB'] . "</p>
-            </div>
 
-            <div class='members-actions'>
-              <button class='btn-3' onclick='openEditModal($memberID)'>Edit</button>
-              <button class='btn-3' onclick='deleteUser($memberID)'>Delete</button>
-            </div>
-        </div>
-        ";
-
-        // Edit Modal for each user
+        // User info display in table rows
         echo "
-        <div id='edit-modal-$memberID' class='modal'>
-            <div class='modal-content'>
-                <span class='close' onclick='closeEditModal($memberID)'>&times;</span>
-                <h3>Edit User</h3>
-                <form action='update_user.php' method='POST'>
-                    <input type='hidden' name='memberID' value='$memberID'>
-                    <label>First Name:</label>
-                    <input type='text' name='firstName' value='" . $row['FirstName'] . "' required>
-                    <label>Last Name:</label>
-                    <input type='text' name='lastName' value='" . $row['LastName'] . "' required>
-                    <label>Username:</label>
-                    <input type='text' name='username' value='" . $row['Username'] . "' required>
-                    <label>Email:</label>
-                    <input type='email' name='email' value='" . $row['Email'] . "' required>
-                    <label>DOB:</label>
-                    <input type='date' name='dob' value='" . $row['DOB'] . "' required>
-                    <button type='submit'>Update</button>
-                </form>
-            </div>
+        <tr>
+            <td>" . htmlspecialchars($row['MemberID']) . "</td>
+            <td>" . htmlspecialchars($row['FirstName']) . "</td>
+            <td>" . htmlspecialchars($row['LastName']) . "</td>
+            <td>" . htmlspecialchars($row['Username']) . "</td>
+            <td>" . htmlspecialchars($row['Email']) . "</td>
+            <td>" . htmlspecialchars($row['DOB']) . "</td>
+            <td>" . htmlspecialchars($row['Status']) . "</td>
+            <td>
+                <button class='btn-primary' onclick='openViewModal($memberID)'>View</button>
+            </td>
+        </tr>";
+        
+        // Edit Modal for each user (kept outside the table)
+        echo "
+<div id='view-modal-$memberID' class='modal'>
+    <div class='modal-content'>
+        <span class='close' onclick='closeViewModal($memberID)'>&times;</span>
+        <h3>View User</h3>
+        <div class='view-user-details'>
+            <p><strong>First Name:</strong> " . htmlspecialchars($row['FirstName']) . "</p>
+            <p><strong>Last Name:</strong> " . htmlspecialchars($row['LastName']) . "</p>
+            <p><strong>Username:</strong> " . htmlspecialchars($row['Username']) . "</p>
+            <p><strong>Email:</strong> " . htmlspecialchars($row['Email']) . "</p>
+            <p><strong>Date of Birth:</strong> " . htmlspecialchars($row['DOB']) . "</p>
+            <p><strong>Status:</strong> <span id='user-status-$memberID'>" . htmlspecialchars($row['Status']) . "</span></p>
+
+            <!-- Reviews Section -->
+            <h4>Reviews</h4>";
+
+            $review_query = "SELECT * FROM Reviews WHERE MemberID = $memberID";
+            $review_result = $conn->query($review_query);
+            
+            if ($review_result->num_rows > 0) {
+                echo "<ul>";
+                while ($review_row = $review_result->fetch_assoc()) {
+                    echo "<li>Rating: " . htmlspecialchars($review_row['Rating']) . "/5, " . htmlspecialchars($review_row['Comments']) . " (" . htmlspecialchars($review_row['ReviewDate']) . ")</li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>No reviews found.</p>";
+            }
+            
+            // Adoption History Section
+            echo "<h4>Adoption History</h4>";
+            
+            $history_query = "SELECT p.PetName, ah.ApplicationDate, ah.Status FROM AdoptionHistory ah JOIN Pets p ON ah.PetID = p.PetID WHERE ah.MemberID = $memberID";
+            $history_result = $conn->query($history_query);
+            
+            if ($history_result->num_rows > 0) {
+                echo "<ul>";
+                while ($history_row = $history_result->fetch_assoc()) {
+                    echo "<li>Adopted Pet: " . htmlspecialchars($history_row['PetName']) . " on " . htmlspecialchars($history_row['ApplicationDate']) . " - Status: " . htmlspecialchars($history_row['Status']) . "</li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>No adoption history found.</p>";
+            }
+
+            // Adoption Applications Section
+            echo "<h4>Adoption Applications</h4>";
+            
+            $app_query = "SELECT * FROM adoptionapplication WHERE MemberID = $memberID"; // Ensure the table name is correct
+            $app_result = $conn->query($app_query);
+            
+            if ($app_result->num_rows > 0) {
+                echo "<ul>";
+                while ($app_row = $app_result->fetch_assoc()) {
+                    echo "<li>Pet Name: " . htmlspecialchars($app_row['PetName']) . ", Status: " . htmlspecialchars($app_row['Status']) . " (Applied on: " . htmlspecialchars($app_row['ApplicationDate']) . ")</li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>No applications found.</p>";
+            }
+            
+            // Blacklist Button Logic
+            if ($row['Status'] !== 'blacklisted') {
+                echo "<button class='btn-danger' onclick='blacklistUser($memberID)'>Blacklist</button>";
+            } else {
+                echo "<button class='btn-success' onclick='removeBlacklist($memberID)'>Remove Blacklist</button>";
+                echo "<script>console.log('User is blacklisted');</script>";
+            }
+
+echo "
         </div>
-        ";
+    </div>
+</div>";
+
     }
-    echo "</div>";
+    echo "</tbody></table>";
 } else {
     echo "<p>No users found.</p>";
 }
 ?>
 </div>
 <script>
-function openEditModal(memberID) {
-    document.getElementById('edit-modal-' + memberID).style.display = "block";
+function openViewModal(memberID) {
+    document.getElementById('view-modal-' + memberID).style.display = "block";
 }
 
-function closeEditModal(memberID) {
-    document.getElementById('edit-modal-' + memberID).style.display = "none";
+function closeViewModal(memberID) {
+    document.getElementById('view-modal-' + memberID).style.display = "none";
 }
 
-function deleteUser(memberID) {
-    if (confirm('Are you sure you want to delete this user?')) {
-        // Create an XMLHttpRequest object
+function blacklistUser(memberID) {
+    if (confirm('Are you sure you want to blacklist this user?')) {
+        // AJAX call to update the status
         var xhr = new XMLHttpRequest();
-        // Configure it: POST-request for the URL /delete_user.php
-        xhr.open('POST', 'delete_user.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        
-        // Set up a function to handle the response
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                // Update the UI or provide feedback
+        xhr.open("POST", "blacklist_user.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Handle response
                 alert(xhr.responseText);
-                if (xhr.responseText.includes('successfully')) {
-                    document.getElementById('member-' + memberID).remove(); // Remove the user from the list
-                }
-            } else {
-                alert('Error: ' + xhr.statusText);
+                // Optionally refresh the page or update the UI
+                location.reload(); // Refresh the page to reflect changes
             }
         };
-        
-        // Send the request with the memberID
-        xhr.send('MemberID=' + encodeURIComponent(memberID));
+        xhr.send("memberID=" + memberID);
     }
 }
+function removeBlacklist(memberID) {
+    console.log("Attempting to remove blacklist for member ID:", memberID);
+    if (confirm("Are you sure you want to remove the blacklist status?")) {
+        // Make an AJAX request to remove the blacklist status
+        fetch('remove_blacklist.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'memberID=' + memberID
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result.trim() === 'success') {
+                alert("Blacklist status has been removed.");
+                // Update the status in the modal
+                document.querySelector(`#user-status-${memberID}`).innerHTML = 'active'; // Change to 'active' or whatever the new status should be
+                // Replace the "Remove Blacklist" button with the "Blacklist" button
+                document.querySelector(`#view-modal-${memberID} .btn-success`).outerHTML = `<button class='btn-danger' onclick='blacklistUser(${memberID})'>Blacklist</button>`;
+            } else {
+                alert("Error removing blacklist status. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        });
+    }
+}
+
 </script>
 
 </body>

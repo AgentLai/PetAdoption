@@ -60,70 +60,89 @@
         $pet_result = $conn->query($pet_sql);
 
         if ($pet_result->num_rows > 0) {
-            echo "<div class='pets-list'>";
+            echo "
+            <table class='pets-table'>
+                <thead>
+                    <tr>
+                        <th>Pet ID</th>
+                        <th>Pet Name</th>
+                        <th>Image</th>
+                        <th>Age</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Gender</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>";
             
             while ($row = $pet_result->fetch_assoc()) {
                 $petID = $row['PetID'];
-                // Pet info display
+        
+                // Pet info display in table rows
                 echo "
-                <div id='pet-$petID' class='pets-item'>
-                    <div class='pets-info'>
-                    <img src='" . $row['image_url'] . "' alt='" . $row['PetName'] . "' />
-                <div class='pets-name'>
-                    <h3>" . $row['PetName'] . "</h3>
-                    </div>
-                    <p>Species: " . $row['PetSpecies'] . "</p>
-                    <p>Breed: " . $row['Breed'] . "</p>
-                    <p>Age: " . $row['Age'] . "</p>
-                    <p>Gender: " . $row['Gender'] . "</p>
-                    <p>Description: " . $row['PetDesc'] . "</p>
-                    <p>Status: " . $row['Status'] . "</p>
-                </div>
-
-                    <div class='pets-actions'>
-                        <button class='btn-3' onclick='openEditModal($petID)'>Edit</button>
-                        <button class='btn-3' onclick='deletePet($petID)'>Delete</button>
-                    </div>
-                </div>
-                ";
+                <tr>
+                    <td>" . htmlspecialchars($row['PetID']) . "</td>
+                    <td>" . htmlspecialchars($row['PetName']) . "</td>
+                    <td><img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' style='width:50px;height:50px;'/></td>
+                    <td>" . htmlspecialchars($row['Age']) . "</td>
+                    <td>" . htmlspecialchars($row['PetSpecies']) . "</td>
+                    <td>" . htmlspecialchars($row['Breed']) . "</td>
+                    <td>" . htmlspecialchars($row['Gender']) . "</td>
+                    <td>" . htmlspecialchars($row['PetDesc']) . "</td>
+                    <td>" . htmlspecialchars($row['Status']) . "</td>
+                    <td>
+                        <button class='btn-primary' onclick='openEditModal($petID)'>View</button>
+                    </td>
+                </tr>";
 
                 // Edit Modal for each pet
                 echo "
-                <div id='edit-modal-$petID' class='modal'>
+            <div id='edit-modal-$petID' class='modal'>
                     <div class='modal-content'>
-                        <span class='close' onclick='closeEditModal($petID)'>&times;</span>
-                        <h3>Edit Pet</h3>
-                        <form action='update_pet.php' method='POST'>
-                            <input type='hidden' name='petID' value='$petID'>
-                            <label>Name:</label>
-                            <input type='text' name='name' value='" . htmlspecialchars($row['PetName']) . "' required>
-                            <label>Image URL:</label>
-                            <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
-                            <label>Age:</label>
-                            <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "'>
-                            <label>Species:</label>
-                            <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "'>
-                            <label>Breed:</label>
-                            <input type='text' name='breed' value='" . htmlspecialchars($row['Breed']) . "'>
-                            <label>Description:</label>
-                            <input type='text' name='petDesc' value='" . htmlspecialchars($row['PetDesc']) . "'>
-                            <label>Gender:</label>
-                            <select name='gender' required>
-                                <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
-                                <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
-                            </select>
-                            <label>Status:</label>
-                            <select name='status' required>
-                                <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
-                                <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
-                                <option value='Adopted'" . ($row['Status'] == 'Adopted' ? ' selected' : '') . ">Adopted</option>
-                                <option value='Deceased'" . ($row['Status'] == 'Deceased' ? ' selected' : '') . ">Deceased</option>
-                            </select>
-                            <button type='submit'>Update</button>
-                        </form>
-                    </div>
+                    <span class='close' onclick='closeEditModal($petID)'>&times;</span>
+                    <h3>Edit Pet</h3>
+                    <form action='update_pet.php' method='POST'>
+                        <input type='hidden' name='petID' value='$petID'>
+                        
+                        <label>Name:</label>
+                        <input type='text' name='petName' value='" . htmlspecialchars($row['PetName']) . "' required>
+                        
+                        <label>Image URL:</label>
+                        <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
+                        
+                        <label>Age:</label>
+                        <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "' min='0'>
+                        
+                        <label>Species:</label>
+                        <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "' required>
+                        
+                        <label>Breed:</label>
+                        <input type='text' name='breed' value='" . htmlspecialchars($row['Breed']) . "' required>
+                        
+                        <label>Description:</label>
+                        <input type='text' name='petDesc' value='" . htmlspecialchars($row['PetDesc']) . "' required>
+                        
+                        <label>Gender:</label>
+                        <select name='gender' required>
+                            <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
+                            <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
+                        </select>
+                        
+                        <label>Status:</label>
+                        <select name='status' required>
+                            <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
+                            <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
+                            <option value='Unavailable'" . ($row['Status'] == 'Unavailable' ? ' selected' : '') . ">Unavailable</option>
+                        </select>
+                        
+                        <button type='submit'>Update</button>
+                    </form>
                 </div>
-                ";
+            </div>";
+
             }
             echo "</div>";
         } else {
@@ -218,46 +237,4 @@
 </script>
 
 </body>
-<footer id="footer">
-      <div class="footer-container">
-        <div class="footer-links">
-          <h2>Quick Links</h2>
-          <div class="link-container">
-            <div class="links">
-              <a href="index.php#about">About</a>
-              <a href="index.php#pets">Pets</a>
-            </div>
-            <div class="links">
-              <a href="index.php#requirements">Requirements</a>
-              <a href="index.php#stories">Stories</a>
-              <a href="FAQs.php#contact">Contact Us</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-brand">
-          <h1>Pet<b class="accent">Haven</b></h1>
-          <p>Find Your Purrfect furry friend Today!</p>
-          <div class="socials">
-            <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="/"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="/"><i class="fa-brands fa-twitter"></i></a>
-            <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>   
-          </div>
-        </div>
-        <div class="footer-contact-info">
-          <div class="contact-info-item">
-            <i class="fa-regular fa-envelope"></i>
-            <p>pethaven@gmail.com</p>
-          </div>
-          <div class="contact-info-item">
-            <i class="fa-solid fa-phone"></i>
-            <p>+60 17-816 3645(Douglas)</p>
-          </div>
-        </div>
-      </div>
-        <p class="copyright">All Rights Reserved to <b>Pet Haven</b></p>
-     </footer>
-    <!-- Footer Section End -->
-
-  </body>
 </html>
