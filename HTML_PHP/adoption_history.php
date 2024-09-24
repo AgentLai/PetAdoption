@@ -10,7 +10,7 @@ if (!isset($_SESSION['MemberID'])) {
 
 $memberID = $_SESSION['MemberID'];
 $query = "SELECT Username, FirstName, LastName, DOB, Email, Status FROM Member WHERE MemberID = ?";
-$stmt = $conn->prepare($query);
+$stmt = $con->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -27,10 +27,10 @@ $user = $result->fetch_assoc();
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/index.js" defer></script>
-    <script src="../JSAndCSS/   profile.js" defer></script>
+    <script src="IndexJava.js" defer></script>
+    <script src="profile.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -71,7 +71,7 @@ $user = $result->fetch_assoc();
     </nav>
 
     <!-- Profile Page Content -->
-    <div class="profile-container">
+    <div class="profile-container" id="account-general">
     <h4>Account Settings</h4>
 
     <div class="row">
@@ -83,26 +83,107 @@ $user = $result->fetch_assoc();
                 <a href="logout.php"><button class="logout-btn">Log out</button></a>
             </div>
         </div>
-        
-        
-         <?php
-               // Get the MemberID from the session
-              $member_id = $_SESSION['MemberID'];
+ <?php       
+  // Get the member ID from session
+$member_id = $_SESSION['MemberID'];
 
-               // Query to get adoption applications for the logged-in member
-               $query = "SELECT PetName, Status FROM adoptionapplication WHERE MemberID = '$member_id'";
-               $result = mysqli_query($conn, $query);
-              ?>
-         <div class="content-section">
-        <div class="adoption-history">
+// Initialize search variables with empty values
+$pet_name_search = '';
+$status_search = '';
+$date_search = '';
+
+// Check if the search form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    // Get the search parameters from the form
+    if (isset($_GET['pet_name'])) {
+        $pet_name_search = trim($_GET['pet_name']);
+    }
+
+    if (isset($_GET['status'])) {
+        $status_search = trim($_GET['status']);
+    }
+
+    if (isset($_GET['application_date'])) {
+        $date_search = trim($_GET['application_date']);
+    }
+}
+
+// Prepare the SQL query
+$query = "SELECT PetName, Status, ApplicationDate FROM adoption_applications WHERE MemberID = ?";
+
+// Add conditions for the search
+$params = [$member_id];
+$types = 'i';  // "i" for integer (MemberID)
+
+// Add Pet Name search if provided
+if (!empty($pet_name_search)) {
+    $query .= " AND PetName LIKE ?";
+    $params[] = '%' . $pet_name_search . '%';  // Use wildcards for partial matching
+    $types .= 's';  // "s" for string (PetName)
+}
+
+// Add Status search if provided
+if (!empty($status_search)) {
+    $query .= " AND Status = ?";
+    $params[] = $status_search;
+    $types .= 's';  // "s" for string (Status)
+}
+
+// Add Application Date search if provided
+if (!empty($date_search)) {
+    $query .= " AND ApplicationDate = ?";
+    $params[] = $date_search;
+    $types .= 's';  // "s" for string (ApplicationDate)
+}
+
+// Prepare and execute the query
+$stmt = $con->prepare($query);
+$stmt->bind_param($types, ...$params);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+
+<!-- Search Form -->
+<div class="search-container">
+    <form method="GET" action="adoption_history.php" class="search-form">
+        <div class="history-form-group">
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" name="pet_name" id="pet_name" value="<?php echo htmlspecialchars($pet_name_search); ?>" placeholder="Enter pet name">
+        </div>
+
+        <div class="history-form-group">
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="">All</option>
+                <option value="pending" <?php if ($status_search == 'pending') echo 'selected'; ?>>Pending</option>
+                <option value="approved" <?php if ($status_search == 'approved') echo 'selected'; ?>>Approved</option>
+                <option value="rejected" <?php if ($status_search == 'rejected') echo 'selected'; ?>>Rejected</option>
+            </select>
+        </div>
+
+        <div class="history-form-group">
+            <label for="application_date">Application Date:</label>
+            <input type="date" name="application_date" id="application_date" value="<?php echo htmlspecialchars($date_search); ?>">
+        </div>
+
+        <button type="submit" class="search-btn">Search</button>
+    </form>
+</div>
+          
+       <div class="content-section">
+            <div class="adoption-history">
                  <h5>Adoption History</h5>
 
             <?php
-                  if (mysqli_num_rows($result) > 0) {
+                  if ($result && mysqli_num_rows($result) > 0) {
                   // Loop through the results and display each application
                   while ($row = mysqli_fetch_assoc($result)) {
                   $pet_name = htmlspecialchars($row['PetName']);
                   $status = htmlspecialchars($row['Status']);
+                  $application_date = htmlspecialchars($row['ApplicationDate']);
+
+                // Format the application date (optional: adjust the date format as needed)
+                $formatted_date = date('F d, Y', strtotime($application_date));
                   
                 echo "<div class='adoption-item'>
                     <div class='adoption-header'>
@@ -111,10 +192,13 @@ $user = $result->fetch_assoc();
                     <div class='adoption-status'  id='account-adoption-history'>
                         <strong>Status:</strong> <span class='status'>$status</span>
                     </div>
+                     <div class='adoption-date'>
+                        <strong>Application Date:</strong> $formatted_date
+                    </div>
                   </div>";
                 }
              } else {
-        echo "<p>No adoption history found.</p>";
+        echo "<div class='no-history'><p>No adoption history found.</p></div>";
     }
     ?>
                   </div>
