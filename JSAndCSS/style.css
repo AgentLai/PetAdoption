@@ -2218,6 +2218,82 @@ hr {
     margin: 10px 0;
 }
 
+.no-history{
+    text-align: center;
+    font-size: 23px;
+}
+
+/* Style for the search form container */
+.search-container {
+    margin-top: 5px;
+    margin-left: 350px;
+    padding: 10px;
+    background-color: #f5f5f5; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Style the search form */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Individual form group styles */
+.search-form .history-form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px; /* Minimum width for input fields */
+}
+
+/* Labels styling */
+.search-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Input fields and select box styling */
+.search-form input,
+.search-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Submit button styling */
+.search-form{
+    padding: 10px 20px;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn{
+    padding: 10px 20px;
+    background-color: var(--black);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form .search-btn:hover {
+    background-color: var(--accent); /* Darker green on hover */
+}
+
+/* Add responsive styling */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+    }
+}
+
 /* Application Review*/
 .application-container{
     margin-top: 140px;

@@ -33,10 +33,13 @@ CREATE TABLE Pets (
     image_url VARCHAR(255),
     Age INT,
     PetSpecies VARCHAR(50),
-    Breed VARCHAR(50),
+    Dog_breed ENUM('Labrador', 'Beagle', 'Bulldog', 'Poodle', 'German Shepherd', 'Golden Retriever', 'Border Collie', 'Corgi', 'Others') DEFAULT NULL,
+    Cat_breed ENUM('Persian', 'Siamese', 'Maine Coon', 'Bengal', 'Sphynx', 'Domestic Shorthair', 'Others') DEFAULT NULL,
     Gender ENUM('Male', 'Female'),
-    PetDesc VARCHAR(255),
-    Status ENUM('Available', 'Pending', 'Unavailable') NOT NULL
+    description VARCHAR(255),
+    Disabilities ENUM('Blind', 'Deaf', 'Limp', 'Missing Leg', 'Other') DEFAULT NULL,
+    Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL,
+ 
 );
 
 CREATE TABLE AdoptionHistory (
