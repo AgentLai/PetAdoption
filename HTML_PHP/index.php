@@ -8,9 +8,10 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/index.js" defer></script>
+    <script src="IndexJava.js" defer></script>
+    <script src="index_application.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js"></script>
@@ -99,9 +100,9 @@
         </div>
       </div>
       <div class="hero-images">
-          <img src="../Pictures/img/hero-img-1.png" alt="img">
-        <img src="../Pictures/img/hero-img-2.png" alt="img">
-        <img src="../Pictures/img/hero-img-3.png" alt="img">
+          <img src="Images/hero-img-1.png" alt="img">
+        <img src="Images/hero-img-2.png" alt="img">
+        <img src="Images/hero-img-3.png" alt="img">
       </div>
     </section>
     <!--About Section-->
@@ -153,7 +154,7 @@
         </div>
       </div>
     <div class="requirements-footer">
-    <img src="../Pictures/img/requirements-img.png" alt="img">
+    <img src="Images/requirements-img.png" alt="img">
       
       
   </div>
@@ -192,15 +193,15 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-            <img src="../Pictures/Dogs/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Henry</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/Cats/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
           <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/Dogs/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Dan</h3>
         </div>
       </div>
@@ -240,71 +241,58 @@
         </div>
         <a href="AboutUs.php"><button class="btn-3">Learn More</button></a>
       </div>
-      <img src="../Pictures/img/about-img.png" alt="img">
+      <img src="Images/about-img.png" alt="img">
     </div>
-    <!--Testimonials Sections-->
-    <div class="testimonials" id="stories">
-      <h6>OUR REVIEWS</h6>
-      <h1>What Our Customers Say</h1>
+    
+   <?php
+// Connect to the database
+include('config.php'); // Assuming you have a file that handles DB connection
 
-      <div class="testimony-container">
-        <!--testimony item 1-->
-        <div class="testimony-item">
-          <div class="testimony-people">
-            <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-1.png" alt="img"/>
-              <div class="testimony-name-item">
-                <h4>Lylia Johnson</h4>
-                <p>Garfield's Owner</p>
-              </div>
-            </div>
-            <i class="fa-solid fa-quote-right"></i>
-          </div>
-          <p class="testimony-text">
-            I had a wonderful experience adopting my furry friend from PetHaven! 
-            The staff was kind, knowledgeable, and focused on finding the perfect match. 
-            The adoption process was smooth, and they gave me all the support I needed. 
-            My new companion brings so much joy, and I highly recommend PetHaven!
-          </p>
+// Query to get the latest 3 reviews
+$sql = "SELECT R.Rating, R.Comments, R.ReviewDate, M.username 
+        FROM Reviews R 
+        JOIN Member M ON R.MemberID = M.MemberID 
+        ORDER BY R.ReviewDate DESC 
+        LIMIT 3";
+
+$result = $con->query($sql);
+?>
+
+<!-- Display Reviews Section -->
+<div class="customer-reviews">
+    <h2>Our Reviews</h2>
+    
+    <?php if ($result->num_rows > 0): ?>
+        <div class="reviews-container">
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="review">
+                    <div class="review-header">
+                        <span class="review-rating">Rating: <?php echo htmlspecialchars($row['Rating']); ?>/5</span>
+                        <span class="review-user"><?php echo htmlspecialchars($row['username']); ?></span>
+                        <span class="review-date"><?php echo date('F j, Y', strtotime($row['ReviewDate'])); ?></span>
+                    </div>
+                    <p class="review-comment"><?php echo htmlspecialchars($row['Comments']); ?></p>
+                </div>
+            <?php endwhile; ?>
         </div>
-        <!--testimony item 2-->
-        <div class="testimony-item">
-          <div class="testimony-people">
-            <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-2.png" alt="img"/>
-              <div class="testimony-name-item">
-                <h4>Jason Lesley</h4>
-                <p>Benedict's Owner</p>
-              </div>
-            </div>
-            <i class="fa-solid fa-quote-right"></i>
-          </div>
-          <p class="testimony-text">
-           I adopted my cat, Benedict, through PetHaven, and the staff was incredibly helpful, answering all my questions and ensuring he was the perfect match. 
-           The process was smooth, and I'm so grateful to PetHaven for bringing us together. 
-           Benedict has brought so much joy to my life!
-          </p>
+            <div class="customer-review-btn-container">
+    <a href="FAQs.php#reviews"><button class="review-btn">Submit a Review</button></a>
+             </div>
+    <?php else: ?>
+        <div class="no-reviews">
+            <p>No reviews available at the moment. Be the first to leave one!</p>
         </div>
-        <!--testimony item 3-->
-        <div class="testimony-item">
-          <div class="testimony-people">
-            <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-3.png" alt="img"/>
-              <div class="testimony-name-item">
-                <h4>Lutpii Lo</h4>
-                <p>Terizla's Owner</p>
-              </div>
-            </div>
-            <i class="fa-solid fa-quote-right"></i>
-          </div>
-          <p class="testimony-text">
-            I adopted my furry friend through PetHaven, and it was a fantastic experience! 
-            The staff was helpful and made the process smooth. They truly care about the animals and ensured I was ready to bring my pet home. 
-            My dog settled in quickly and is now a beloved family member. Highly recommend PetHaven!
-          </p>
-        </div>
-      </div>
-    </div>
+         <div class="review-btn-container">
+    <a href="FAQs.php#reviews"><button class="review-btn">Submit a Review</button></a>
+         </div>
+    <?php endif; ?>
+</div>
+
+<?php
+// Close the connection
+$con->close();
+?>
+
 <!-- Testimonials Section End-->
 
 <!-- Footer Section -->
