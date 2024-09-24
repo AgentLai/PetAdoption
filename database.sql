@@ -36,7 +36,7 @@ CREATE TABLE Pets (
     Dog_breed ENUM('Labrador', 'Beagle', 'Bulldog', 'Poodle', 'German Shepherd', 'Golden Retriever', 'Border Collie', 'Corgi', 'Others') DEFAULT NULL,
     Cat_breed ENUM('Persian', 'Siamese', 'Maine Coon', 'Bengal', 'Sphynx', 'Domestic Shorthair', 'Others') DEFAULT NULL,
     Gender ENUM('Male', 'Female'),
-    description VARCHAR(255),
+    PetDesc VARCHAR(255),
     Disabilities ENUM('Blind', 'Deaf', 'Limp', 'Missing Leg', 'Other') DEFAULT NULL,
     Status ENUM('Available', 'Pending', 'Adopted', 'Deceased') NOT NULL,
  

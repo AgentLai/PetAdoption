@@ -15,14 +15,25 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the form data
     $petID = $_POST['petID'];
-    $petName = $_POST['name'];
+    $petName = $_POST['petName'];
     $imageUrl = $_POST['image_url'];
     $age = $_POST['age'];
     $petSpecies = $_POST['petSpecies'];
-    $breed = $_POST['breed'];
     $gender = $_POST['gender'];
     $petDesc = $_POST['petDesc'];
+    $disabilities = $_POST['disabilities']; // New field for disabilities
     $status = $_POST['status'];
+
+    // Initialize breed variables
+    $dogBreed = null;
+    $catBreed = null;
+
+    // Determine the breed based on species
+    if ($petSpecies === 'Dog') {
+        $dogBreed = $_POST['breed']; // Dog breed
+    } elseif ($petSpecies === 'Cat') {
+        $catBreed = $_POST['breed']; // Cat breed
+    }
 
     // Print received data for debugging
     echo "<pre>";
@@ -30,13 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</pre>";
 
     // Prepare and bind
-    $stmt = $conn->prepare("UPDATE Pets SET PetName=?, image_url=?, Age=?, PetSpecies=?, Breed=?, Gender=?, Status=? WHERE PetID=?");
+    // Adjust SQL statement to include the breed column for both dogs and cats
+    $stmt = $conn->prepare("UPDATE Pets SET PetName=?, image_url=?, Age=?, PetSpecies=?, Dog_breed=?, Cat_breed=?, Gender=?, Disabilities=?, Status=? WHERE PetID=?");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error);
     }
 
     // Bind parameters
-    $bindResult = $stmt->bind_param("ssissssi", $petName, $imageUrl, $age, $petSpecies, $breed, $gender, $status, $petID);
+    $bindResult = $stmt->bind_param("ssissssssi", $petName, $imageUrl, $age, $petSpecies, $dogBreed, $catBreed, $gender, $disabilities, $status, $petID);
     if ($bindResult === false) {
         die("Bind failed: " . $stmt->error);
     }
@@ -60,3 +72,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<p>Invalid request method.</p>";
 }
 ?>
+

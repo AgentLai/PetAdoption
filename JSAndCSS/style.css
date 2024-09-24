@@ -2722,11 +2722,26 @@ table tr:nth-child(even) {
     font-size: 20px;
 }
 
+.view-pet-modal p {
+    font-size: 20px;
+}
+
+.view-modal-content{
+    background-color: #f9f9f9;
+    margin: 10% auto ; /* Centered vertically and horizontally */
+    padding: 30px;
+    border: 1px solid #ccc;
+    width: 80%; /* Adjustable width */
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
 .modal-content input,
 .modal-content textarea {
-    width: calc(100% - 20px);
+    width: calc(100% - 10px);
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;

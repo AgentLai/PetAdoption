@@ -143,75 +143,88 @@ if ($user_result->num_rows > 0) {
 <div class="pet-list-container">
 <?php
 // Fetch pets from the database
-$pet_sql = "SELECT PetID, PetName, PetSpecies, Breed, Age, Gender, Status, image_url, PetDesc FROM pets";
+// Fetch pets from the database
+$pet_sql = "SELECT PetID, PetName, PetSpecies, 
+            CASE 
+                WHEN Dog_breed IS NOT NULL THEN Dog_breed 
+                ELSE Cat_breed 
+            END AS Breed, 
+            Age, Gender, Status, image_url, PetDesc, Disabilities 
+            FROM Pets";
+
 $result = $conn->query($pet_sql);
 
 echo "<div class='pets-title'><h1>Pets</h1></div>";
 
 if ($result === false) {
-  // Handle the query error here
-  echo "<p>Error executing query: " . mysqli_error($conn) . "</p>";
+    // Handle the query error here
+    echo "<p>Error executing query: " . mysqli_error($conn) . "</p>";
 } else {
-  if ($result->num_rows > 0) {
-      echo "
-      <table class='pets-table'>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Pet Name</th>
-            <th>Species</th>
-            <th>Breed</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>";
-      
-      while ($row = $result->fetch_assoc()) {
-          $petID = $row['PetID'];
-          echo "
-          <tr>
-            <td><img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' width='100' /></td>
-            <td>" . htmlspecialchars($row['PetName']) . "</td>
-            <td>" . htmlspecialchars($row['PetSpecies']) . "</td>
-            <td>" . htmlspecialchars($row['Breed']) . "</td>
-            <td>" . htmlspecialchars($row['Age']) . "</td>
-            <td>" . htmlspecialchars($row['Gender']) . "</td>
-            <td>" . htmlspecialchars($row['PetDesc']) . "</td>
-            <td>" . htmlspecialchars($row['Status']) . "</td>
-          </tr>
+    if ($result->num_rows > 0) {
+        echo "
+        <table class='pets-table'>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Pet Name</th>
+                    <th>Species</th>
+                    <th>Breed</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Description</th>
+                    <th>Disabilities</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>";
+        
+        while ($row = $result->fetch_assoc()) {
+            $petID = $row['PetID'];
+            echo "
+            <tr>
+                <td><img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' width='100' /></td>
+                <td>" . htmlspecialchars($row['PetName']) . "</td>
+                <td>" . htmlspecialchars($row['PetSpecies']) . "</td>
+                <td>" . htmlspecialchars($row['Breed']) . "</td>
+                <td>" . htmlspecialchars($row['Age']) . "</td>
+                <td>" . htmlspecialchars($row['Gender']) . "</td>
+                <td>" . htmlspecialchars($row['PetDesc']) . "</td>
+                <td>" . htmlspecialchars($row['Disabilities'] ?? 'None') . "</td>
+                <td>" . htmlspecialchars($row['Status']) . "</td>
+            </tr>
 
-          <!-- Modal for Quick View -->
-          <div id='modal-$petID' class='modal'>
-            <div class='modal-content'>
-              <span class='close' onclick='closeModal($petID)'>&times;</span>
-              <div class='modal-body'>
-                <div class='modal-image'>
-                  <img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' />
+            <!-- Modal for Quick View -->
+            <div id='modal-$petID' class='modal'>
+                <div class='modal-content'>
+                    <span class='close' onclick='closeModal($petID)'>&times;</span>
+                    <div class='modal-body'>
+                        <div class='modal-image'>
+                            <img src='" . htmlspecialchars($row['image_url']) . "' alt='" . htmlspecialchars($row['PetName']) . "' />
+                        </div>
+                        <div class='modal-info'>
+                            <h3>" . htmlspecialchars($row['PetName']) . "</h3>
+                            <p><strong>Species:</strong> " . htmlspecialchars($row['PetSpecies']) . "</p>
+                            <p><strong>Breed:</strong> " . htmlspecialchars($row['Breed']) . "</p>
+                            <p><strong>Age:</strong> " . htmlspecialchars($row['Age']) . "</p>
+                            <p><strong>Gender:</strong> " . htmlspecialchars($row['Gender']) . "</p>
+                            <p><strong>Description:</strong> " . htmlspecialchars($row['PetDesc']) . "</p>
+                            <p><strong>Disabilities:</strong> " . htmlspecialchars($row['Disabilities'] ?? 'None') . "</p>
+                            <p><strong>Status:</strong> " . htmlspecialchars($row['Status']) . "</p>
+                        </div>
+                    </div>
                 </div>
-                <div class='modal-info'>
-                  <h3>" . htmlspecialchars($row['PetName']) . "</h3>
-                  <p>Species: " . htmlspecialchars($row['PetSpecies']) . "</p>
-                  <p>Breed: " . htmlspecialchars($row['Breed']) . "</p>
-                  <p>Age: " . htmlspecialchars($row['Age']) . "</p>
-                  <p>Gender: " . htmlspecialchars($row['Gender']) . "</p>
-                  <p>Description: " . htmlspecialchars($row['PetDesc']) . "</p>
-                  <p>Status: " . htmlspecialchars($row['Status']) . "</p>
-                </div>
-              </div>
-            </div>
-          </div>";
-      }
+            </div>";
+        }
 
-      echo "
-        </tbody>
-      </table>";
-  } else {
-      echo "<p>No pets found matching the criteria.</p>";
-  }
+        echo "
+            </tbody>
+        </table>";
+    } else {
+        echo "<p>No pets found matching the criteria.</p>";
+    }
 }
+
+
 
 
 // Close connection

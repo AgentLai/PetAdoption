@@ -1,22 +1,21 @@
 <?php
-require 'config.php'; // Include your database connection file
+include("config.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['memberID'])) {
-        $memberID = intval($_POST['memberID']);
-        
-        // Update the user status in the database
-        $update_query = "UPDATE Member SET Status = 'active' WHERE MemberID = ?";
-        $stmt = $conn->prepare($update_query);
-        $stmt->bind_param('i', $memberID);
+    $memberID = $_POST['memberID'];
 
-        if ($stmt->execute()) {
-            echo 'success'; // Return success response
-        } else {
-            echo 'error'; // Return error response
-        }
-        
-        $stmt->close();
+    // Update the status in the database
+    $update_sql = "UPDATE Member SET Status = 'active' WHERE MemberID = ?";
+    $stmt = $conn->prepare($update_sql);
+    $stmt->bind_param("i", $memberID);
+
+    if ($stmt->execute()) {
+        echo 'success';
+    } else {
+        echo 'error';
     }
+
+    $stmt->close();
 }
 $conn->close();
+?>

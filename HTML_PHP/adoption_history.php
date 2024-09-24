@@ -10,7 +10,7 @@ if (!isset($_SESSION['MemberID'])) {
 
 $memberID = $_SESSION['MemberID'];
 $query = "SELECT Username, FirstName, LastName, DOB, Email, Status FROM Member WHERE MemberID = ?";
-$stmt = $con->prepare($query);
+$stmt = $conn->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -27,10 +27,10 @@ $user = $result->fetch_assoc();
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="..\JSAndCSS\style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
-    <script src="profile.js" defer></script>
+    <script src="..\JSAndCSS\index.js" defer></script>
+    <script src="..\JSAndCSS\profile.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 // Prepare the SQL query
-$query = "SELECT PetName, Status, ApplicationDate FROM adoption_applications WHERE MemberID = ?";
+$query = "SELECT PetName, Status, ApplicationDate FROM adoptionapplication WHERE MemberID = ?";
 
 // Add conditions for the search
 $params = [$member_id];
@@ -137,7 +137,7 @@ if (!empty($date_search)) {
 }
 
 // Prepare and execute the query
-$stmt = $con->prepare($query);
+$stmt = $conn->prepare($query);
 $stmt->bind_param($types, ...$params);
 $stmt->execute();
 $result = $stmt->get_result();
