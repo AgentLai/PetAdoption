@@ -8,10 +8,10 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
-    <script src="index_application.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
+    <script src="../JSAndCSS/index_application.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js"></script>
@@ -52,7 +52,7 @@
   </head>
   <body>
     <nav>
-        <a href="index.html" class ="brand">
+        <a href="index.php" class ="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -100,9 +100,9 @@
         </div>
       </div>
       <div class="hero-images">
-          <img src="Images/hero-img-1.png" alt="img">
-        <img src="Images/hero-img-2.png" alt="img">
-        <img src="Images/hero-img-3.png" alt="img">
+          <img src="../Pictures/img/hero-img-1.png" alt="img">
+        <img src="../Pictures/img/hero-img-2.png" alt="img">
+        <img src="../Pictures/img/hero-img-3.png" alt="img">
       </div>
     </section>
     <!--About Section-->
@@ -154,7 +154,7 @@
         </div>
       </div>
     <div class="requirements-footer">
-    <img src="Images/requirements-img.png" alt="img">
+    <img src="../Pictures/img/requirements-img.png" alt="img">
       
       
   </div>
@@ -193,15 +193,15 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-            <img src="Images/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Henry</h3>
         </div>
         <div class="pet-item">
-            <img src="Images/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Cats/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
           <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-            <img src="Images/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Dan</h3>
         </div>
       </div>
@@ -241,7 +241,7 @@
         </div>
         <a href="AboutUs.php"><button class="btn-3">Learn More</button></a>
       </div>
-      <img src="Images/about-img.png" alt="img">
+      <img src="../Pictures/img/about-img.png" alt="img">
     </div>
     
    <?php
@@ -255,7 +255,7 @@ $sql = "SELECT R.Rating, R.Comments, R.ReviewDate, M.username
         ORDER BY R.ReviewDate DESC 
         LIMIT 3";
 
-$result = $con->query($sql);
+$result = $conn->query($sql);
 ?>
 
 <!-- Display Reviews Section -->
@@ -290,7 +290,7 @@ $result = $con->query($sql);
 
 <?php
 // Close the connection
-$con->close();
+$conn->close();
 ?>
 
 <!-- Testimonials Section End-->

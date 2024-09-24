@@ -169,6 +169,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                         <label class="form-label" for="email">Email</label>
                         <input type="email" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($user['Email']); ?>" required>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" for="status">Status</labe>
+                        <input type="text" id="status" name="status" class="form-control" value="<?php 
+                        if ($user['Status'] == 'blacklisted') {
+                            echo 'Blacklisted';
+                        } else {
+                            echo 'Active';
+                        } ?>" readonly>
+                    </div>
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
 
