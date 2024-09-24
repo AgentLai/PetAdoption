@@ -49,7 +49,16 @@ CREATE TABLE AdoptionHistory (
     FOREIGN KEY (PetID) REFERENCES Pets(PetID)
 );
 
-CREATE TABLE AdoptionApplication (
+CREATE TABLE Reviews (
+    ReviewID INT AUTO_INCREMENT PRIMARY KEY,
+    MemberID INT,
+    Rating INT CHECK (Rating BETWEEN 1 AND 5),
+    Comments TEXT,
+    ReviewDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+);
+
+CREATE TABLE adoption_applications (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT NOT NULL,
     PetID INT NOT NULL,
@@ -58,9 +67,6 @@ CREATE TABLE AdoptionApplication (
     Email VARCHAR(100) NOT NULL,
     PhoneNumber VARCHAR(20),
     Address TEXT NOT NULL,
-    Occupation VARCHAR(100),
-    HouseholdSize INT,
-    PetExperience VARCHAR(255),
     ReasonForAdopting TEXT,
     Status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
     ApplicationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
