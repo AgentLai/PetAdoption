@@ -146,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php">General</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="profile.php">Change password</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="adoption_history.php">Adoption History</a>
+                <a href="logout.php"><button class="logout-btn">Log out</button></a>
             </div>
         </div>
 
@@ -218,7 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
            
             </div>
         </div>
-    <a href="logout.php"><button class="logout-btn">Log out</button></a>
     
 </div>
 
