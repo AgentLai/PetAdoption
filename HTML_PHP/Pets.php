@@ -206,7 +206,7 @@ if ($result->num_rows > 0) {
         $petName = $row['PetName'];  // Ensure petName is defined here
         
           // Query to count the number of applications for this pet
-        $appCountSql = "SELECT COUNT(*) as count FROM adoption_applications WHERE PetID = $petID";
+        $appCountSql = "SELECT COUNT(*) as count FROM adoptionapplication WHERE PetID = $petID";
         $appCountResult = $conn->query($appCountSql);
         $appCountRow = $appCountResult->fetch_assoc();
         $appCount = $appCountRow['count'];

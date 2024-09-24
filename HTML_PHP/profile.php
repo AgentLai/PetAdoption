@@ -9,7 +9,7 @@ if (!isset($_SESSION['MemberID'])) {
 }
 
 $memberID = $_SESSION['MemberID'];
-$query = "SELECT Username, FirstName, LastName, DOB, Email, image_url  FROM Member WHERE MemberID = ?";
+$query = "SELECT Username, FirstName, LastName, DOB, Email, Status FROM Member WHERE MemberID = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $memberID);
 $stmt->execute();
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 <body>
     <!-- Navbar -->
     <nav>
-        <a href="index.html" class="brand">
+        <a href="index.php" class="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
               $member_id = $_SESSION['MemberID'];
 
                // Query to get adoption applications for the logged-in member
-               $query = "SELECT PetName, Status FROM adoption_applications WHERE MemberID = '$member_id'";
+               $query = "SELECT PetName, Status FROM adoptionapplication WHERE MemberID = '$member_id'";
                $result = mysqli_query($conn, $query);
               ?>
             
@@ -219,25 +219,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
                  <h5>Adoption History</h5>
 
             <?php
-                  if (mysqli_num_rows($result) > 0) {
-                  // Loop through the results and display each application
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $pet_name = htmlspecialchars($row['PetName']);
-                  $status = htmlspecialchars($row['Status']);
-                  
-                echo "<div class='adoption-item'>
-                    <div class='adoption-header'>
-                        <strong>Pet Name:</strong> $pet_name
-                    </div>
-                    <div class='adoption-status'  id='account-adoption-history'>
-                        <strong>Status:</strong> <span class='status'>$status</span>
-                    </div>
-                  </div>";
+                  if ($result) {
+                    if (mysqli_num_rows($result) > 0) {
+                        // Loop through the results and display each application
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $pet_name = htmlspecialchars($row['PetName']);
+                            $status = htmlspecialchars($row['Status']);
+                            
+                            echo "<div class='adoption-item'>
+                                    <div class='adoption-header'>
+                                        <strong>Pet Name:</strong> $pet_name
+                                    </div>
+                                    <div class='adoption-status' id='account-adoption-history'>
+                                        <strong>Status:</strong> <span class='status'>$status</span>
+                                    </div>
+                                  </div>";
+                        }
+                    } else {
+                        echo "No pets found.";
+                    }
+                } else {
+                    // If the query fails, display an error message
+                    echo "Error: " . mysqli_error($conn);
                 }
-             } else {
-        echo "<p>No adoption history found.</p>";
-    }
-    ?>
+                ?>
                   </div>
             </div>
         </div>

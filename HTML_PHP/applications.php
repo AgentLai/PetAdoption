@@ -3,7 +3,7 @@ session_start();
 include("config.php");
 
 // Fetch all submitted adoption applications
-$query = "SELECT * FROM adoption_applications WHERE Status = 'Pending'";
+$query = "SELECT * FROM adoptionapplications WHERE Status = 'Pending'";
 $result = mysqli_query($conn, $query);
 
 ?>

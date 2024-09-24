@@ -68,8 +68,8 @@ CREATE TABLE AdoptionApplication (
     FOREIGN KEY (PetID) REFERENCES pets(PetID)
 );
 
-INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password, image_url) 
-VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000', 'Images/Admin_img.jpeg');
+INSERT INTO Member (Username, FirstName, LastName, DOB, Email, Password) 
+VALUES ('AgentLai', 'Douglas', 'Lai', '2000-02-12', 'douglaslys-sm23@student.tarc.edu.my', 'TarUMT2000');
 
 INSERT INTO Admin (MemberID, Username, Email, Password) 
 VALUES (1, 'PetAdmin', 'PetHaven@gmail.com' ,'@dmin2024_PetHaven');

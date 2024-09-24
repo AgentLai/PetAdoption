@@ -99,9 +99,9 @@
         </div>
       </div>
       <div class="hero-images">
-          <img src="Images/hero-img-1.png" alt="img">
-        <img src="Images/hero-img-2.png" alt="img">
-        <img src="Images/hero-img-3.png" alt="img">
+          <img src="../Pictures/img/hero-img-1.png" alt="img">
+        <img src="../Pictures/img/hero-img-2.png" alt="img">
+        <img src="../Pictures/img/hero-img-3.png" alt="img">
       </div>
     </section>
     <!--About Section-->
@@ -153,7 +153,7 @@
         </div>
       </div>
     <div class="requirements-footer">
-    <img src="Images/requirements-img.png" alt="img">
+    <img src="../Pictures/img/requirements-img.png" alt="img">
       
       
   </div>
@@ -192,15 +192,15 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-            <img src="Images/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Henry</h3>
         </div>
         <div class="pet-item">
-            <img src="Images/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Cats/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
           <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-            <img src="Images/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="../Pictures/Dogs/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Dan</h3>
         </div>
       </div>
@@ -240,7 +240,7 @@
         </div>
         <a href="AboutUs.php"><button class="btn-3">Learn More</button></a>
       </div>
-      <img src="Images/about-img.png" alt="img">
+      <img src="../Pictures/img/about-img.png" alt="img">
     </div>
     <!--Testimonials Sections-->
     <div class="testimonials" id="stories">
@@ -252,7 +252,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="Images/testimony-image-1.png" alt="img"/>
+              <img src="../Pictures/img/testimony-image-1.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lylia Johnson</h4>
                 <p>Garfield's Owner</p>
@@ -271,7 +271,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="Images/testimony-image-2.png" alt="img"/>
+              <img src="../Pictures/img/testimony-image-2.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Jason Lesley</h4>
                 <p>Benedict's Owner</p>
@@ -289,7 +289,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="Images/testimony-image-3.png" alt="img"/>
+              <img src="../Pictures/img/testimony-image-3.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lutpii Lo</h4>
                 <p>Terizla's Owner</p>
