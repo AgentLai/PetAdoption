@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
     <script src="../JSAndCSS/index.js" defer></script>
-    <script src="../JSAndCSS/index_application.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js"></script>
@@ -52,7 +51,7 @@
   </head>
   <body>
     <nav>
-        <a href="index.php" class ="brand">
+        <a href="index.html" class ="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -75,7 +74,7 @@
             </button>
         <?php else: ?>
             <!-- Display login button when not logged in -->
-            <button onclick="window.location.href='login.php'">
+            <button onclick="window.location.href='Login.php'">
               <p>Login</p>
               <i class="fa-solid fa-arrow-right-to-bracket"></i>
             </button>
@@ -100,9 +99,9 @@
         </div>
       </div>
       <div class="hero-images">
-          <img src="../Pictures/img/hero-img-1.png" alt="img">
-        <img src="../Pictures/img//hero-img-2.png" alt="img">
-        <img src="../Pictures/img//hero-img-3.png" alt="img">
+          <img src="Images/hero-img-1.png" alt="img">
+        <img src="Images/hero-img-2.png" alt="img">
+        <img src="Images/hero-img-3.png" alt="img">
       </div>
     </section>
     <!--About Section-->
@@ -154,20 +153,9 @@
         </div>
       </div>
     <div class="requirements-footer">
-    <img src="../Pictures/img/requirements-img.png" alt="img">
+    <img src="Images/requirements-img.png" alt="img">
       
-      <!-- Add button for quick view of the application form -->
-  <div class="application-button">
-    <?php if (isset($_SESSION['MemberID'])): ?>
-      <button id="submitApplicationButton">
-          Submit an Application
-      </button>
-    <?php else: ?>
-      <button onclick="window.location.href='Login.php'">
-          Login to Submit an Application
-      </button>
-    <?php endif; ?>
-  </div>
+      
   </div>
     </section>
 
@@ -187,9 +175,6 @@
             <label for="address">Address:</label>
             <textarea name="address" id="address" required></textarea><br>
 
-            <label for="pet_name">Pet Name:</label>
-            <input type="text" name="pet_name" id="pet_name" required><br>
-
             <label for="reason">Why do you want to adopt this pet?</label>
             <textarea name="reason" id="reason" required></textarea><br>
 
@@ -207,15 +192,15 @@
 
       <div class="pets-collection">
         <div class="pet-item">
-            <img src="../Pictures/Dogs/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/floofa(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Henry</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/Cats/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/Mimi(cat).jpg" alt="img" width="430px" height="430px"/>
           <h3>Mimi</h3>
         </div>
         <div class="pet-item">
-            <img src="../Pictures/Dogs/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
+            <img src="Images/muffin(dog).jpg" alt="img" width="430px" height="430px"/>
           <h3>Dan</h3>
         </div>
       </div>
@@ -255,7 +240,7 @@
         </div>
         <a href="AboutUs.php"><button class="btn-3">Learn More</button></a>
       </div>
-      <img src="../Pictures/img/about-img.png" alt="img">
+      <img src="Images/about-img.png" alt="img">
     </div>
     <!--Testimonials Sections-->
     <div class="testimonials" id="stories">
@@ -267,7 +252,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-1.png" alt="img"/>
+              <img src="Images/testimony-image-1.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lylia Johnson</h4>
                 <p>Garfield's Owner</p>
@@ -286,7 +271,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-2.png" alt="img"/>
+              <img src="Images/testimony-image-2.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Jason Lesley</h4>
                 <p>Benedict's Owner</p>
@@ -304,7 +289,7 @@
         <div class="testimony-item">
           <div class="testimony-people">
             <div class="testimony-name">
-              <img src="../Pictures/img/testimony-image-3.png" alt="img"/>
+              <img src="Images/testimony-image-3.png" alt="img"/>
               <div class="testimony-name-item">
                 <h4>Lutpii Lo</h4>
                 <p>Terizla's Owner</p>
