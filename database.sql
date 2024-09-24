@@ -6,7 +6,7 @@ CREATE TABLE Member (
     DOB DATE,
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    Status ENUM('Active','Inactive','Blacklisted') NOT NULL
+    Status ENUM('Active','Inactive','Blacklisted') NOT NULL DEFAULT 'Inactive'
 );
 
 
