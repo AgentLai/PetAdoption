@@ -2757,3 +2757,42 @@ table tr:nth-child(even) {
 .pet-search-container button:hover {
     background-color: #218838;
 }
+
+.user-search-container {
+   margin: 180px auto;
+   
+   width: 80%;
+}
+
+.user-search-container form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.user-search-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-search-container input,
+.user-search-container select {
+    padding: 5px;
+    font-size: 1rem;
+    flex: 1; /* Make inputs and selects flexible */
+    min-width: 120px; /* Set a minimum width */
+}
+
+.user-search-container button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.user-search-container button:hover {
+    background-color: #218838;
+}
