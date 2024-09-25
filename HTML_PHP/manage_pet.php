@@ -6,7 +6,7 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
@@ -50,14 +50,68 @@
         <div class='pets-title'>
             <h1>Pets</h1>
         </div>
+        
+        <div class="pet-search-container">
+    <form method="GET" action="">
+        <label for="petName">Pet Name:</label>
+        <input type="text" name="petName" id="petName" value="<?= isset($_GET['petName']) ? htmlspecialchars($_GET['petName']) : '' ?>">
+
+         <label for="species">Species:</label>
+        <select name="species" id="species"> <!-- Corrected name -->
+            <option value="">Any</option>
+            <option value="Dog" <?= isset($_GET['species']) && $_GET['species'] == 'Dog' ? 'selected' : '' ?>>Dog</option>
+            <option value="Cat" <?= isset($_GET['species']) && $_GET['species'] == 'Cat' ? 'selected' : '' ?>>Cat</option>
+        </select>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+            <option value="">Any</option>
+            <option value="Male" <?= isset($_GET['gender']) && $_GET['gender'] == 'Male' ? 'selected' : '' ?>>Male</option>
+            <option value="Female" <?= isset($_GET['gender']) && $_GET['gender'] == 'Female' ? 'selected' : '' ?>>Female</option>
+        </select>
+
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+            <option value="">Any</option>
+            <option value="Available" <?= isset($_GET['status']) && $_GET['status'] == 'Available' ? 'selected' : '' ?>>Available</option>
+            <option value="Pending" <?= isset($_GET['status']) && $_GET['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
+            <option value="Adopted" <?= isset($_GET['status']) && $_GET['status'] == 'Adopted' ? 'selected' : '' ?>>Adopted</option>
+            <option value="Deceased" <?= isset($_GET['status']) && $_GET['status'] == 'Deceased' ? 'selected' : '' ?>>Deceased</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+  
 
         <?php
         // Include the database connection file
         include 'config.php';
+        
+        $searchConditions = [];
 
-        // Fetch all pets from the database
-        $pet_sql = "SELECT * FROM Pets";
-$pet_result = $conn->query($pet_sql);
+// Check if the search form is submitted and append conditions
+if (isset($_GET['petName']) && !empty($_GET['petName'])) {
+    $searchConditions[] = "PetName LIKE '%" . $con->real_escape_string($_GET['petName']) . "%'";
+}
+if (isset($_GET['species']) && !empty($_GET['species'])) {
+    $searchConditions[] = "PetSpecies = '" . $con->real_escape_string($_GET['species']) . "'";
+}
+if (isset($_GET['gender']) && !empty($_GET['gender'])) {
+    $searchConditions[] = "Gender = '" . $con->real_escape_string($_GET['gender']) . "'";
+}
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $searchConditions[] = "Status = '" . $con->real_escape_string($_GET['status']) . "'";
+}
+
+// Construct the SQL query with conditions
+$searchQuery = "SELECT * FROM Pets";
+if (count($searchConditions) > 0) {
+    $searchQuery .= " WHERE " . implode(' AND ', $searchConditions);
+}
+
+$pet_result = $con->query($searchQuery);
+       
 
 if ($pet_result->num_rows > 0) {
     echo "<div class='add-pet'>
@@ -106,7 +160,7 @@ if ($pet_result->num_rows > 0) {
         // View Modal for each pet
         echo "
     <div id='view-modal-$petID' class='modal'>
-        <div class='modal-content'>
+        <div class='admin-modal-content'>
             <span class='close' onclick='closeViewModal($petID)'>&times;</span>
             <h4>View Pet</h4>
             <div class='modal-body'>
@@ -131,7 +185,7 @@ if ($pet_result->num_rows > 0) {
         // Edit Modal for each pet
         echo "
     <div id='edit-modal-$petID' class='modal'>
-        <div class='modal-content'>
+        <div class='admin-modal-content'>
             <span class='close' onclick='closeEditModal($petID)'>&times;</span>
             <h3>Edit Pet</h3>
             <form action='update_pet.php' method='POST'>
@@ -218,7 +272,7 @@ if ($pet_result->num_rows > 0) {
 
     <!-- Add Pet Modal -->
     <div id='add-modal' class='modal'>
-        <div class='modal-content'>
+        <div class='admin-modal-content'>
             <span class='close' onclick='closeAddModal()'>&times;</span>
             <h3>Add Pet</h3>
             <form action='add_pet.php' method='POST'>
