@@ -139,7 +139,7 @@ if ($user_result->num_rows > 0) {
         // Edit Modal for each user (kept outside the table)
         echo "
 <div id='view-modal-$memberID' class='modal'>
-    <div class='modal-content'>
+    <div class='admin-modal-content'>
         <span class='close' onclick='closeViewModal($memberID)'>&times;</span>
         <h3>View User</h3>
         <div class='view-user-details'>
