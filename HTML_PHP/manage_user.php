@@ -6,9 +6,9 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
-    <script src="IndexJava.js" defer></script>
+    <script src="../JSAndCSS/index.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -43,10 +43,9 @@
         <label for="status">Status:</label>
         <select name="status" id="status">
             <option value="">Any</option>
-            <option value="Available" <?= isset($_GET['status']) && $_GET['status'] == 'Available' ? 'selected' : '' ?>>Available</option>
-            <option value="Pending" <?= isset($_GET['status']) && $_GET['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-            <option value="Adopted" <?= isset($_GET['status']) && $_GET['status'] == 'Adopted' ? 'selected' : '' ?>>Adopted</option>
-            <option value="Deceased" <?= isset($_GET['status']) && $_GET['status'] == 'Deceased' ? 'selected' : '' ?>>Deceased</option>
+            <option value="Active" <?= isset($_GET['status']) && $_GET['status'] == 'Active' ? 'selected' : '' ?>>Active</option>
+            <option value="Inactive" <?= isset($_GET['status']) && $_GET['status'] == 'Inactive' ? 'selected' : '' ?>>Inactive</option>
+            <option value="Blacklisted" <?= isset($_GET['status']) && $_GET['status'] == 'Blacklisted' ? 'selected' : '' ?>>Blacklisted</option>
         </select>
 
         <button type="submit">Search</button>
@@ -79,16 +78,16 @@ $searchConditions = [];
 
 // Check if the search form is submitted and append conditions
 if (isset($_GET['firstName']) && !empty($_GET['firstName'])) {
-    $searchConditions[] = "FirstName LIKE '%" . $con->real_escape_string($_GET['firstName']) . "%'";
+    $searchConditions[] = "FirstName LIKE '%" . $conn->real_escape_string($_GET['firstName']) . "%'";
 }
 if (isset($_GET['lastName']) && !empty($_GET['lastName'])) {
-    $searchConditions[] = "LastName LIKE '%" . $con->real_escape_string($_GET['lastName']) . "%'";
+    $searchConditions[] = "LastName LIKE '%" . $conn->real_escape_string($_GET['lastName']) . "%'";
 }
 if (isset($_GET['email']) && !empty($_GET['email'])) {
-    $searchConditions[] = "Email = '" . $con->real_escape_string($_GET['email']) . "'";
+    $searchConditions[] = "Email = '" . $conn->real_escape_string($_GET['email']) . "'";
 }
 if (isset($_GET['status']) && !empty($_GET['status'])) {
-    $searchConditions[] = "Status = '" . $con->real_escape_string($_GET['status']) . "'";
+    $searchConditions[] = "Status = '" . $conn->real_escape_string($_GET['status']) . "'";
 }
 
 // Construct the SQL query with conditions
@@ -97,7 +96,7 @@ if (count($searchConditions) > 0) {
     $searchQuery .= " WHERE " . implode(' AND ', $searchConditions);
 }
 
-$user_result = $con->query($searchQuery);
+$user_result = $conn->query($searchQuery);
 
 echo "<div class='members-title'><h1>Members</h1></div>";
 
@@ -154,7 +153,7 @@ if ($user_result->num_rows > 0) {
             <h4>Reviews</h4>";
 
             $review_query = "SELECT * FROM Reviews WHERE MemberID = $memberID";
-            $review_result = $con->query($review_query);
+            $review_result = $conn->query($review_query);
             
             if ($review_result->num_rows > 0) {
                 echo "<ul>";
@@ -169,7 +168,7 @@ if ($user_result->num_rows > 0) {
             echo "<h4>Adoption Applications</h4>";
             
             $app_query = "SELECT * FROM adoption_applications WHERE MemberID = $memberID"; // Ensure the table name is correct
-            $app_result = $con->query($app_query);
+            $app_result = $conn->query($app_query);
             
             if ($app_result->num_rows > 0) {
                 echo "<ul>";
