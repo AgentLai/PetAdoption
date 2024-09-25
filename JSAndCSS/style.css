@@ -2796,3 +2796,42 @@ table tr:nth-child(even) {
 .user-search-container button:hover {
     background-color: #218838;
 }
+
+.application-search-container{
+    margin: 140px 0; /* Add some margin for spacing */
+    width: 80%;
+}
+
+.application-search-container form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.application-search-container label {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.application-search-container input,
+.application-search-container select {
+    padding: 5px;
+    font-size: 1rem;
+    flex: 1; /* Make inputs and selects flexible */
+    min-width: 120px; /* Set a minimum width */
+}
+
+.application-search-container button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.application-search-container button:hover {
+    background-color: #218838;
+}
