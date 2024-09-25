@@ -61,7 +61,7 @@ CREATE TABLE Reviews (
     FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
 
-CREATE TABLE adoption_applications (
+CREATE TABLE adoptionapplication (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
     MemberID INT NOT NULL,
     PetID INT NOT NULL,

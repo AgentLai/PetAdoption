@@ -3,8 +3,8 @@ session_start();
 include("config.php");
 
 // Check the connection
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error); // Updated from $conn to $con
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error); // Updated from $conn to $con
 }
 
 if (isset($_SESSION['MemberID']) && $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,7 +24,7 @@ if (isset($_SESSION['MemberID']) && $_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: FAQs.php?success=1"); // Adds a success parameter to show a message if needed
         exit(); // Ensures the script stops executing after redirection
     } else {
-        echo "Error submitting review: " . $con->error;
+        echo "Error submitting review: " . $conn->error;
     }
     
     // Close the statement and connection

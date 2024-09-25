@@ -7,7 +7,7 @@ if (isset($_POST['application_id'])) {
     
     if (isset($_POST['approve'])) {
         // Update the application status to 'Approved'
-        $query = "UPDATE adoption_applications SET Status = 'Approved' WHERE ApplicationID = '$applicationID'";
+        $query = "UPDATE adoptionapplication SET Status = 'Approved' WHERE ApplicationID = '$applicationID'";
         if (mysqli_query($conn, $query)) {
             $_SESSION['message'] = "Application approved successfully.";
         } else {
@@ -17,7 +17,7 @@ if (isset($_POST['application_id'])) {
 
     if (isset($_POST['deny'])) {
         // Update the application status to 'Denied'
-        $query = "UPDATE adoption_applications SET Status = 'Rejected' WHERE ApplicationID = '$applicationID'";
+        $query = "UPDATE adoptionapplication SET Status = 'Rejected' WHERE ApplicationID = '$applicationID'";
         if (mysqli_query($conn, $query)) {
             $_SESSION['message'] = "Application denied successfully.";
         } else {
