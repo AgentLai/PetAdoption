@@ -165,7 +165,7 @@ nav.sticky{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("Images/hero-background-image.png");
+    background-image: url("../Pictures/img/hero-background-image.png");
 }
 
 .hero-headlines{
@@ -262,7 +262,7 @@ nav.sticky{
     align-items: center;
     justify-content: center;
     display: flex;
-    background-image: url("Images/requirements-background-img.png");
+    background-image: url("../Pictures/img/requirements-background-img.png");
 }
 
 .requirements-headlines{
@@ -531,24 +531,13 @@ nav.sticky{
 
 
 .MoreAbout-Banner{
-   background-image: url(Images/Doggos.jpg);
+   background-image: url("../Pictures/Dogs/Doggos.jpg");
    background-size: cover;
    background-position: center center;
    top: 100px;
    width: 100%;
    height: 100vh;
 }
-
-
-.MoreAbout-Banner{
-    background-image: url(Images/Doggos.jpg);
-    background-size: cover;
-    background-position: center center;
-    top: 100px;
-    width: 100%;
-    height: 100vh;
- }
- 
  
 .MoreAbout-Banner h1{
      margin-left: 700px;
@@ -1066,7 +1055,7 @@ select:focus {
 /* FAQs Css */
 
 .faq-Banner{
-   background-image: url(Images/faq_cat.jpg);
+   background-image: url("../Pictures/Cats/faq_cat.jpg");
    background-size: cover;
    background-position: center center;
    top: 80px;
@@ -1842,7 +1831,7 @@ footer{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: url("Images/hero-background-image.png");
+    background-image: url("../Pictures/img/hero-background-image.png");
     background-repeat: no-repeat;
     background-size: 100%;
 }

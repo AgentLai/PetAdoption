@@ -165,23 +165,6 @@ if ($user_result->num_rows > 0) {
             } else {
                 echo "<p>No reviews found.</p>";
             }
-            
-            // Adoption History Section
-            echo "<h4>Adoption History</h4>";
-            
-            $history_query = "SELECT p.PetName, ah.ApplicationDate, ah.Status FROM AdoptionHistory ah JOIN Pets p ON ah.PetID = p.PetID WHERE ah.MemberID = $memberID";
-            $history_result = $con->query($history_query);
-            
-            if ($history_result->num_rows > 0) {
-                echo "<ul>";
-                while ($history_row = $history_result->fetch_assoc()) {
-                    echo "<li>Adopted Pet: " . htmlspecialchars($history_row['PetName']) . " on " . htmlspecialchars($history_row['ApplicationDate']) . " - Status: " . htmlspecialchars($history_row['Status']) . "</li>";
-                }
-                echo "</ul>";
-            } else {
-                echo "<p>No adoption history found.</p>";
-            }
-
             // Adoption Applications Section
             echo "<h4>Adoption Applications</h4>";
             

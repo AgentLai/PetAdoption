@@ -16,7 +16,7 @@ if (isset($_SESSION['MemberID']) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $comments = $_POST['comments'];
     
     // Prepare the SQL statement to insert the review
-    $stmt = $con->prepare("INSERT INTO Reviews (MemberID, Rating, Comments, ReviewDate) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+    $stmt = $conn->prepare("INSERT INTO Reviews (MemberID, Rating, Comments, ReviewDate) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
     $stmt->bind_param("iis", $member_id, $rating, $comments);
     
     if ($stmt->execute()) {
@@ -31,5 +31,5 @@ if (isset($_SESSION['MemberID']) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 
-$con->close();
+$conn->close();
 ?>
