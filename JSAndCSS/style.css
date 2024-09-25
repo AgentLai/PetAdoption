@@ -909,6 +909,18 @@ nav.sticky{
   flex-direction: column;
 }
 
+.modal-content input,
+.modal-content textarea {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+
 .modal-body {
   display: flex;
   flex-direction: row;
@@ -2695,7 +2707,7 @@ table tr:nth-child(even) {
 }
 
 /* Submit Button */
-.admin-modal-content button {
+.modal-content button {
     background-color: black; /* Green background */
     color: white; /* White text */
     padding: 15px 20px;
@@ -2705,7 +2717,7 @@ table tr:nth-child(even) {
     font-size: 16px;
 }
 
-.admin-modal-content button:hover {
+.modal-content button:hover {
     background-color: var(--accent); /* Darker green on hover */
 }
 

@@ -138,7 +138,7 @@ if ($user_result->num_rows > 0) {
         // Edit Modal for each user (kept outside the table)
         echo "
 <div id='view-modal-$memberID' class='modal'>
-    <div class='admin-modal-content'>
+    <div class='modal-content'>
         <span class='close' onclick='closeViewModal($memberID)'>&times;</span>
         <h3>View User</h3>
         <div class='view-user-details'>
@@ -167,7 +167,7 @@ if ($user_result->num_rows > 0) {
             // Adoption Applications Section
             echo "<h4>Adoption Applications</h4>";
             
-            $app_query = "SELECT * FROM adoption_applications WHERE MemberID = $memberID"; // Ensure the table name is correct
+            $app_query = "SELECT * FROM adoptionapplication WHERE MemberID = $memberID"; // Ensure the table name is correct
             $app_result = $conn->query($app_query);
             
             if ($app_result->num_rows > 0) {

@@ -6,15 +6,15 @@ include("config.php");
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 // Construct the base query
-$query = "SELECT * FROM adoption_applications WHERE Status = 'Pending'";
+$query = "SELECT * FROM adoptionapplication WHERE Status = 'Pending'";
 
 // Check if the search term is provided
 if (!empty($search)) {
-    $search = $con->real_escape_string($search);
+    $search = $conn->real_escape_string($search);
     $query .= " AND (PetName LIKE '%$search%' OR FullName LIKE '%$search%')";
 }
 
-$result = mysqli_query($con, $query);
+$result = mysqli_query($conn, $query);
 ?>
 
 ?>

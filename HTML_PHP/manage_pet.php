@@ -6,7 +6,7 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../JSAndCSS/style.css" />
     <!-- link To JS -->
     <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
@@ -50,7 +50,6 @@
         <div class='pets-title'>
             <h1>Pets</h1>
         </div>
-        
         <div class="pet-search-container">
     <form method="GET" action="">
         <label for="petName">Pet Name:</label>
@@ -75,8 +74,7 @@
             <option value="">Any</option>
             <option value="Available" <?= isset($_GET['status']) && $_GET['status'] == 'Available' ? 'selected' : '' ?>>Available</option>
             <option value="Pending" <?= isset($_GET['status']) && $_GET['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-            <option value="Adopted" <?= isset($_GET['status']) && $_GET['status'] == 'Adopted' ? 'selected' : '' ?>>Adopted</option>
-            <option value="Deceased" <?= isset($_GET['status']) && $_GET['status'] == 'Deceased' ? 'selected' : '' ?>>Deceased</option>
+            <option value="Unavailable" <?= isset($_GET['status']) && $_GET['status'] == 'Unavailable' ? 'selected' : '' ?>>Unavailable</option>
         </select>
 
         <button type="submit">Search</button>
@@ -92,16 +90,16 @@
 
 // Check if the search form is submitted and append conditions
 if (isset($_GET['petName']) && !empty($_GET['petName'])) {
-    $searchConditions[] = "PetName LIKE '%" . $con->real_escape_string($_GET['petName']) . "%'";
+    $searchConditions[] = "PetName LIKE '%" . $conn->real_escape_string($_GET['petName']) . "%'";
 }
 if (isset($_GET['species']) && !empty($_GET['species'])) {
-    $searchConditions[] = "PetSpecies = '" . $con->real_escape_string($_GET['species']) . "'";
+    $searchConditions[] = "PetSpecies = '" . $conn->real_escape_string($_GET['species']) . "'";
 }
 if (isset($_GET['gender']) && !empty($_GET['gender'])) {
-    $searchConditions[] = "Gender = '" . $con->real_escape_string($_GET['gender']) . "'";
+    $searchConditions[] = "Gender = '" . $conn->real_escape_string($_GET['gender']) . "'";
 }
 if (isset($_GET['status']) && !empty($_GET['status'])) {
-    $searchConditions[] = "Status = '" . $con->real_escape_string($_GET['status']) . "'";
+    $searchConditions[] = "Status = '" . $conn->real_escape_string($_GET['status']) . "'";
 }
 
 // Construct the SQL query with conditions
@@ -110,8 +108,9 @@ if (count($searchConditions) > 0) {
     $searchQuery .= " WHERE " . implode(' AND ', $searchConditions);
 }
 
-$pet_result = $con->query($searchQuery);
-       
+$pet_result = $conn->query($searchQuery);
+        $pet_sql = "SELECT * FROM Pets";
+$pet_result = $conn->query($pet_sql);
 
 if ($pet_result->num_rows > 0) {
     echo "<div class='add-pet'>
@@ -160,7 +159,7 @@ if ($pet_result->num_rows > 0) {
         // View Modal for each pet
         echo "
     <div id='view-modal-$petID' class='modal'>
-        <div class='admin-modal-content'>
+        <div class='modal-content'>
             <span class='close' onclick='closeViewModal($petID)'>&times;</span>
             <h4>View Pet</h4>
             <div class='modal-body'>
@@ -185,7 +184,7 @@ if ($pet_result->num_rows > 0) {
         // Edit Modal for each pet
         echo "
     <div id='edit-modal-$petID' class='modal'>
-        <div class='admin-modal-content'>
+        <div class='modal-content'>
             <span class='close' onclick='closeEditModal($petID)'>&times;</span>
             <h3>Edit Pet</h3>
             <form action='update_pet.php' method='POST'>
@@ -228,7 +227,6 @@ if ($pet_result->num_rows > 0) {
                     <option value='Sphynx'" . ($row['Cat_breed'] == 'Sphynx' ? ' selected' : '') . ">Sphynx</option>
                     <option value='Domestic Shorthair'" . ($row['Cat_breed'] == 'Domestic Shorthair' ? ' selected' : '') . ">Domestic Shorthair</option>";
                 }
-
                 echo "
                 </select>
                 
@@ -271,39 +269,61 @@ if ($pet_result->num_rows > 0) {
     </div>
 
     <!-- Add Pet Modal -->
-    <div id='add-modal' class='modal'>
-        <div class='admin-modal-content'>
-            <span class='close' onclick='closeAddModal()'>&times;</span>
-            <h3>Add Pet</h3>
-            <form action='add_pet.php' method='POST'>
-                <label>Name:</label>
-                <input type='text' name='name' required>
-                <label>Image URL:</label>
-                <input type='text' name='image_url'>
-                <label>Age:</label>
-                <input type='number' name='age'>
-                <label>Species:</label>
-                <input type='text' name='petSpecies'>
-                <label>Breed:</label>
-                <input type='text' name='breed'>
-                <label>Gender:</label>
-                <select name='gender' required>
-                    <option value='Male'>Male</option>
-                    <option value='Female'>Female</option>
-                </select>
-                <label>Status:</label>
-                <select name='status' required>
-                    <option value='Available'>Available</option>
-                    <option value='Pending'>Pending</option>
-                    <option value='Adopted'>Adopted</option>
-                    <option value='Deceased'>Deceased</option>
-                </select>
-                <label>Description:</label>
-                <input type='text' name='petDesc'> <!-- Added field -->
-                <button type='submit'>Add Pet</button>
-            </form>
-        </div>
+<div id='add-modal' class='modal'>
+    <div class='modal-content'>
+        <span class='close' onclick='closeAddModal()'>&times;</span>
+        <h3>Add Pet</h3>
+        <form action='add_pet.php' method='POST' enctype="multipart/form-data">
+            <label>Name:</label>
+            <input type='text' name='name' required>
+
+            <label>Image:</label>
+            <input type='file' name='image' accept="image/*">
+
+            <label>Age:</label>
+            <input type='number' name='age' min='0'>
+
+            <label>Species:</label>
+            <select name='petSpecies' required>
+                <option value='Dog'>Dog</option>
+                <option value='Cat'>Cat</option>
+            </select>
+
+            <label>Breed:</label>
+            <input type='text' name='breed' required>
+
+            <label>Gender:</label>
+            <select name='gender' required>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+            </select>
+
+            <label>Status:</label>
+            <select name='status' required>
+                <option value='Available'>Available</option>
+                <option value='Pending'>Pending</option>
+                <option value='Adopted'>Adopted</option>
+                <option value='Deceased'>Deceased</option>
+            </select>
+
+            <label>Description:</label>
+            <input type='text' name='petDesc' required> <!-- Matches PetDesc field -->
+
+            <label>Disabilities:</label>
+            <select name='disabilities'>
+                <option value=''>None</option>
+                <option value='Blind'>Blind</option>
+                <option value='Deaf'>Deaf</option>
+                <option value='Limp'>Limp</option>
+                <option value='Missing Leg'>Missing Leg</option>
+                <option value='Other'>Other</option>
+            </select>
+
+            <button type='submit'>Add Pet</button>
+        </form>
     </div>
+</div>
+
 
     <script>
     function openViewModal(petID) {
