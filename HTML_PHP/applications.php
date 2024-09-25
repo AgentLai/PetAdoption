@@ -2,53 +2,31 @@
 session_start();
 include("config.php");
 
-// Fetch all submitted adoption applications
-$query = "SELECT * FROM adoptionapplication WHERE Status = 'Pending'";
-$result = mysqli_query($conn, $query);
+// Initialize the search variable
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Construct the base query
+$query = "SELECT * FROM adoption_applications WHERE Status = 'Pending'";
+
+// Check if the search term is provided
+if (!empty($search)) {
+    $search = $con->real_escape_string($search);
+    $query .= " AND (PetName LIKE '%$search%' OR FullName LIKE '%$search%')";
+}
+
+$result = mysqli_query($con, $query);
+?>
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <!-- Use for responsiveness -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
-    <!-- link To JS -->
-    <script src="../JSAndCSS/index.js" defer></script>
-    <!-- For Scroll Reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <!-- Link For Split Type -->
-    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-     <!-- Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <title>Pet Haven</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Applications</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <!-- Navbar -->
     <nav>
@@ -63,8 +41,17 @@ $result = mysqli_query($conn, $query);
         </div>    
     </nav>
     
+   <div class="application-search-container">
+    <form method="GET" action="">
+        <label for="search">Search Applications:</label>
+        <input type="text" name="search" id="search" placeholder="Enter Pet Name or Full Name" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" required>
+        <button type="submit" class="btn-primary">Search</button>
+    </form>
+</div>
+
+    
     <div class="application-container">
-        <h2>Adoption Applications</h2>
+        <h2>Pending Adoption Applications</h2>
 
         <?php
         if (mysqli_num_rows($result) > 0) {
