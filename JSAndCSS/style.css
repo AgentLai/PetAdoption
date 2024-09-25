@@ -165,7 +165,7 @@ nav.sticky{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("../Pictures/img/hero-background-image.png");
+    background-image: url("Images/hero-background-image.png");
 }
 
 .hero-headlines{
@@ -262,7 +262,7 @@ nav.sticky{
     align-items: center;
     justify-content: center;
     display: flex;
-    background-image: url("../Pictures/img/requirements-background-img.png");
+    background-image: url("Images/requirements-background-img.png");
 }
 
 .requirements-headlines{
@@ -529,8 +529,19 @@ nav.sticky{
     margin-top: 48px;
 }
 
+
 .MoreAbout-Banner{
-    background-image: url("../Pictures/Dogs/Doggos.jpg");
+   background-image: url(Images/Doggos.jpg);
+   background-size: cover;
+   background-position: center center;
+   top: 100px;
+   width: 100%;
+   height: 100vh;
+}
+
+
+.MoreAbout-Banner{
+    background-image: url(Images/Doggos.jpg);
     background-size: cover;
     background-position: center center;
     top: 100px;
@@ -579,7 +590,7 @@ nav.sticky{
     letter-spacing: 1px;
 }
 
-/* Customer Review Section*/
+/*INDEXTestimonial Section*/
 .customer-reviews{
   width: 100%;
   max-width: 1700px;
@@ -702,6 +713,8 @@ nav.sticky{
     font-size: 14px;
   }
 }
+
+
 /* PETS filter section */
 
 /* Parent container to hold filter and pet list */
@@ -1053,7 +1066,7 @@ select:focus {
 /* FAQs Css */
 
 .faq-Banner{
-   background-image: url("../Pictures/Cats/faq_cat.jpg");
+   background-image: url(Images/faq_cat.jpg);
    background-size: cover;
    background-position: center center;
    top: 80px;
@@ -1371,6 +1384,9 @@ iframe:hover{
     padding: 10px;
   }
 }
+
+
+
 
 /* Profile CSS*/
 /* Custom styles for profile.php elements */
@@ -1826,7 +1842,7 @@ footer{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: url("../Pictures/img/hero-background-image.png");
+    background-image: url("Images/hero-background-image.png");
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -2094,8 +2110,7 @@ footer{
 }
 
 .profile-card-body,
-.password-card-body,
-.adoption-history {
+.password-card-body{
     margin-top: 20px;
 }
 
@@ -2293,6 +2308,7 @@ hr {
         flex-direction: column;
     }
 }
+
 
 /* Application Review*/
 .application-container{
@@ -2512,64 +2528,6 @@ table tr:nth-child(even) {
     border: 1px solid var(--accent);
 }
 
-/***Edit Modal***/
-.admin-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-}
-
-/* Modal Content */
-.admin-modal-content {
-    background-color: #f9f9f9;
-    margin: 5% auto; /* Centered vertically and horizontally */
-    padding: 30px;
-    border: 1px solid #ccc;
-    width: 80%; /* Adjustable width */
-    max-width: 600px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-/* Form Labels */
-.admin-modal-content label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Form Inputs and Textareas */
-.admin-modal-content input,
-.admin-modal-content textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Submit Button */
-.admin-modal-content button {
-    background-color: black; /* Green background */
-    color: white; /* White text */
-    padding: 15px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.admin-modal-content button:hover {
-    background-color: var(--accent); /* Darker green on hover */
-    transition: background-color 0.3s ease;  
-}
 
 /***Pets management***/
 .pet-list-container{
@@ -2625,7 +2583,7 @@ table tr:nth-child(even) {
     display: flex;
     justify-content: center;
     align-items: center; /* Optional for vertical centering */
-    height: 20vh;
+    height: 5vh;
 }
 
 .add-pet-btn {
@@ -2737,18 +2695,18 @@ table tr:nth-child(even) {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
-.modal-content input,
-.modal-content textarea {
-    width: calc(100% - 10px);
+.admin-modal-content input,
+.admin-modal-content textarea {
+    width: calc(100% - 20px);
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
 /* Submit Button */
-.modal-content button {
+.admin-modal-content button {
     background-color: black; /* Green background */
     color: white; /* White text */
     padding: 15px 20px;
@@ -2758,6 +2716,122 @@ table tr:nth-child(even) {
     font-size: 16px;
 }
 
-.modal-content button:hover {
+.admin-modal-content button:hover {
     background-color: var(--accent); /* Darker green on hover */
+}
+
+.pet-search-container {
+   margin: 80px auto;
+   width: 80%;
+}
+
+.pet-search-container form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pet-search-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pet-search-container input,
+.pet-search-container select {
+    padding: 5px;
+    font-size: 1rem;
+    flex: 1; /* Make inputs and selects flexible */
+    min-width: 120px; /* Set a minimum width */
+}
+
+.pet-search-container button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pet-search-container button:hover {
+    background-color: #218838;
+}
+
+.user-search-container {
+   margin: 180px auto;
+   
+   width: 80%;
+}
+
+.user-search-container form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.user-search-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-search-container input,
+.user-search-container select {
+    padding: 5px;
+    font-size: 1rem;
+    flex: 1; /* Make inputs and selects flexible */
+    min-width: 120px; /* Set a minimum width */
+}
+
+.user-search-container button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.user-search-container button:hover {
+    background-color: #218838;
+}
+
+.application-search-container{
+    margin: 140px 0; /* Add some margin for spacing */
+    width: 80%;
+}
+
+.application-search-container form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.application-search-container label {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.application-search-container input,
+.application-search-container select {
+    padding: 5px;
+    font-size: 1rem;
+    flex: 1; /* Make inputs and selects flexible */
+    min-width: 120px; /* Set a minimum width */
+}
+
+.application-search-container button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.application-search-container button:hover {
+    background-color: #218838;
 }

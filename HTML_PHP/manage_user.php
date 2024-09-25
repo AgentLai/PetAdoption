@@ -6,9 +6,9 @@
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/index.js" defer></script>
+    <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.0.0/scrollReveal.js">
@@ -28,6 +28,31 @@
 
     <title>Pet Haven</title>
 </head>
+
+  <div class="user-search-container">
+    <form method="GET" action="">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="petName" value="<?= isset($_GET['firstName']) ? htmlspecialchars($_GET['firstName']) : '' ?>">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" id="lastName" value="<?= isset($_GET['lastName']) ? htmlspecialchars($_GET['lastName']) : '' ?>">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="<?= isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '' ?>">
+
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+            <option value="">Any</option>
+            <option value="Available" <?= isset($_GET['status']) && $_GET['status'] == 'Available' ? 'selected' : '' ?>>Available</option>
+            <option value="Pending" <?= isset($_GET['status']) && $_GET['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
+            <option value="Adopted" <?= isset($_GET['status']) && $_GET['status'] == 'Adopted' ? 'selected' : '' ?>>Adopted</option>
+            <option value="Deceased" <?= isset($_GET['status']) && $_GET['status'] == 'Deceased' ? 'selected' : '' ?>>Deceased</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
 
 
 <body>
@@ -50,8 +75,29 @@
 <div class="member-list-container">
 <?php
 include("config.php");
-$user_sql = "SELECT * FROM Member";
-$user_result = $conn->query($user_sql);
+$searchConditions = [];
+
+// Check if the search form is submitted and append conditions
+if (isset($_GET['firstName']) && !empty($_GET['firstName'])) {
+    $searchConditions[] = "FirstName LIKE '%" . $con->real_escape_string($_GET['firstName']) . "%'";
+}
+if (isset($_GET['lastName']) && !empty($_GET['lastName'])) {
+    $searchConditions[] = "LastName LIKE '%" . $con->real_escape_string($_GET['lastName']) . "%'";
+}
+if (isset($_GET['email']) && !empty($_GET['email'])) {
+    $searchConditions[] = "Email = '" . $con->real_escape_string($_GET['email']) . "'";
+}
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $searchConditions[] = "Status = '" . $con->real_escape_string($_GET['status']) . "'";
+}
+
+// Construct the SQL query with conditions
+$searchQuery = "SELECT * FROM Member";
+if (count($searchConditions) > 0) {
+    $searchQuery .= " WHERE " . implode(' AND ', $searchConditions);
+}
+
+$user_result = $con->query($searchQuery);
 
 echo "<div class='members-title'><h1>Members</h1></div>";
 
@@ -93,7 +139,7 @@ if ($user_result->num_rows > 0) {
         // Edit Modal for each user (kept outside the table)
         echo "
 <div id='view-modal-$memberID' class='modal'>
-    <div class='modal-content'>
+    <div class='admin-modal-content'>
         <span class='close' onclick='closeViewModal($memberID)'>&times;</span>
         <h3>View User</h3>
         <div class='view-user-details'>
@@ -108,7 +154,7 @@ if ($user_result->num_rows > 0) {
             <h4>Reviews</h4>";
 
             $review_query = "SELECT * FROM Reviews WHERE MemberID = $memberID";
-            $review_result = $conn->query($review_query);
+            $review_result = $con->query($review_query);
             
             if ($review_result->num_rows > 0) {
                 echo "<ul>";
@@ -124,7 +170,7 @@ if ($user_result->num_rows > 0) {
             echo "<h4>Adoption History</h4>";
             
             $history_query = "SELECT p.PetName, ah.ApplicationDate, ah.Status FROM AdoptionHistory ah JOIN Pets p ON ah.PetID = p.PetID WHERE ah.MemberID = $memberID";
-            $history_result = $conn->query($history_query);
+            $history_result = $con->query($history_query);
             
             if ($history_result->num_rows > 0) {
                 echo "<ul>";
@@ -139,8 +185,8 @@ if ($user_result->num_rows > 0) {
             // Adoption Applications Section
             echo "<h4>Adoption Applications</h4>";
             
-            $app_query = "SELECT * FROM adoptionapplication WHERE MemberID = $memberID"; // Ensure the table name is correct
-            $app_result = $conn->query($app_query);
+            $app_query = "SELECT * FROM adoption_applications WHERE MemberID = $memberID"; // Ensure the table name is correct
+            $app_result = $con->query($app_query);
             
             if ($app_result->num_rows > 0) {
                 echo "<ul>";
