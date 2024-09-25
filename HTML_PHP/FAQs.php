@@ -1,5 +1,5 @@
 <?php
-session_start();
+   session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,9 +8,9 @@ session_start();
     <!-- Use for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link To CSS -->
-    <link rel="stylesheet" href="../JSAndCSS/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- link To JS -->
-    <script src="../JSAndCSS/Faq.js" defer></script>
+    <script src="IndexJava.js" defer></script>
     <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- For Icons -->
@@ -51,21 +51,22 @@ session_start();
     <title>Pet Haven | FAQ's </title>
   </head>
   <body>
-  <nav>
-    <a href="index.php" class="brand">
-      <h1>Pet<b class="accent">Haven</b></h1>
-    </a>
-    <div class="menu">
-        <div class="btn">
-            <i class="fas fa-times close-btn"></i>
+    <nav>
+        <a href="index.html" class ="brand">
+            <h1>Pet<b class="accent">Haven</b></h1>
+        </a>
+        <div class="menu">
+            <div class="btn">
+                <i class = "fas fa-times close-btn"></i>
+            </div>
+            <a href="index.php">Home</a>
+            <a href="AboutUs.php">About Us</a>
+            <a href="Pets.php">Pets</a>
+            <a href="FAQs.php">FAQ's</a>
+            <a href="index.php#stories">Stories</a>
         </div>
-        <a href="index.php">Home</a>
-        <a href="AboutUs.php">About Us</a>
-        <a href="Pets.php">Pets</a>
-        <a href="FAQs.php">FAQ's</a>
-        <a href="index.php#stories">Stories</a>
-    </div>
-    <div class="login-btn">
+
+       <div class="login-btn">
         <?php if (isset($_SESSION['MemberID'])): ?>
             <!-- Display username when logged in -->
             <button onclick="window.location.href='profile.php'">
@@ -196,8 +197,29 @@ session_start();
      <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d1984.0800623329678!2d116.094487!3d5.9726747!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwNTgnMjAuOSJOIDExNsKwMDUnNDIuNSJF!5e0!3m2!1sen!2smy!4v1725699026013!5m2!1sen!2smy"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
  </div>
       
-      
-      
+ 
+ <!-- Review -->     
+ <div class="review-section" id="reviews">
+  <h2>Leave a Review</h2>
+  <?php if (isset($_SESSION['MemberID'])): ?>
+    <form id="reviewForm" method="POST" action="submitReview.php">
+      <label for="rating">Rating (1 to 5):</label>
+      <select name="rating" id="rating" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      </select>  
+      <label for="comments">Your Review:</label>
+      <textarea id="comments" name="comments" rows="4" required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  <?php else: ?>
+    <p>Please <a href="Login.php">log in</a> to leave a review.</p>
+  <?php endif; ?>
+</div>
+     
       
       
    <!-- Footer Section -->
@@ -243,11 +265,3 @@ session_start();
 <!-- Footer Section End -->
   </body>
 </html>  
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
