@@ -188,7 +188,19 @@ if ($user_result->num_rows > 0) {
                 echo "<script>console.log('User is blacklisted');</script>";
             }
 
+            
+
 echo "
+    <!-- Blacklist Reason Modal -->
+<div id='blacklist-reason-modal' class='modal'>
+    <div class='modal-content'>
+        <span class='close' onclick='closeBlacklistReasonModal()'>&times;</span>
+        <h3>Blacklist User</h3>
+        <p>Please provide a reason for blacklisting:</p>
+        <textarea id='blacklist-reason' placeholder='Enter reason here...' rows='4' cols='50'></textarea>
+        <button class='btn-danger' onclick='confirmBlacklist()'>Confirm Blacklist</button>
+    </div>
+</div>
         </div>
     </div>
 </div>";
@@ -210,7 +222,26 @@ function closeViewModal(memberID) {
 }
 
 function blacklistUser(memberID) {
+    currentMemberID = memberID; // Store the member ID globally
+    document.getElementById('blacklist-reason-modal').style.display = "block"; // Show the blacklist reason modal
+}
+
+function closeBlacklistReasonModal() {
+    document.getElementById('blacklist-reason-modal').style.display = "none"; // Close the blacklist reason modal
+}
+
+function confirmBlacklist() {
+    const reason = document.getElementById('blacklist-reason').value;
+
+    if (reason.trim() === "") {
+        alert("Please provide a reason for blacklisting.");
+        return;
+    }
+
     if (confirm('Are you sure you want to blacklist this user?')) {
+        // Close the modal after confirming
+        closeBlacklistReasonModal();
+
         // AJAX call to update the status
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "blacklist_user.php", true);
@@ -219,43 +250,12 @@ function blacklistUser(memberID) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 // Handle response
                 alert(xhr.responseText);
-                // Optionally refresh the page or update the UI
                 location.reload(); // Refresh the page to reflect changes
             }
         };
-        xhr.send("memberID=" + memberID);
+        xhr.send("memberID=" + currentMemberID + "&reason=" + encodeURIComponent(reason));
     }
 }
-function removeBlacklist(memberID) {
-    console.log("Attempting to remove blacklist for member ID:", memberID);
-    if (confirm("Are you sure you want to remove the blacklist status?")) {
-        // Make an AJAX request to remove the blacklist status
-        fetch('remove_blacklist.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'memberID=' + memberID
-        })
-        .then(response => response.text())
-        .then(result => {
-            if (result.trim() === 'success') {
-                alert("Blacklist status has been removed.");
-                // Update the status in the modal
-                document.querySelector(`#user-status-${memberID}`).innerHTML = 'active'; // Change to 'active' or whatever the new status should be
-                // Replace the "Remove Blacklist" button with the "Blacklist" button
-                document.querySelector(`#view-modal-${memberID} .btn-success`).outerHTML = `<button class='btn-danger' onclick='blacklistUser(${memberID})'>Blacklist</button>`;
-            } else {
-                alert("Error removing blacklist status. Please try again.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again.");
-        });
-    }
-}
-
 </script>
 
 </body>

@@ -1,20 +1,15 @@
 <?php
-    session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-    <!-- Use for responsiveness -->
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- link To CSS -->
     <link rel="stylesheet" href="../JSAndCSS/style.css" />
-    <!-- link To JS -->
     <script src="../JSAndCSS/index.js" defer></script>
-    <!-- For Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
-    <!-- For Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -22,29 +17,25 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- Link For Gsap -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- Link For Gsap - Scroll Trigger -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
       integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- Link For Lenis - Smooth Scrolling -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <!-- Link For Split Type -->
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
     <title>Login</title>
 </head>
 <body>
     <nav>
-        <a href="index.html" class ="brand">
+        <a href="index.html" class="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -79,20 +70,35 @@
                    $result = mysqli_query($conn, "SELECT * FROM member WHERE Email='$email'") or die("Selection Error");
                    $row = mysqli_fetch_assoc($result);
 
-                   if ($row && password_verify($password, $row['Password'])) {
-                       $_SESSION['valid'] = $row['Email'];
-                       $_SESSION['username'] = $row['Username'];
-                       $_SESSION['dob'] = $row['DoB'];
-                       $_SESSION['MemberID'] = $row['MemberID'];
+                   if ($row) {
+                       // Check if the user is blacklisted
+                       if ($row['Status'] === 'Blacklisted') {
+                           echo "<div class='message'>
+                                   <p>Your account has been blacklisted for violating Terms and Services. Please contact support.</p>
+                                 </div><br>";
+                           echo "<a href='login.php'><button class='again-btn'>Go Back</button></a>";
+                       }
+                       // Check if the password matches
+                       elseif (password_verify($password, $row['Password'])) {
+                           $_SESSION['valid'] = $row['Email'];
+                           $_SESSION['username'] = $row['Username'];
+                           $_SESSION['dob'] = $row['DoB'];
+                           $_SESSION['MemberID'] = $row['MemberID'];
 
-                       header("Location: index.php");
-                       exit();
+                           header("Location: index.php");
+                           exit();
+                       } else {
+                           echo "<div class='message'>
+                                   <p>Wrong Username or Password</p>
+                                 </div><br>";
+                           echo "<a href='login.php'><button class='again-btn'>Try Again</button></a>";
+                       }
                    } else {
                        echo "<div class='message'>
-                               <p>Wrong Username or Password</p>
+                               <p>No account found with that email.</p>
                              </div><br>";
-                        echo "<a href='login.php'><button class='again-btn'>Try Again</button></a>";
-                    }
+                       echo "<a href='login.php'><button class='again-btn'>Try Again</button></a>";
+                   }
                } else {
             ?>
             <header>Login</header>
