@@ -9,37 +9,54 @@ include 'config.php';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the form data
-    $name = $_POST['name'];
-    $imageUrl = $_POST['image_url'];
+    $petName = $_POST['name'];
     $age = $_POST['age'];
     $petSpecies = $_POST['petSpecies'];
     $breed = $_POST['breed'];
     $gender = $_POST['gender'];
     $status = $_POST['status'];
-    $petDesc = $_POST['petDesc']; // Added field
+    $petDesc = $_POST['petDesc'];
+    $disabilities = $_POST['disabilities'];
 
-    // Validate inputs (e.g., sanitize and/or validate data as needed)
-    if (empty($name) || empty($gender) || empty($status)) {
-        die("Required fields are missing.");
+    // Handle image file upload (if a file is uploaded)
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $imageTmpPath = $_FILES['image']['tmp_name'];
+        $imageName = basename($_FILES['image']['name']);
+        $uploadDir = 'uploads/';
+        $imagePath = $uploadDir . $imageName;
+
+        // Move the uploaded file to the server
+        if (!move_uploaded_file($imageTmpPath, $imagePath)) {
+            die("Failed to upload image.");
+        }
+    } else {
+        // Default image URL if none is uploaded
+        $imagePath = null;
     }
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Breed, Gender, PetDesc, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    // Prepare the SQL statement for inserting the pet
+    $stmt = $conn->prepare("INSERT INTO Pets (PetName, image_url, Age, PetSpecies, Dog_breed, Cat_breed, Gender, PetDesc, Disabilities, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error);
     }
 
-    $bindResult = $stmt->bind_param("ssisssss", $name, $imageUrl, $age, $petSpecies, $breed, $gender, $petDesc, $status);
-    if ($bindResult === false) {
-        die("Bind failed: " . $stmt->error);
+    // Determine if the species is Dog or Cat and set the correct breed column
+    $dogBreed = null;
+    $catBreed = null;
+    
+    if ($petSpecies === 'Dog') {
+        $dogBreed = $breed;
+    } elseif ($petSpecies === 'Cat') {
+        $catBreed = $breed;
     }
 
+    // Bind the parameters
+    $stmt->bind_param("ssisssssss", $petName, $imagePath, $age, $petSpecies, $dogBreed, $catBreed, $gender, $petDesc, $disabilities, $status);
+
     // Execute the statement
-    $executeResult = $stmt->execute();
-    if ($executeResult) {
-        // Redirect to manage_pets.php after success
-        header("Location: manage_pet.php");
-        exit();
+    if ($stmt->execute()) {
+        echo "<p>Pet added successfully.</p>";
     } else {
         echo "<p>Error adding pet: " . $stmt->error . "</p>";
     }
@@ -47,7 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the statement and connection
     $stmt->close();
     $conn->close();
-} else {
-    echo "<p>Invalid request method.</p>";
+
+    // Redirect back to the pet list (or another page)
+    header("Location: manage_pet.php");
+    exit();
 }
 ?>
+
