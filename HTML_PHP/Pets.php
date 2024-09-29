@@ -221,6 +221,7 @@ if ($result->num_rows > 0) {
             <p>Breed: " . $row['Dog_breed'] . $row['Cat_breed'] ."</p>
             <p>Age: " . $row['Age'] . "</p>
             <p>Gender: " . $row['Gender'] . "</p>
+            <p>Disabilities: " .$row['Disabilities'] ."</p>   
             <p>Status: " . $row['Status'] . "</p>
         </div>
                 
@@ -238,6 +239,7 @@ if ($result->num_rows > 0) {
                 <p>Breed: " . $row['Dog_breed'] . $row['Cat_breed'] ."</p>
                 <p>Age: " . $row['Age'] . "</p>
                 <p>Gender: " . $row['Gender'] . "</p>
+                <p>Disabilities: " .$row['Disabilities'] ."</p>  
                 <p>Description: " . $row['PetDesc'] . "</p>
                 <p>Status: " . $row['Status'] . "</p>
                  <div class='application-count-container'>
