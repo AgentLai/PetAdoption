@@ -83,7 +83,9 @@ if ($conn->connect_error) {
 $user_sql = "SELECT MemberID, FirstName, LastName, Username, Email, DOB, Status FROM member";
 $user_result = $conn->query($user_sql);
 
-echo "<div class='members-title'><h1>Members</h1></div>";
+$member_count = $user_result->num_rows; // Get the count of members
+
+echo "<div class='members-title'><h1>Members: ($member_count)</h1></div>";
 
 if ($user_result->num_rows > 0) {
   echo "
@@ -154,7 +156,10 @@ $pet_sql = "SELECT PetID, PetName, PetSpecies,
 
 $result = $conn->query($pet_sql);
 
-echo "<div class='pets-title'><h1>Pets</h1></div>";
+$pet_count = $result->num_rows; // Get the count of pets
+
+echo "<div class='pets-title'><h1>Pets: ($pet_count)</h1></div>";
+
 
 if ($result === false) {
     // Handle the query error here
