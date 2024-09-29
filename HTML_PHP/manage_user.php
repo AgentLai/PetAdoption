@@ -136,7 +136,8 @@ if ($user_result->num_rows > 0) {
         </tr>";
         
         // Edit Modal for each user (kept outside the table)
-        echo "
+        // Assuming you already have the member's data in $row
+echo "
 <div id='view-modal-$memberID' class='modal'>
     <div class='modal-content'>
         <span class='close' onclick='closeViewModal($memberID)'>&times;</span>
@@ -147,10 +148,15 @@ if ($user_result->num_rows > 0) {
             <p><strong>Username:</strong> " . htmlspecialchars($row['Username']) . "</p>
             <p><strong>Email:</strong> " . htmlspecialchars($row['Email']) . "</p>
             <p><strong>Date of Birth:</strong> " . htmlspecialchars($row['DOB']) . "</p>
-            <p><strong>Status:</strong> <span id='user-status-$memberID'>" . htmlspecialchars($row['Status']) . "</span></p>
+            <p><strong>Status:</strong> <span id='user-status-$memberID'>" . htmlspecialchars($row['Status']) . "</span></p>";
 
-            <!-- Reviews Section -->
-            <h4>Reviews</h4>";
+            // Display Blacklist Reason if status is 'Blacklisted'
+            if ($row['Status'] === 'Blacklisted') {
+                echo "<p><strong>Blacklist Reason:</strong> " . htmlspecialchars($row['BlacklistReason']) . "</p>";
+            }
+
+            // Reviews Section
+            echo "<h4>Reviews</h4>";
 
             $review_query = "SELECT * FROM Reviews WHERE MemberID = $memberID";
             $review_result = $conn->query($review_query);
@@ -164,6 +170,7 @@ if ($user_result->num_rows > 0) {
             } else {
                 echo "<p>No reviews found.</p>";
             }
+
             // Adoption Applications Section
             echo "<h4>Adoption Applications</h4>";
             
@@ -181,15 +188,12 @@ if ($user_result->num_rows > 0) {
             }
             
             // Blacklist Button Logic
-            if ($row['Status'] !== 'blacklisted') {
+            if ($row['Status'] !== 'Blacklisted') {
                 echo "<button class='btn-danger' onclick='blacklistUser($memberID)'>Blacklist</button>";
             } else {
                 echo "<button class='btn-success' onclick='removeBlacklist($memberID)'>Remove Blacklist</button>";
                 echo "<script>console.log('User is blacklisted');</script>";
             }
-
-            
-
 echo "
     <!-- Blacklist Reason Modal -->
 <div id='blacklist-reason-modal' class='modal'>

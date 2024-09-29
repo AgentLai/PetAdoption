@@ -183,83 +183,84 @@ if ($pet_result->num_rows > 0) {
 
         // Edit Modal for each pet
         echo "
-    <div id='edit-modal-$petID' class='modal'>
-        <div class='modal-content'>
-            <span class='close' onclick='closeEditModal($petID)'>&times;</span>
-            <h3>Edit Pet</h3>
-            <form action='update_pet.php' method='POST'>
-                <input type='hidden' name='petID' value='$petID'>
-                
-                <label>Name:</label>
-                <input type='text' name='petName' value='" . htmlspecialchars($row['PetName']) . "' required>
-                
-                <label>Image URL:</label>
-                <input type='text' name='image_url' value='" . htmlspecialchars($row['image_url']) . "'>
-                
-                <label>Age:</label>
-                <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "' min='0'>
-                
-                <label>Species:</label>
-                <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "' required readonly>
-                
-                <label>Breed:</label>
-                <select name='breed' required>
-                    <option value=''>" . ($row['Dog_breed'] ? htmlspecialchars($row['Dog_breed']) : htmlspecialchars($row['Cat_breed'])) . "</option>";
+<div id='edit-modal-$petID' class='modal'>
+    <div class='modal-content'>
+        <span class='close' onclick='closeEditModal($petID)'>&times;</span>
+        <h3>Edit Pet</h3>
+        <form action='update_pet.php' method='POST' enctype='multipart/form-data'>
+            <input type='hidden' name='petID' value='$petID'>
+            
+            <label>Name:</label>
+            <input type='text' name='petName' value='" . htmlspecialchars($row['PetName']) . "' required>
+            
+            <label>Image:</label>
+            <input type='file' name='image' accept='image/*'>
+            <p>Current Image: <img src='" . htmlspecialchars($row['image_url']) . "' alt='Current Image' style='max-width: 200px;'></p>
+            
+            <label>Age:</label>
+            <input type='number' name='age' value='" . htmlspecialchars($row['Age']) . "' min='0'>
+            
+            <label>Species:</label>
+            <input type='text' name='petSpecies' value='" . htmlspecialchars($row['PetSpecies']) . "' required readonly>
+            
+            <label>Breed:</label>
+            <select name='breed' required>
+                <option value=''>" . ($row['Dog_breed'] ? htmlspecialchars($row['Dog_breed']) : htmlspecialchars($row['Cat_breed'])) . "</option>";
 
-                // Check species and adjust breed options
-                if ($row['PetSpecies'] == 'Dog') {
-                    echo "
-                    <option value='Labrador'" . ($row['Dog_breed'] == 'Labrador' ? ' selected' : '') . ">Labrador</option>
-                    <option value='Beagle'" . ($row['Dog_breed'] == 'Beagle' ? ' selected' : '') . ">Beagle</option>
-                    <option value='Bulldog'" . ($row['Dog_breed'] == 'Bulldog' ? ' selected' : '') . ">Bulldog</option>
-                    <option value='Poodle'" . ($row['Dog_breed'] == 'Poodle' ? ' selected' : '') . ">Poodle</option>
-                    <option value='German Shepherd'" . ($row['Dog_breed'] == 'German Shepherd' ? ' selected' : '') . ">German Shepherd</option>
-                    <option value='Golden Retriever'" . ($row['Dog_breed'] == 'Golden Retriever' ? ' selected' : '') . ">Golden Retriever</option>
-                    <option value='Border Collie'" . ($row['Dog_breed'] == 'Border Collie' ? ' selected' : '') . ">Border Collie</option>
-                    <option value='Corgi'" . ($row['Dog_breed'] == 'Corgi' ? ' selected' : '') . ">Corgi</option>
-                    <option value='Others'" . ($row['Dog_breed'] == 'Others' ? ' selected' : '') . ">Others</option>";
-                } elseif ($row['PetSpecies'] == 'Cat') {
-                    echo "
-                    <option value='Persian'" . ($row['Cat_breed'] == 'Persian' ? ' selected' : '') . ">Persian</option>
-                    <option value='Siamese'" . ($row['Cat_breed'] == 'Siamese' ? ' selected' : '') . ">Siamese</option>
-                    <option value='Maine Coon'" . ($row['Cat_breed'] == 'Maine Coon' ? ' selected' : '') . ">Maine Coon</option>
-                    <option value='Bengal'" . ($row['Cat_breed'] == 'Bengal' ? ' selected' : '') . ">Bengal</option>
-                    <option value='Sphynx'" . ($row['Cat_breed'] == 'Sphynx' ? ' selected' : '') . ">Sphynx</option>
-                    <option value='Domestic Shorthair'" . ($row['Cat_breed'] == 'Domestic Shorthair' ? ' selected' : '') . ">Domestic Shorthair</option>";
-                }
+            // Check species and adjust breed options
+            if ($row['PetSpecies'] == 'Dog') {
                 echo "
-                </select>
-                
-                <label>Description:</label>
-                <input type='text' name='petDesc' value='" . htmlspecialchars($row['PetDesc']) . "' required>
-                
-                <label>Gender:</label>
-                <select name='gender' required>
-                    <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
-                    <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
-                </select>
-                
-                <label>Disabilities:</label>
-                <select name='disabilities'>
-                    <option value=''>" . htmlspecialchars($row['Disabilities']) . "</option>
-                    <option value='Blind'>Blind</option>
-                    <option value='Deaf'>Deaf</option>
-                    <option value='Limp'>Limp</option>
-                    <option value='Missing Leg'>Missing Leg</option>
-                    <option value='Other'>Other</option>
-                </select>
-                
-                <label>Status:</label>
-                <select name='status' required>
-                    <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
-                    <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
-                    <option value='Unavailable'" . ($row['Status'] == 'Unavailable' ? ' selected' : '') . ">Unavailable</option>
-                </select>
-                
-                <button type='submit'>Update</button>
-            </form>
-        </div>
-    </div>";
+                <option value='Labrador'" . ($row['Dog_breed'] == 'Labrador' ? ' selected' : '') . ">Labrador</option>
+                <option value='Beagle'" . ($row['Dog_breed'] == 'Beagle' ? ' selected' : '') . ">Beagle</option>
+                <option value='Bulldog'" . ($row['Dog_breed'] == 'Bulldog' ? ' selected' : '') . ">Bulldog</option>
+                <option value='Poodle'" . ($row['Dog_breed'] == 'Poodle' ? ' selected' : '') . ">Poodle</option>
+                <option value='German Shepherd'" . ($row['Dog_breed'] == 'German Shepherd' ? ' selected' : '') . ">German Shepherd</option>
+                <option value='Golden Retriever'" . ($row['Dog_breed'] == 'Golden Retriever' ? ' selected' : '') . ">Golden Retriever</option>
+                <option value='Border Collie'" . ($row['Dog_breed'] == 'Border Collie' ? ' selected' : '') . ">Border Collie</option>
+                <option value='Corgi'" . ($row['Dog_breed'] == 'Corgi' ? ' selected' : '') . ">Corgi</option>
+                <option value='Others'" . ($row['Dog_breed'] == 'Others' ? ' selected' : '') . ">Others</option>";
+            } elseif ($row['PetSpecies'] == 'Cat') {
+                echo "
+                <option value='Persian'" . ($row['Cat_breed'] == 'Persian' ? ' selected' : '') . ">Persian</option>
+                <option value='Siamese'" . ($row['Cat_breed'] == 'Siamese' ? ' selected' : '') . ">Siamese</option>
+                <option value='Maine Coon'" . ($row['Cat_breed'] == 'Maine Coon' ? ' selected' : '') . ">Maine Coon</option>
+                <option value='Bengal'" . ($row['Cat_breed'] == 'Bengal' ? ' selected' : '') . ">Bengal</option>
+                <option value='Sphynx'" . ($row['Cat_breed'] == 'Sphynx' ? ' selected' : '') . ">Sphynx</option>
+                <option value='Domestic Shorthair'" . ($row['Cat_breed'] == 'Domestic Shorthair' ? ' selected' : '') . ">Domestic Shorthair</option>";
+            }
+            echo "
+            </select>
+            
+            <label>Description:</label>
+            <input type='text' name='petDesc' value='" . htmlspecialchars($row['PetDesc']) . "' required>
+            
+            <label>Gender:</label>
+            <select name='gender' required>
+                <option value='Male'" . ($row['Gender'] == 'Male' ? ' selected' : '') . ">Male</option>
+                <option value='Female'" . ($row['Gender'] == 'Female' ? ' selected' : '') . ">Female</option>
+            </select>
+            
+            <label>Disabilities:</label>
+            <select name='disabilities'>
+                <option value=''>" . htmlspecialchars($row['Disabilities']) . "</option>
+                <option value='Blind'>Blind</option>
+                <option value='Deaf'>Deaf</option>
+                <option value='Limp'>Limp</option>
+                <option value='Missing Leg'>Missing Leg</option>
+                <option value='Other'>Other</option>
+            </select>
+            
+            <label>Status:</label>
+            <select name='status' required>
+                <option value='Available'" . ($row['Status'] == 'Available' ? ' selected' : '') . ">Available</option>
+                <option value='Pending'" . ($row['Status'] == 'Pending' ? ' selected' : '') . ">Pending</option>
+                <option value='Unavailable'" . ($row['Status'] == 'Unavailable' ? ' selected' : '') . ">Unavailable</option>
+            </select>
+            
+            <button type='submit'>Update</button>
+        </form>
+    </div>
+</div>";
             }
     echo "</tbody></table>";
     } else {
@@ -269,7 +270,7 @@ if ($pet_result->num_rows > 0) {
     </div>
 
     <!-- Add Pet Modal -->
-<div id='add-modal' class='modal'>
+    <div id='add-modal' class='modal'>
     <div class='modal-content'>
         <span class='close' onclick='closeAddModal()'>&times;</span>
         <h3>Add Pet</h3>
@@ -281,16 +282,43 @@ if ($pet_result->num_rows > 0) {
             <input type='file' name='image' accept="image/*">
 
             <label>Age:</label>
-            <input type='number' name='age' min='0'>
+            <input type='number' name='age' min='0' required>
 
             <label>Species:</label>
-            <select name='petSpecies' required>
+            <select name='petSpecies' id='petSpecies' required onchange="toggleBreedFields()">
                 <option value='Dog'>Dog</option>
                 <option value='Cat'>Cat</option>
             </select>
 
-            <label>Breed:</label>
-            <input type='text' name='breed' required>
+            <div id="dogBreed">
+                <label>Breed (Dog):</label>
+                <select name='Dog_breed'>
+                    <option value=''>Select a breed</option>
+                    <option value='Labrador'>Labrador</option>
+                    <option value='Beagle'>Beagle</option>
+                    <option value='Bulldog'>Bulldog</option>
+                    <option value='Poodle'>Poodle</option>
+                    <option value='German Shepherd'>German Shepherd</option>
+                    <option value='Golden Retriever'>Golden Retriever</option>
+                    <option value='Border Collie'>Border Collie</option>
+                    <option value='Corgi'>Corgi</option>
+                    <option value='Others'>Others</option>
+                </select>
+            </div>
+
+            <div id="catBreed" style="display: none;">
+                <label>Breed (Cat):</label>
+                <select name='Cat_breed'>
+                    <option value=''>Select a breed</option>
+                    <option value='Persian'>Persian</option>
+                    <option value='Siamese'>Siamese</option>
+                    <option value='Maine Coon'>Maine Coon</option>
+                    <option value='Bengal'>Bengal</option>
+                    <option value='Sphynx'>Sphynx</option>
+                    <option value='Domestic Shorthair'>Domestic Shorthair</option>
+                    <option value='Others'>Others</option>
+                </select>
+            </div>
 
             <label>Gender:</label>
             <select name='gender' required>
@@ -307,7 +335,7 @@ if ($pet_result->num_rows > 0) {
             </select>
 
             <label>Description:</label>
-            <input type='text' name='petDesc' required> <!-- Matches PetDesc field -->
+            <input type='text' name='petDesc' required>
 
             <label>Disabilities:</label>
             <select name='disabilities'>
@@ -324,6 +352,21 @@ if ($pet_result->num_rows > 0) {
     </div>
 </div>
 
+<script>
+function toggleBreedFields() {
+    var species = document.getElementById('petSpecies').value;
+    var dogBreedDiv = document.getElementById('dogBreed');
+    var catBreedDiv = document.getElementById('catBreed');
+
+    if (species === 'Dog') {
+        dogBreedDiv.style.display = 'block';
+        catBreedDiv.style.display = 'none';
+    } else {
+        dogBreedDiv.style.display = 'none';
+        catBreedDiv.style.display = 'block';
+    }
+}
+</script>
 
     <script>
     function openViewModal(petID) {

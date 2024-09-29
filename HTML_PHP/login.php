@@ -71,13 +71,16 @@ session_start();
                    $row = mysqli_fetch_assoc($result);
 
                    if ($row) {
-                       // Check if the user is blacklisted
-                       if ($row['Status'] === 'Blacklisted') {
-                           echo "<div class='message'>
-                                   <p>Your account has been blacklisted for violating Terms and Services. Please contact support.</p>
-                                 </div><br>";
-                           echo "<a href='login.php'><button class='again-btn'>Go Back</button></a>";
-                       }
+                    // Check if the user is blacklisted
+                    if ($row['Status'] === 'Blacklisted') {
+                        // Retrieve the blacklist reason from the row
+                        $blacklistReason = htmlspecialchars($row['BlacklistReason']); // Safely encode for output
+                        echo "<div class='message'>
+                                <p>Your account has been blacklisted for the following reason: $blacklistReason. Please contact support.</p>
+                              </div><br>";
+                        echo "<a href='login.php'><button class='again-btn'>Go Back</button></a>";
+                    }
+                
                        // Check if the password matches
                        elseif (password_verify($password, $row['Password'])) {
                            $_SESSION['valid'] = $row['Email'];
