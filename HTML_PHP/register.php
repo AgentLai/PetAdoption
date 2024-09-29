@@ -48,7 +48,7 @@
 </head>
 <body>
 <nav>
-        <a href="index.html" class ="brand">
+        <a href="index.php" class ="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
@@ -98,7 +98,7 @@
                     echo "<div class='message'>
                             <p>This email is in use, please try again.</p>
                           </div> <br>";
-                    echo "<a href='javascript:history.back()'><button class='btn'>Go Back</button></a>";
+                    echo "<a href='javascript:history.back()'><button class='again-btn'>Go Back</button></a>";
                 } else {
                     // Insert the user data into the database
                     $insert_query = mysqli_query($conn, "INSERT INTO Member (FirstName, LastName, Username, Email, DOB, Password) VALUES ('$firstName', '$lastName', '$username', '$email', '$dob', '$hashed_password')");

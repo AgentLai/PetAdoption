@@ -35,7 +35,7 @@ session_start();
 </head>
 <body>
     <nav>
-        <a href="index.html" class="brand">
+        <a href="index.php" class="brand">
             <h1>Pet<b class="accent">Haven</b></h1>
         </a>
         <div class="menu">
