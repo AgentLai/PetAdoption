@@ -2589,9 +2589,11 @@ table tr:nth-child(even) {
     justify-content: center;
     align-items: center; /* Optional for vertical centering */
     height: 5vh;
+    width: fit-content; /* Optional: Keeps the container size flexible */
 }
 
 .add-pet-btn {
+    margin-left: 1250px;
     width: 205px;
     height: 53px;
     background-color: var(--black);
@@ -2602,6 +2604,7 @@ table tr:nth-child(even) {
     transition: all 0.2s ease-out;
     cursor: pointer;
 }
+
 
 .add-pet-btn a{
     color: white;
@@ -2712,8 +2715,8 @@ table tr:nth-child(even) {
 
 /* Submit Button */
 .modal-content button {
-    background-color: black; /* Green background */
-    color: white; /* White text */
+    background-color: black;
+    color: white;
     padding: 15px 20px;
     border: none;
     border-radius: 4px;
