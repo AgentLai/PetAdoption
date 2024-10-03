@@ -2587,13 +2587,15 @@ table tr:nth-child(even) {
 .add-pet {
     display: flex;
     justify-content: center;
-    align-items: center; /* Optional for vertical centering */
+    align-items: center;
     height: 5vh;
-    width: fit-content; /* Optional: Keeps the container size flexible */
+    width: 100%; /* Use full width to center */
+    position: relative; /* Relative positioning to allow for absolute child */
 }
 
 .add-pet-btn {
-    margin-left: 1225px;
+    position: absolute;
+    right: 295px; /* Adjust this value to your preference */
     width: 205px;
     height: 53px;
     background-color: var(--black);
@@ -2604,6 +2606,7 @@ table tr:nth-child(even) {
     transition: all 0.2s ease-out;
     cursor: pointer;
 }
+
 
 
 .add-pet-btn a{

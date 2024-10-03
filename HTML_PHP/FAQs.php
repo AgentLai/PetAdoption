@@ -63,7 +63,6 @@
             <a href="AboutUs.php">About Us</a>
             <a href="Pets.php">Pets</a>
             <a href="FAQs.php">FAQ's</a>
-            <a href="index.php#stories">Stories</a>
         </div>
 
        <div class="login-btn">
