@@ -191,7 +191,6 @@ echo "
             if ($row['Status'] !== 'Blacklisted') {
                 echo "<button class='btn-danger' onclick='blacklistUser($memberID)'>Blacklist</button>";
             } else {
-                echo "<button class='btn-success' onclick='removeBlacklist($memberID)'>Remove Blacklist</button>";
                 echo "<script>console.log('User is blacklisted');</script>";
             }
 echo "
