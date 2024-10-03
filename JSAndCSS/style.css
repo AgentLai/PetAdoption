@@ -2593,7 +2593,7 @@ table tr:nth-child(even) {
 }
 
 .add-pet-btn {
-    margin-left: 1250px;
+    margin-left: 1225px;
     width: 205px;
     height: 53px;
     background-color: var(--black);

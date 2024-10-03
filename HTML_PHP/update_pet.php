@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $age = $_POST['age'];
     $petSpecies = $_POST['petSpecies'];
     $gender = $_POST['gender'];
-    $petDesc = $_POST['petDesc'];
+    $petDesc = $_POST['petDesc']; // Pet description
     $disabilities = $_POST['disabilities']; // New field for disabilities
     $status = $_POST['status'];
 
@@ -33,11 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($petSpecies === 'Cat') {
         $catBreed = $_POST['breed']; // Cat breed
     }
-
-    // Print received data for debugging
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
 
     // Prepare to handle the image upload
     $imageUrl = ""; // Default to empty
@@ -67,14 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare and bind
-    // Adjust SQL statement to include the breed column for both dogs and cats
-    $stmt = $conn->prepare("UPDATE Pets SET PetName=?, image_url=?, Age=?, PetSpecies=?, Dog_breed=?, Cat_breed=?, Gender=?, Disabilities=?, Status=? WHERE PetID=?");
+    // Adjust SQL statement to include the petDesc and breed columns for both dogs and cats
+    $stmt = $conn->prepare("UPDATE Pets SET PetName=?, image_url=?, Age=?, PetSpecies=?, Dog_breed=?, Cat_breed=?, Gender=?, PetDesc=?, Disabilities=?, Status=? WHERE PetID=?");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error);
     }
 
-    // Bind parameters
-    $bindResult = $stmt->bind_param("ssissssssi", $petName, $imageUrl, $age, $petSpecies, $dogBreed, $catBreed, $gender, $disabilities, $status, $petID);
+    // Bind parameters (Notice types: s = string, i = integer)
+    $bindResult = $stmt->bind_param("ssisssssssi", $petName, $imageUrl, $age, $petSpecies, $dogBreed, $catBreed, $gender, $petDesc, $disabilities, $status, $petID);
     if ($bindResult === false) {
         die("Bind failed: " . $stmt->error);
     }
@@ -82,7 +77,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the statement
     $executeResult = $stmt->execute();
     if ($executeResult) {
-        echo "<p>Record updated successfully.</p>";
+        // Redirect back to the pet list (or another page) after a successful update
+        header("Location: manage_pet.php");
+        exit();
     } else {
         echo "<p>Error updating record: " . $stmt->error . "</p>";
     }
@@ -90,10 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the statement and connection
     $stmt->close();
     $conn->close();
-
-    // Redirect back to the pet list (or another page)
-    header("Location: manage_pet.php");
-    exit();
 } else {
     echo "<p>Invalid request method.</p>";
 }
